@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   belongs_to :account, optional: true
   has_many :bills
+
+  USERTYPE = ['client', 'provider']
 end

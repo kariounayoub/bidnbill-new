@@ -2,13 +2,18 @@
   "name": "bidnbill-new",
   "private": true,
   "dependencies": {
+    "@mdi/font": "^3.6.95",
+    "axios": "^0.18.0",
     "@rails/webpacker": "^4.0.2",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vue-router": "^3.0.2",
+    "vuetify": "^1.5.4",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.3.1"

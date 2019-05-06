@@ -1,0 +1,4 @@
+<div id="app" data-id="<%=@user.id%>"></div>
+<% content_for :after_js do %>
+    <%= javascript_pack_tag 'vue_clients' %>
+<% end %>
