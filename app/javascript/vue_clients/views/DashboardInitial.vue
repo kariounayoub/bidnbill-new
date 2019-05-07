@@ -1,5 +1,5 @@
 <template>
-  <div class='top-margin'>
+  <div >
     <h3 class="dashboard__title">Bienvenue {{client.attributes.full_name}}</h3>
     <v-container>
       <v-layout row wrap>
@@ -33,15 +33,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .top-margin {
-    margin-top: 64px;
-  }
-  .dashboard__title {
-    font-weight: 700;
-    color: rgba(0,0,0,0.8);
-    margin: 15px auto;
-    text-align: center;
-  }
-</style>

@@ -5,6 +5,11 @@
       <v-toolbar-side-icon class="navbar__icon"></v-toolbar-side-icon>
       <v-toolbar-title class="pointer navbar__header" @click='navigateLanding()'>BillSelector</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <router-link  :to="'/client_dashboard'">
+          <p class='pointer navbar__link'>Dashboard</p>
+        </router-link>
+      </v-toolbar-items>
       <v-menu offset-y attach left>
         <v-avatar size="40" color="rgba(0,0,0,0)" class='pointer' slot="activator" >
           <img src="../../assets/images/avatar.jpg" alt="alt">
@@ -66,5 +71,11 @@
     &:hover {
       background: #eee;
     };
+  }
+  a:hover {text-decoration: none;}
+  .navbar__link {
+    color: white;
+    padding: 20px;
+    font-weight: 600;
   }
 </style>

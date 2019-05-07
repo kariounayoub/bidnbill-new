@@ -13,9 +13,9 @@
       <% if user_signed_in? %>
         <li class="nav-item active">
           <% if current_user.user_type == 'client' %>
-            <%= link_to "Dashboard", client_dashboard_path(current_user), class: "nav-link" %>
+            <%= link_to "Dashboard", client_dashboard_path, class: "nav-link" %>
           <% elsif current_user.user_type == 'provider' %>
-            <%= link_to "Dashboard", provider_dashboard_path(current_user), class: "nav-link" %>
+            <%= link_to "Dashboard", provider_dashboard_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">

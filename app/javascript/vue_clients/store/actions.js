@@ -15,5 +15,10 @@ export default {
     await axios.get(`/api/v1/users/${state.client.data.attributes.id}/bills`, config)
     .then(res => commit('SET_BILLS', res))
     .catch(err => console.log(err))
+  },
+  GET_BILL: async ({state, commit}, payload) => {
+    await axios.get(`/api/v1/users/${state.client.data.attributes.id}/bills/${payload}`, config)
+    .then(res => commit('SET_BILL', res))
+    .catch(err => console.log(err))
   }
 }

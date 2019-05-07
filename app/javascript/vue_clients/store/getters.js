@@ -5,5 +5,8 @@ export default {
   Bills: state => {
       return state.bills.data.data
     },
+  ActiveBill: state => {
+      return state.activeBill
+    },
 
 }

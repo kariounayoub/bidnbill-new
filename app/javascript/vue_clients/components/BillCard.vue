@@ -8,7 +8,9 @@
             <h4>{{bill.attributes.current_provider}}</h4>
             <p>{{bill.attributes.price}} € / mois</p>
           </div>
-          <v-btn>Mes offres</v-btn>
+          <router-link  :to="'/bills/' + bill.id">
+            <v-btn>Mes offres</v-btn>
+          </router-link>
         </div>
         <div class="dashboard__card__left">
           <div class="dashboard_card_image" v-bind:style="{backgroundImage: 'url(' + getImage + ')'}"></div>
@@ -75,6 +77,9 @@
         background-size: contain;
         background-position: center;
       }
+    }
+    a:hover {
+      text-decoration: none;
     }
   }
 </style>
