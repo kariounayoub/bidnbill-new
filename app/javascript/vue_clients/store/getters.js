@@ -1,9 +1,9 @@
 export default {
   Client: state => {
-      return state.client
+      return state.client.data
     },
   Bills: state => {
-      return state.bills
+      return state.bills.data.data
     },
 
 }
