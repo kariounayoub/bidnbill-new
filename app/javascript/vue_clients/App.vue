@@ -1,17 +1,23 @@
 <template>
   <v-app id="app">
-    <DashboardInitial />
+    <Navbar />
+    <router-view class='top-margin'></router-view>
   </v-app>
 </template>
 
 <script>
-
-import DashboardInitial from './views/DashboardInitial'
+import Navbar from '../shared_components/Navbar'
 
 export default {
   name: 'App',
   components: {
-    DashboardInitial,
-  }
+    Navbar
+  },
 }
 </script>
+
+<style>
+  .top-margin {
+    margin-top: 64px;
+  }
+</style>

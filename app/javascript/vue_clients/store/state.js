@@ -1,3 +1,9 @@
+const root = document.getElementById('app')
+
+
 export default {
+  client: JSON.parse(root.dataset.client),
+  bills: {data: {data: null}},
+  activeBill: null,
 
 }
