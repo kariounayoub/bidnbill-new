@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  get 'users/:id/client_dashboard', to: 'pages#client_dashboard'
-  get 'users/:id/provider_dashboard', to: 'pages#provider_dashboard'
+  get 'users/:id/client_dashboard', to: 'pages#client_dashboard', as: :client_dashboard
+  get 'users/:id/provider_dashboard', to: 'pages#provider_dashboard', as: :provider_dashboard
 
 
   namespace :api, defaults: { format: :json } do

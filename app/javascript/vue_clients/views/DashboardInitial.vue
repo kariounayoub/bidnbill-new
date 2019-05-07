@@ -1,7 +1,6 @@
 <template>
-  <div>
-    {{message}}
-    {{id}}
+  <div class='top-margin'>
+    Hello {{client.data.attributes.full_name}}
     <p>
       {{bills}}
     </p>
@@ -9,34 +8,25 @@
 </template>
 
 <script>
-import axios from 'axios' // axios is an http library to make http requrests (can use default fetch api instead)
-const ROOT_URL = `${window.location.origin}`;
-const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
-const config = {
-   headers: {
-        Accept: 'application/json',
-      'Content-Type': 'application/json',
-       'X-CSRF-Token': csrfToken
-      },
-    credentials: "same-origin"
-}
-  const root = document.getElementById('app')
 
   export default {
     name: 'DashboardInitial',
-    data: () => ({
-      message: 'Hello Client',
-      id: JSON.parse(root.dataset.id),
-      bills: null
-    }),
-    methods: {
-      GET_BILLS() {
-        axios.get(`/api/v1/users/${this.id}/bills`)
-        .then(res => this.bills = res)
+    computed: {
+      client() {
+        return this.$store.getters.Client
+      },
+      bills() {
+        return this.$store.getters.Bills
       }
     },
     mounted() {
-      this.GET_BILLS();
+      this.$store.dispatch('GET_BILLS');
     }
   }
 </script>
+
+<style>
+  .top-margin {
+    margin-top: 64px;
+  }
+</style>
