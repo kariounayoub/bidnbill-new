@@ -26,7 +26,7 @@
 
 <script>
   import axios from 'axios'
-  const ROOT_URL = `${window.location.origin}`;
+  const ROOT_URL = window.location.origin;
   const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
   const config = {
      headers: {
