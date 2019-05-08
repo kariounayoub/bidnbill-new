@@ -3,8 +3,8 @@
     <h3 class="dashboard__title">Bienvenue {{client.attributes.full_name}}</h3>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm6 v-for="bill in bills">
-          <BillCard v-bind:bill='bill' />
+        <v-flex xs12 sm6 v-for="bill in bills" v-bind:key='bill.attributes.id'>
+          <BillCardDashboard v-bind:bill='bill' />
         </v-flex>
       </v-layout>
     </v-container>
@@ -14,11 +14,11 @@
 
 <script>
 
-  import BillCard from '../components/BillCard'
+  import BillCardDashboard from '../components/BillCardDashboard'
   export default {
     name: 'DashboardInitial',
     components: {
-      BillCard
+      BillCardDashboard
     },
     computed: {
       client() {
