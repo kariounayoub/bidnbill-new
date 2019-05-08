@@ -9,7 +9,7 @@
             <p>{{bill.attributes.price}} € / mois</p>
           </div>
           <router-link  :to="'/bills/' + bill.id">
-            <v-btn>Mes offres</v-btn>
+            <v-btn class='rounded'>Mes offres</v-btn>
           </router-link>
         </div>
         <div class="dashboard__card__left">
@@ -47,7 +47,7 @@
       .card-category {
         padding-top: 20px;
         font-size: 20px;
-        color: #59E02A;
+        color: var(--v-success-base);
         font-weight: 600;
       }
       .card-info {
@@ -63,7 +63,7 @@
     }
     .dashboard__card__left {
       height: 200px;
-      background: linear-gradient(234.15deg, #59E02A -28.36%, #FFFFFF 171.84%);
+      background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
       width: 50%;
       display: flex;
       align-items: center;

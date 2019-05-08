@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="dashboard__title">Abonnement {{currentProvider}}</h3>
+    <h3 class="dashboard__title">Abonnement {{activeBill.attributes.current_provider}}</h3>
     <v-container>
       <v-layout row wrap>
         <v-flex xs12 sm4>
@@ -30,13 +30,10 @@
       ...mapState(['bills']),
       activeBill() {
         return this.$store.getters.ActiveBill
-      },
-      currentProvider() {
-        if(this.activeBill !== null) return this.activeBill.attributes.current_provider
       }
     },
     mounted() {
-      if (this.bills.data.data === null) {
+      if (this.bills.data.data[0].attributes.id === null) {
         this.$store.dispatch('GET_BILL', this.id)
       } else {
         this.$store.commit('SET_ACTIVE_BILL', this.id)

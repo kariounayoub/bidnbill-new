@@ -44,9 +44,9 @@
     margin: 20px;
     border-radius: 30px 4px 30px 4px;
     .bid__card__title {
-      background: linear-gradient(234.15deg, #59E02A -28.36%, #FFFFFF 171.84%);
+      background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
       width: 100%;
-      border-radius: 30px 4px 0px 0px !important;
+      border-radius: 30px 4px 0px 0px ;
       font-size: 18px;
       padding: 7px;
       font-weight: 700;
