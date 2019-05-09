@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <Navbar />
+    <Flash />
     <router-view class='top-margin min-height-full'></router-view>
     <Footer />
   </v-app>
@@ -9,12 +10,14 @@
 <script>
 import Navbar from '../shared_components/Navbar'
 import Footer from '../shared_components/Footer'
+import Flash from '../shared_components/Flash'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Footer
+    Footer,
+    Flash
   },
 }
 </script>

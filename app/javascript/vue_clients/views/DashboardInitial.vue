@@ -32,7 +32,9 @@
       }
     },
     mounted() {
-      this.$store.dispatch('GET_BILLS');
+      if (this.bills[0].attributes.id === null) {
+        this.$store.dispatch('GET_BILLS')
+      }
     }
   }
 </script>

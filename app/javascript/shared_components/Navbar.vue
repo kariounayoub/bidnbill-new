@@ -6,7 +6,7 @@
       <v-toolbar-title class="pointer navbar__header" @click='navigateLanding()'>BillSelector</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <router-link  :to="'/client_dashboard'">
+        <router-link  :to="{name: 'dashboard'}">
           <p class='pointer navbar__link'>Dashboard</p>
         </router-link>
       </v-toolbar-items>

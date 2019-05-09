@@ -5,36 +5,36 @@
       <p>Sélectionnez le type d’abonnement pour lequel vous souhaitez créer un enchère</p>
     </div>
       <div class="choix-type">
-        <div class="text-center"  @click="setBillType('Electricité')" >
-          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === 'Electricité'}">
+        <div class="text-center"  @click="setBillType(getCategoryListValue('Electricité'))" >
+          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Electricité')}">
             <i class="far fa-lightbulb"></i>
           </div>
           <p>Electricté</p>
         </div>
-        <div class="text-center"  @click="setBillType('Gaz')" >
-          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === 'Gaz'}">
+        <div class="text-center"  @click="setBillType(getCategoryListValue('Gas'))" >
+          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Gas')}">
             <i class="fas fa-burn"></i>
           </div>
-          <p>Gaz</p>
+          <p>Gas</p>
         </div>
-        <div class="text-center"   @click="setBillType('Electricité et Gaz')" >
-          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === 'Electricité et Gaz'}">
+        <div class="text-center"   @click="setBillType(getCategoryListValue('Electricité et Gas'))" >
+          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Electricité et Gas')}">
             <i class="far fa-lightbulb"></i> + <i class="fas fa-burn"></i>
           </div>
-          <p>Electricté et Gaz</p>
+          <p>Electricté et Gas</p>
         </div>
       </div>
       <div class="choix-type-even">
-        <div class="text-center" >
+        <div class="text-center dark" >
           <p>Comming Soon...</p>
-          <div class="type-icon dark d-flex align-items-center justify-content-center">
+          <div class="type-icon  d-flex align-items-center justify-content-center">
             <i class="fas fa-phone"></i>
           </div>
           <p>Téléphone</p>
         </div>
-        <div class="text-center" >
+        <div class="text-center dark" >
           <p>Comming Soon...</p>
-          <div class="type-icon dark d-flex align-items-center justify-content-center" >
+          <div class="type-icon  d-flex align-items-center justify-content-center" >
             <i class="fas fa-wifi"></i>
           </div>
           <p>Internet</p>
@@ -44,11 +44,13 @@
     <!-- Hidden Select Field -->
     <v-select
       attach
-      class="d-none"
+      class='d-none'
       v-model="billType"
       :items="categoryList"
       :rules="[v => !!v || 'Champs Obligatoire']"
       required
+      item-value="id"
+      item-text="name"
     ></v-select>
 
 
@@ -61,11 +63,18 @@
      data: () => ({
       valid: true,
       billType: '',
-      categoryList: ['Electricité', 'Gaz', 'Electricité et Gaz', 'Téléphone', 'Internet'],
     }),
+    computed: {
+      categoryList() {
+        return this.$store.getters.Categories
+      }
+    },
     methods: {
       setBillType (value) {
         this.billType = value
+      },
+      getCategoryListValue(value) {
+        return this.categoryList.find(item => item.name === value).id;
       }
     }
 
@@ -100,8 +109,10 @@
     }
   }
   .dark {
-    background-color: #eee;
     color: #ccc;
+    .type-icon {
+      background-color: #eee;
+    }
   }
   .chosen-icon {
     background-color: var(--v-success-base);

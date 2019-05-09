@@ -5,3 +5,7 @@
     border-radius: 15px 2px 15px 2px !important;
     font-weight: 600 !important;
   }
+
+  .v-btn.rounded.v-btn--disabled {
+    background: rgba(0,0,0,0.12)
+  }

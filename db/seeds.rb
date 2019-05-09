@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# client = User.create(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client')
+# provider = User.create(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider')
 
-client = User.create(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client')
-provider = User.create(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider')
+
+# Category.destroy_all
+# Category.create(name: 'Electricité')
+# Category.create(name: 'Gas')
+# Category.create(name: 'Electricité et Gas')
+# Category.create(name: 'Téléphonie')
+# Category.create(name: 'Internet')
