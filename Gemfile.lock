@@ -148,6 +148,8 @@ GEM
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
+    rtesseract (3.0.3)
+      nokogiri
     sassc (2.0.1)
       ffi (~> 1.9)
       rake
@@ -213,6 +215,7 @@ DEPENDENCIES
   pundit
   rails (= 5.2.3)
   redis
+  rtesseract
   sassc-rails
   simple_form
   spring

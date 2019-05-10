@@ -19,6 +19,8 @@ gem 'webpacker'
 
 gem 'fast_jsonapi'
 
+gem 'rtesseract'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

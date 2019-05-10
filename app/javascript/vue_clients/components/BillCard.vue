@@ -47,7 +47,7 @@
     border-radius: 30px 4px 30px 4px;
     .bill__card__top {
       height: 100px;
-      background: linear-gradient(234.15deg, #59E02A -28.36%, #FFFFFF 171.84%);
+      background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
       width: 100%;
       display: flex;
       align-items: center;
@@ -70,7 +70,7 @@
       .card-category {
         padding-bottom: 20px;
         font-size: 20px;
-        color: #59E02A;
+        color: var(--v-success-base);
         font-weight: 600;
       }
       .card-info {
@@ -78,14 +78,12 @@
         padding-left: 10px;
         font-size: 14px;
         font-weight: 700;
-        .inline-div{
-          display: inline-block;
-          padding-bottom: 10px;
-        }
+
 
         .info-title {
           color: #aaa;
           width: 50%;
+          padding-bottom: 10px;
         }
         .content {
           width: 50%;

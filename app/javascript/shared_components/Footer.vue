@@ -17,14 +17,17 @@
 <style scoped lang='scss'>
   #footer {
     margin-top: 40px;
-    height: 150px;
-     background: linear-gradient(98.45deg, #59E02A -22.29%, #FFFFFF 248.81%);
+    height: 100px;
+     background: linear-gradient(98.45deg, var(--v-success-base) -22.29%, #FFFFFF 248.81%);
      display: flex;
      justify-content: center;
      align-items: center;
      font-size: 14px;
      font-weight: 700;
      color: white;
+     p {
+      margin: 0;
+     }
      span {
       margin: 0 10px;
      }

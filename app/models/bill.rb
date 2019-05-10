@@ -4,4 +4,5 @@ class Bill < ApplicationRecord
   has_one :auction
   has_many :bids, through: :auction
 
+  validates :current_provider, :price, :consumption, :address, presence: true
 end

@@ -1,6 +1,6 @@
 class BillPolicy < ApplicationPolicy
   def index?
-    user == record.first.client
+    record.first == nil || user == record.first.client
   end
 
   def show?
