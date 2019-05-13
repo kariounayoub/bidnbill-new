@@ -26,26 +26,21 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "company"
-    t.string "company_type"
+    t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "auctions", force: :cascade do |t|
-    t.bigint "bill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bill_id"], name: "index_auctions_on_bill_id"
   end
 
   create_table "bids", force: :cascade do |t|
-    t.bigint "auction_id"
+    t.bigint "bill_id"
     t.bigint "user_id"
     t.string "status"
     t.text "content"
+    t.float "price"
+    t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auction_id"], name: "index_bids_on_auction_id"
+    t.index ["bill_id"], name: "index_bids_on_bill_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
   end
 
@@ -61,6 +56,9 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.integer "consumption"
     t.string "city"
     t.string "zip_code"
+    t.boolean "is_deleted"
+    t.boolean "is_edited"
+    t.boolean "is_open"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_bills_on_category_id"
@@ -69,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -105,8 +104,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
 
   add_foreign_key "account_categories", "accounts"
   add_foreign_key "account_categories", "categories"
-  add_foreign_key "auctions", "bills"
-  add_foreign_key "bids", "auctions"
+  add_foreign_key "bids", "bills"
   add_foreign_key "bids", "users"
   add_foreign_key "bills", "categories"
   add_foreign_key "bills", "users"

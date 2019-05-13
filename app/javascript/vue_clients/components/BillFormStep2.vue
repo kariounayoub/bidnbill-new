@@ -19,7 +19,7 @@
             <div >
               <div class="form-subtitle inline-div">Vôtre fournisseur actuel</div>
               <div class="form-content inline-div">
-                  <v-select v-model="current_provider" :items="listProviders" outline :rules="[required]" attach></v-select>
+                  <v-select v-model="current_provider" :items="listProviders" outline :rules="[required]" ></v-select>
               </div>
             </div>
 
@@ -67,7 +67,7 @@
 
 <script>
   import {required, number} from '../../shared_components/validate'
-
+  import providers from '../../shared_components/providers'
 
   export default {
     name: 'BillFormStep2',
@@ -79,7 +79,7 @@
       address: null,
       consumption: null,
       consumption_q: true,
-      listProviders: ['Total Direct Energie', 'EDF', 'Total Spring', 'Engie', 'Butagaz', 'Vattenfall', 'Ekwater', 'Antargaz', 'Energie du Santerre', 'Eni', 'Sowee by EDF', 'Autre']
+      listProviders: providers
     }),
     methods: {
       booleanToString(param) {

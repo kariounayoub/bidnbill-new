@@ -30,3 +30,12 @@
   .compact-form .form-content {
     transform: scale(0.875)
   }
+
+.offset {
+  margin-left: 200px;
+}
+@media (max-width: 900px) {
+  .offset {
+    margin-left: 0px;
+  }
+}

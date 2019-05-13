@@ -1,9 +1,14 @@
 class Api::V1::BillsController < Api::V1::BaseController
-  before_action :find_user, only: [:index, :create]
+  before_action :find_user, only: [:my_bills, :create]
 
-  def index
+  def my_bills
     @bills = Bill.where(client: @user)
     authorize @bills
+    render json: BillsSerializer.new(@bills).serialized_json
+  end
+
+  def index
+    @bills = policy_scope(Bill)
     render json: BillsSerializer.new(@bills).serialized_json
   end
 

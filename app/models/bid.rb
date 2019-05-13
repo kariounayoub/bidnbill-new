@@ -1,16 +1,15 @@
 class Bid < ApplicationRecord
-  belongs_to :auction
+  belongs_to :bill
   belongs_to :user
 
   has_one :account, through: :user
-  has_one :bill, through: :auction
-  has_one :client, through: :auction
+  has_one :client, through: :bill
 
 
-  after_initialize :init
+  before_create :init
 
   def init
-    status  ||= "pending"
+    self.status  ||= "pending"
   end
 
   STATUS = ["cancelled","pending", "completed"]

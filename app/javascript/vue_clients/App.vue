@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <Navbar />
+    <Navbar  v-bind:withSidebar='false'/>
     <Flash />
     <router-view class='top-margin min-height-full'></router-view>
     <Footer />

@@ -1,5 +1,11 @@
 class BillPolicy < ApplicationPolicy
-  def index?
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
+  end
+
+  def my_bills?
     record.first == nil || user == record.first.client
   end
 

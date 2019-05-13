@@ -13,7 +13,7 @@ const config = {
 
 export default {
   GET_BILLS: async ({state, commit}) => {
-    await axios.get(`/api/v1/users/${state.client.data.attributes.id}/bills`, config)
+    await axios.get(`/api/v1/users/${state.client.data.attributes.id}/my_bills`, config)
     .then(res => commit('SET_BILLS', res))
     .catch(err => console.log(err))
   },

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [] do
           resources :bills, only: [:index, :show, :create]
+          get 'my_bills', to: 'bills#my_bills'
       end
     end
   end
