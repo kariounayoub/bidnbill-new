@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'provider_dashboard', to: 'pages#provider_dashboard', as: :provider_dashboard
 
   get 'bills/:id', to: 'pages#client_dashboard'
+  get 'provider_encheres', to: 'pages#provider_dashboard'
+  get 'provider_clients', to: 'pages#provider_dashboard'
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

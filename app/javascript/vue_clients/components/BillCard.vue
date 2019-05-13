@@ -6,13 +6,13 @@
           <div class="bill__card__image" v-bind:style="{backgroundImage: 'url(' + getImage + ')'}"></div>
         </div>
         <div class='bill__card__middle'>
-          <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
+          <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.bill.data.attributes.category.name}}</div>
           <div class="card-info">
             <div><div class="info-title inline-div">Nom</div><div class="content inline-div">{{client.full_name}}</div></div>
-            <div><div class="info-title inline-div">Fournisseur</div><div class="content inline-div">{{bill.attributes.current_provider}}</div></div>
-            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{bill.attributes.consumption}} KW/h</div></div>
-            <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{bill.attributes.price}} € / mois</div></div>
-            <div><div class="info-title inline-div">Addresse</div><div class="content inline-div">{{bill.attributes.address}}</div></div>
+            <div><div class="info-title inline-div">Fournisseur</div><div class="content inline-div">{{bill.bill.data.attributes.current_provider}}</div></div>
+            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{bill.info.consumption}} KW/h</div></div>
+            <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{bill.bill.data.attributes.price}} € / mois</div></div>
+            <div><div class="info-title inline-div">Addresse</div><div class="content inline-div">{{bill.info.address}}</div></div>
           </div>
         </div>
         <div class="bill__card__bottom hidden-xs-only">
@@ -32,7 +32,7 @@
     props: ['bill'],
     computed: {
       getImage() {
-         if(this.bill !== null) return getProviderImage(this.bill.attributes.current_provider)
+         if(this.bill !== null) return getProviderImage(this.bill.bill.data.attributes.current_provider)
       },
       client () {
         return this.$store.getters.Client.attributes

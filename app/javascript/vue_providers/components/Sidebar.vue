@@ -1,7 +1,7 @@
 <template>
   <div id="sidebar"  >
     <v-slide-x-transition >
-    <v-navigation-drawer fixed width="200" mobile-break-point=900 v-show="!offset">
+    <v-navigation-drawer fixed width="200" permanent v-show="!offset">
       <v-list dense class="pt-0">
         <router-link  v-for="item in items" :key="item.title" :to="item.path">
           <v-list-tile >

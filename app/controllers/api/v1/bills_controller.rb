@@ -4,7 +4,8 @@ class Api::V1::BillsController < Api::V1::BaseController
   def my_bills
     @bills = Bill.where(client: @user)
     authorize @bills
-    render json: BillsSerializer.new(@bills).serialized_json
+    bills = @bills.map{|bill| {bill: BillsSerializer.new(bill), info: {address: bill.address, consumption: bill.consumption, zip_code: bill.zip_code}}}
+    render json: bills
   end
 
   def index
@@ -15,14 +16,15 @@ class Api::V1::BillsController < Api::V1::BaseController
   def show
     @bill = Bill.find_by_id(params[:id])
     authorize @bill
-    render json: BillsSerializer.new(@bill).serialized_json
+    render json: {bill: BillsSerializer.new(@bill), info: {address: @bill.address,  consumption: @bill.consumption, zip_code: @bill.zip_code}}
   end
 
   def create
     @bill = Bill.new(bill_params)
     if @bill.save
       @user.update(user_params)
-      render json: {success: true, bill: BillsSerializer.new(@bill), user: UsersSerializer.new(@user)}
+      bill = {bill: BillsSerializer.new(@bill), info: {address: @bill.address,  consumption: @bill.consumption, zip_code: @bill.zip_code}}
+      render json: {success: true, bill: bill, user: UsersSerializer.new(@user)}
     else
       render json: {success: false}
     end

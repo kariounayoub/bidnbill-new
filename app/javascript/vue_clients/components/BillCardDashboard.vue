@@ -3,12 +3,12 @@
     <v-card class="dashboard__card rounded">
       <v-layout justify-content-between>
         <div class='dashboard__card__right'>
-          <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
+          <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.bill.data.attributes.category.name}}</div>
           <div class="card-info">
-            <h4>{{bill.attributes.current_provider}}</h4>
-            <p>{{bill.attributes.price}} € / mois</p>
+            <h4>{{bill.bill.data.attributes.current_provider}}</h4>
+            <p>{{bill.info.price}} € / mois</p>
           </div>
-          <router-link  :to="'/bills/' + bill.id">
+          <router-link  :to="'/bills/' + bill.bill.data.attributes.id">
             <v-btn class='rounded'>Mes offres</v-btn>
           </router-link>
         </div>
@@ -28,7 +28,7 @@
     props: ['bill'],
     computed: {
       getImage() {
-         return getProviderImage(this.bill.attributes.current_provider)
+         return getProviderImage(this.bill.bill.data.attributes.current_provider)
       }
     }
   }
