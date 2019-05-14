@@ -11,11 +11,11 @@
           :rows-per-page-items="[5,10,25,{'text': 'Tout', 'value': -1}]"
         >
           <template v-slot:items="props">
-            <td class="text-xs-left">{{ props.item.user.first_name }}</td>
-            <td class="text-xs-left">{{ props.item.bid.content }}</td>
-            <td class="text-xs-left">{{ props.item.bid.content }}</td>
-            <td class="text-xs-left">{{ props.item.bid.content }}</td>
-            <td class="text-xs-left">{{ props.item.bid.content }}</td>
+            <td class="text-xs-left">{{ props.item.account.company }} </td>
+            <td class="text-xs-left">{{ props.item.bid.price }} €</td>
+            <td class="text-xs-left">{{ calculateDifference(props.item.bid.price) }} €</td>
+            <td class="text-xs-left">{{ props.item.bid.status }}</td>
+            <td class="text-xs-left">Edit</td>
           </template>
         </v-data-table>
     </v-card>
@@ -34,7 +34,17 @@
           { text: 'Statut', value: 'status', class: 'bid__header' },
           { text: 'Actions', value: 'actions',  class: 'bid__header'}
         ],
-    })
+    }),
+    computed: {
+      activeBill () {
+        return this.$store.getters.ActiveBill;
+      },
+    },
+    methods: {
+      calculateDifference(bidPrice) {
+        return this.activeBill.attributes.price - bidPrice
+      }
+    }
 
   }
 </script>

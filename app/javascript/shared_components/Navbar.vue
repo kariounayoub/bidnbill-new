@@ -2,7 +2,7 @@
   <div>
     <v-toolbar fixed class="navbar__main">
 
-      <v-toolbar-side-icon class="navbar__icon"></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="navbar__icon" @click="toggleSidebar()"></v-toolbar-side-icon>
       <v-toolbar-title class="pointer navbar__header" @click='navigateLanding()'>BillSelector</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -39,8 +39,15 @@
 
   export default {
     name: 'Navbar',
-
+    props: {
+      withSidebar: Boolean,
+    },
     methods: {
+      toggleSidebar() {
+        if(this.withSidebar) {
+          this.$store.commit('TOOGLE_SIDEBAR_STATE')
+        }
+      },
       navigateLanding() {
         window.location.assign(ROOT_URL)
       },

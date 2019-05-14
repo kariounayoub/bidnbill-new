@@ -1,5 +1,5 @@
 #login-form {
-    background: linear-gradient(251.31deg, #59E02A -32.76%, #FFFFFF 217.09%);
+    background: linear-gradient(251.31deg, $green -32.76%, #FFFFFF 217.09%);
     min-height: 100vh;
   .half-screen {
     width: 500px;
@@ -26,7 +26,7 @@
       padding: 10px 50px;
     &:hover {
       box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-      background-color: #59E02A !important;
+      background-color: $green !important;
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="bill__card">
+    <v-card class="bill__card rounded">
       <v-layout column justify-content-between>
         <div class="bill__card__top">
           <div class="bill__card__image" v-bind:style="{backgroundImage: 'url(' + getImage + ')'}"></div>
@@ -28,7 +28,7 @@
   import {mapState} from 'vuex'
 
   export default {
-    name: 'Bill',
+    name: 'BillCard',
     props: ['bill'],
     computed: {
       getImage() {
@@ -43,8 +43,6 @@
 
 <style scoped lang='scss'>
   .bill__card {
-    margin: 20px;
-    border-radius: 30px 4px 30px 4px;
     .bill__card__top {
       height: 100px;
       background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);

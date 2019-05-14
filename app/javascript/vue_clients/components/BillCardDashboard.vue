@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="dashboard__card">
+    <v-card class="dashboard__card rounded">
       <v-layout justify-content-between>
         <div class='dashboard__card__right'>
           <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
@@ -8,7 +8,7 @@
             <h4>{{bill.attributes.current_provider}}</h4>
             <p>{{bill.attributes.price}} € / mois</p>
           </div>
-          <router-link  :to="'/bills/' + bill.id">
+          <router-link  :to="'/bills/' + bill.attributes.id">
             <v-btn class='rounded'>Mes offres</v-btn>
           </router-link>
         </div>
@@ -36,8 +36,6 @@
 
 <style scoped lang='scss'>
   .dashboard__card {
-    margin: 20px;
-    border-radius: 30px 4px 30px 4px;
     .dashboard__card__right {
       display: flex;
       flex-direction: column;

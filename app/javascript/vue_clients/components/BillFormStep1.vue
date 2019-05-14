@@ -11,17 +11,17 @@
           </div>
           <p>Electricté</p>
         </div>
-        <div class="text-center"  @click="setBillType(getCategoryListValue('Gas'))" >
-          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Gas')}">
+        <div class="text-center"  @click="setBillType(getCategoryListValue('Gaz'))" >
+          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Gaz')}">
             <i class="fas fa-burn"></i>
           </div>
-          <p>Gas</p>
+          <p>Gaz</p>
         </div>
-        <div class="text-center"   @click="setBillType(getCategoryListValue('Electricité et Gas'))" >
-          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Electricité et Gas')}">
+        <div class="text-center"   @click="setBillType(getCategoryListValue('Electricité et Gaz'))" >
+          <div class="type-icon d-flex align-items-center justify-content-center" v-bind:class="{'chosen-icon' : billType === getCategoryListValue('Electricité et Gaz')}">
             <i class="far fa-lightbulb"></i> + <i class="fas fa-burn"></i>
           </div>
-          <p>Electricté et Gas</p>
+          <p>Electricté et Gaz</p>
         </div>
       </div>
       <div class="choix-type-even">

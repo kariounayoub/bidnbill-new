@@ -1,0 +1,50 @@
+#sidebar {
+  .v-navigation-drawer {
+    transition: all 0.5s;
+    margin-top: 64px !important;
+    box-shadow:0px 6px 6px rgba(0, 0, 0, 0.12), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    color: $green;
+    text-decoration: none;
+    .v-list{
+      padding-top: 20px !important;
+      i {
+        font-size: 22px;
+        color: $green;
+      }
+      a {
+        text-decoration: none;
+        .v-list__tile__title {
+          font-size: 14px;
+        }
+        &:hover {
+          color: white;
+          text-decoration: none,
+        }
+      }
+      .v-list__tile__action {
+        min-width: 30px;
+      }
+      [role="listitem"]  {
+        padding: 10px 0;
+      }
+      [role="listitem"]:hover {
+        background-color: $green;
+        i {
+          color: white;
+        }
+      }
+      .router-link-exact-active {
+        [role="listitem"]  {
+          background-color: $green;
+          color: white;
+          i {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+
