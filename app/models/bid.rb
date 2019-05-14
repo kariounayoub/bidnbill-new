@@ -9,9 +9,8 @@ class Bid < ApplicationRecord
   before_create :init
 
   def init
-    self.status  ||= "pending"
+    self.status  ||= "en attente"
   end
 
-  STATUS = ["cancelled","pending", "completed"]
-  PAYMENT_STATUS = ["cancelled","pending", "completed"]
+  STATUS = ["refusé","en attente", "accépté"]
 end

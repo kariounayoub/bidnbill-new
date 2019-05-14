@@ -1,33 +1,39 @@
 class Api::V1::BillsController < Api::V1::BaseController
-  before_action :find_user, only: [:my_bills, :create]
+  before_action :find_user, only: [:my_bills, :create, :my_clients]
 
   def my_bills
-    @bills = Bill.where(client: @user)
-    authorize @bills
-    bills = @bills.map{|bill| {bill: BillsSerializer.new(bill), info: {address: bill.address, consumption: bill.consumption, zip_code: bill.zip_code}}}
-    render json: bills
+    bills = Bill.where(client: @user).includes(:bids)
+    authorize bills
+    render json: BillsSerializer.new(bills, {params: {show_details: true}})
   end
 
   def index
-    @bills = policy_scope(Bill)
-    render json: BillsSerializer.new(@bills).serialized_json
+    bills = policy_scope(Bill).where(is_open: true).includes(:bids)
+    render json: BillsSerializer.new(bills).serialized_json
   end
 
   def show
-    @bill = Bill.find_by_id(params[:id])
-    authorize @bill
-    render json: {bill: BillsSerializer.new(@bill), info: {address: @bill.address,  consumption: @bill.consumption, zip_code: @bill.zip_code}}
+    bill = Bill.find_by_id(params[:id])
+    authorize bill
+    render json: BillsSerializer.new(bill, {params: {show_details: true}})
   end
 
   def create
-    @bill = Bill.new(bill_params)
-    if @bill.save
+    bill = Bill.new(bill_params)
+    if bill.save
       @user.update(user_params)
-      bill = {bill: BillsSerializer.new(@bill), info: {address: @bill.address,  consumption: @bill.consumption, zip_code: @bill.zip_code}}
-      render json: {success: true, bill: bill, user: UsersSerializer.new(@user)}
+      render json: {success: true, bill: BillsSerializer.new(bill, {params: {show_details: true}}), user: UsersSerializer.new(@user)}
     else
       render json: {success: false}
     end
+  end
+
+  def my_clients
+    bid_ids = Bid.joins(user: :account).where(status: 'accépté', accounts: {id: @user.account.id})
+    authorize bid_ids
+    my_bills = Bill.where(id: bid_ids.map {|bid| bid.bill.id})
+    my_clients = my_bills.map{|bill| {client: UsersSerializer.new(bill.client), bill: BillsSerializer.new(bill, {params: {show_bids: false, show_details: true}}), bid: BidsSerializer.new(bill.bids.select {|b| b.user.account == current_user.account}[0])}}
+    render json: my_clients
   end
 
   private

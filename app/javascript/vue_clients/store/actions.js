@@ -27,7 +27,7 @@ export default {
     .then((res) => {
       router.push('/client_dashboard');
       if(res.data.success) {
-        commit('ADD_BILL', res.data.bill);
+        commit('ADD_BILL', res.data.bill.data);
         commit('UPDATE_CLIENT', res.data.user)
         commit('SET_FLASH', { message: 'Abonnement enregistré avec succès', variant: 'success' })
       } else {

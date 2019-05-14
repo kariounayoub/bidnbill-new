@@ -5,11 +5,9 @@ class Bill < ApplicationRecord
   has_many :bids
   has_many :accounts, through: :bids
 
-
   validates :current_provider, :price, :consumption, :address, presence: true
 
   before_create :set_open
-
 
   def set_open
     self.is_open = true

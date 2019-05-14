@@ -42,7 +42,7 @@
     },
     methods: {
       calculateDifference(bidPrice) {
-        return this.activeBill.bill.data.attributes.price - bidPrice
+        return this.activeBill.attributes.price - bidPrice
       }
     }
 

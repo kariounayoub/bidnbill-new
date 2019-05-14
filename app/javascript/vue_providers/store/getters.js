@@ -11,18 +11,20 @@ export default {
   Bills: state => {
     return state.bills.data.data
   },
-  MyBills: state => {
+  OtherBills: state => {
     return state.bills.data.data.filter((b) => {
-      if (checkBidAccount(b, state.provider.data.attributes.account.id) > 0) return b
+      if (!state.myBills.includes(b)) return b
     })
+  },
+  MyBills: state => {
+    return state.myBills
+  },
+  MyClients: state => {
+    return state.myClients.data
+  },
+  ActiveClient: state => {
+    return state.activeClient
   }
 }
 
 
-function checkBidAccount(bill, account) {
- if(Array.isArray(bill.attributes.bids) && bill.attributes.bids.length > 0) {
-   return bill.attributes.bids.filter((bid) => {
-      if(bid.account.id === account) return true
-    }).length
-  }
-}

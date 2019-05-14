@@ -2,7 +2,7 @@
   <div>
     <h3 class="dashboard__title">Mes Enchères</h3>
     <v-container>
-      <BidTable v-bind:bills='bills' />
+      <BidTable v-bind:bills='bills' v-bind:canBid='false'/>
     </v-container>
   </div>
 </template>

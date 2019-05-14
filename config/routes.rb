@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       resources :users, only: [] do
           resources :bills, only: [:index, :show, :create]
           get 'my_bills', to: 'bills#my_bills'
+          get 'my_clients', to: 'bills#my_clients'
       end
+      resources :bids, only: [:create]
     end
   end
 

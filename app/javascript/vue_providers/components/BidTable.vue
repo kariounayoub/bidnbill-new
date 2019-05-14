@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- Dialog -->
+      <v-dialog v-model="dialog" max-width="700px" v-if='viewedBill'>
+        <BidDialog v-bind:viewedBill='viewedBill' v-bind:canBid='canBid' v-on:close='close'/>
+      </v-dialog>
+
+    <!-- Main Table -->
       <v-card class='rounded'>
         <v-layout row wrap class='inside-card'>
           <v-flex xs12 sm4 >
@@ -37,7 +43,7 @@
                   <td class="text-xs-right">{{ props.item.price }} €</td>
                   <td class="text-xs-right">{{ props.item.city }}</td>
                   <td class="text-xs-right">{{ bidCount(props.item) }}</td>
-                  <td class="text-xs-right">Bid</td>
+                  <td class="text-xs-right"><v-icon @click='viewBill(props.item)'>visibility</v-icon></td>
                 </tr>
               </template>
             </v-data-table>
@@ -48,12 +54,15 @@
 </template>
 
 <script>
-
+import BidDialog from './BidDialog'
 import providers from '../../shared_components/providers'
 
 export default {
   name: 'BidTable',
-  props: ['bills'],
+  props: ['bills', 'canBid'],
+  components: {
+    BidDialog
+  },
   data: () => ({
     filters: {
       ville: '',
@@ -62,6 +71,7 @@ export default {
     },
     categories: ['Tout','Electricité', 'Gaz', 'Electricité et Gaz'],
     providers: ['Tout',...providers],
+    dialog: false,
     headers: [
       { text: 'Demande', align: 'left', value: 'category'},
       { text: 'Fournisseur actuel', value: 'current_provider', align: 'right'},
@@ -70,10 +80,16 @@ export default {
       { text: 'Statut', value: 'status', align: 'right'},
       { text: 'Actions', value: 'actions', align: 'right'},
     ],
+    viewedBill: null,
   }),
   computed: {
     items() {
       return this.bills.map(e => e.attributes)
+    }
+  },
+  watch: {
+    dialog (val) {
+      val || this.close()
     }
   },
   methods: {
@@ -122,7 +138,15 @@ export default {
     },
     filterFournisseurs(val) {
       this.filters = this.$MultiFilters.updateFilters(this.filters, {fournisseur: val});
-    }
+    },
+    viewBill (item) {
+      this.viewedBill = Object.assign({}, item)
+      this.dialog = true
+    },
+    close () {
+      this.dialog = false
+      this.viewedBill = null
+    },
   },
 
 };

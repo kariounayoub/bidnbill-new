@@ -6,7 +6,7 @@
     </router-link>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm6 v-for="bill in bills" v-bind:key='bill.bill.data.attributes.id'>
+        <v-flex xs12 sm6 v-for="bill in bills" v-bind:key='bill.attributes.id'>
           <BillCardDashboard v-bind:bill='bill' />
         </v-flex>
       </v-layout>
@@ -32,7 +32,7 @@
       }
     },
     mounted() {
-      if (this.bills[0].bill.data.attributes.id === null) {
+      if (this.bills[0].attributes.id === null) {
         this.$store.dispatch('GET_BILLS')
       }
     }

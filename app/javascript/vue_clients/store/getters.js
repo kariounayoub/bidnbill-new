@@ -9,7 +9,7 @@ export default {
       return state.categories
     },
   Bills: state => {
-      return state.bills.data
+      return state.bills.data.data
     },
   ActiveBill: state => {
       return state.activeBill
