@@ -35,5 +35,17 @@ export default {
       }
     })
     .catch(err => commit('SET_FLASH', {message: err, variant: 'error'}))
+  },
+  SELECT_BID: async ({state,commit}, payload) => {
+    await axios.patch(`/api/v1/bids/${payload}/select`, config)
+    .then((res) => {
+      if(res.data.success) {
+        commit('UPDATE_BILL', res.data.bill.data);
+        commit('SET_FLASH', { message: 'Enchère validé avec succès', variant: 'success' })
+      } else {
+        commit('SET_FLASH', {message: "Erreur la séléction n'a pas aboutie", variant: 'error'})
+      }
+    })
+    .catch(err => commit('SET_FLASH', {message: err, variant: 'error'}))
   }
 }

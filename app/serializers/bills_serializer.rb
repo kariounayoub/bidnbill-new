@@ -1,6 +1,6 @@
 class BillsSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :current_provider,  :price, :photo, :category,  :city, :consumption
+  attributes :id, :current_provider,  :price, :photo, :category,  :city, :consumption, :is_open
   attribute :address, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :zip_code, if: Proc.new {|record, params| params && params[:show_details] == true}
 

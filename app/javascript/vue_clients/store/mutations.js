@@ -16,5 +16,11 @@ export default {
   },
   UPDATE_CLIENT: (state,payload) => {
     state.client = payload
+  },
+  UPDATE_BILL: (state,payload) => {
+    state.activeBill = payload
+    const index = state.bills.data.data.indexOf(b => b.id === payload.id);
+    console.log(index)
+    state.bills.data.data[index] = payload
   }
 }
