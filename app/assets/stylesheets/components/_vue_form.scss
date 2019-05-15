@@ -33,3 +33,8 @@
   #form-fields .v-select.v-text-field--enclosed:not(.v-text-field--single-line) .v-select__selections {
     padding-top: 0 ;
   }
+
+
+  #form-fields .v-select:not(.v-text-field--single-line) .v-select__slot > input {
+    align-self: center;
+  }

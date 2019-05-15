@@ -24,6 +24,9 @@ export default {
   },
   ActiveClient: state => {
     return state.activeClient
+  },
+  MapKey: state => {
+    return state.mapKey
   }
 }
 

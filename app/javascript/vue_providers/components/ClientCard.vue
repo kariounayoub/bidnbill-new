@@ -18,7 +18,9 @@
           </div>
         </div>
         <div class="client_card__bottom hidden-xs-only">
-          MAP
+          <MglMap v-if='coordinates !== null' class="rounded" :accessToken="accessToken" :mapStyle="'mapbox://styles/mapbox/streets-v10'" :center="coordinates" :zoom='10'>
+            <MglMarker  :coordinates="coordinates" color="green" />
+          </MglMap>
         </div>
       </v-layout>
     </v-card>
@@ -26,11 +28,32 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import Mapbox from "mapbox-gl";
+  import { MglMap, MglMarker } from "vue-mapbox";
 
   export default {
     name: 'ClientCard',
     props: ['client'],
+    components: {
+      MglMap,
+      MglMarker
+    },
+    computed: {
+      accessToken() {
+        return this.$store.getters.MapKey
+      },
+      coordinates() {
+        if (this.client.bill.data.attributes.latitude !== undefined) {
+          return [this.client.bill.data.attributes.longitude, this.client.bill.data.attributes.latitude]
+        } else {
+          return null
+        }
+      }
+    },
+    created() {
+      // We need to set mapbox-gl library here in order to use it in template
+      this.mapbox = Mapbox;
+    }
   }
 </script>
 
@@ -81,10 +104,16 @@
     .client_card__bottom {
       height: 200px;
       background: #eee;
-      border-radius: 0 4px 30px 0;
+      border-radius: 0 0px 30px 4px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+  }
+</style>
+
+<style>
+  .client_card__bottom .mapboxgl-map {
+    border-radius: 0 0px 30px 4px !important;
   }
 </style>

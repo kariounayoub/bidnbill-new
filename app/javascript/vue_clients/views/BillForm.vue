@@ -87,7 +87,8 @@
                 price: this.$refs.step2.price,
                 current_provider: this.$refs.step2.current_provider,
                 consumption: this.$refs.step2.consumption,
-                address: this.$refs.step2.address
+                address: this.$refs.step2.address,
+                city: this.$refs.step2.city
               },
               user: {
                 first_name: this.$refs.step3.first_name,

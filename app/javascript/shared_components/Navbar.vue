@@ -64,7 +64,7 @@
     cursor: pointer;
   }
   .navbar__main {
-    background: linear-gradient(98.45deg, #59E02A -22.29%, #FFFFFF 248.81%);
+    background: linear-gradient(98.59deg, #6FE446 40.14%, #ACF094 99.89%);
   }
   .navbar__icon {
     color: white !important;

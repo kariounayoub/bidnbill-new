@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
   import BillCardDashboard from '../components/BillCardDashboard'
   export default {
     name: 'DashboardInitial',

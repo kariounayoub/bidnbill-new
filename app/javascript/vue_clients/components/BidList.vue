@@ -15,7 +15,7 @@
             <td class="text-xs-left">{{ props.item.bid.price }} €</td>
             <td class="text-xs-left">{{ calculateDifference(props.item.bid.price) }} €</td>
             <td class="text-xs-left">{{ props.item.bid.status }}</td>
-            <td class="text-xs-left">Edit</td>
+            <td class="text-xs-left"><v-btn small color='success' @click='selectBid(props.item.bid.id)' v-if='activeBill.attributes.is_open'>Accépter</v-btn></td>
           </template>
         </v-data-table>
     </v-card>
@@ -43,6 +43,9 @@
     methods: {
       calculateDifference(bidPrice) {
         return this.activeBill.attributes.price - bidPrice
+      },
+      selectBid(id) {
+        this.$store.dispatch('SELECT_BID', id)
       }
     }
 

@@ -1,6 +1,85 @@
 <%= render 'shared/navbar' %>
+<div id="home-wrapper">
+  <div id="home-top">
+    <div class="text-container">
+      <h1>Reduire vos factures en quelque clicks ?</h1>
+      <h3>C’est possible !</h3>
+      <p>BillSelector cherche pour vous la meilleur offre sur mesure en s’appuyant sur votre consommation réel</p>
+      <button>Inscrivez Vous</button>
+    </div>
+      <%= image_tag 'gandma-transparent.png' %>
+  </div>
+  <section>
+    <h3 class='title'>Comment ça marche?</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <div class="home-card">
+            <i class="fas fa-download"></i>
+            <h4>Téléchargez votre facture</h4>
+            <p>Inscrivez-vous et téléchargez votre facture (éléctricité - gaz - téléphone - internet)</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="home-card">
+            <i class="fas fa-gavel"></i>
+            <h4>Créez un enchère</h4>
+            <p>Faite une demande <strong>anonyme</strong> aux fornisseurs afin de leur permettre de soummetre une <strong>offre sur mesure </strong> </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <div class="home-card">
+            <i class="fas fa-check-circle"></i>
+            <h4>Choissisez votre nouveau fournisseur</h4>
+            <p>Consultez les résultats de l’enchère et séléctionnez votre nouveau fournisseur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h1>Landing Page</h1>
-<p>TODO: fill out landing page</p>
+  <section>
+    <h3 class="title">Nos partenaires</h3>
+    <p>Nous travaillons en collaboration avec plus de 50 fournisseurs d’eléctricité, gaz, téléphonie et internet</p>
+    <div class="container-fluid">
+        <div id="carousel-example" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active">
+                    <img src="<%= image_path('edf.png') %>" class="img-fluid mx-auto d-block" alt="img1">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="<%= image_path('total.png') %>" class="img-fluid mx-auto d-block" alt="img2">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=3" class="img-fluid mx-auto d-block" alt="img3">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=4" class="img-fluid mx-auto d-block" alt="img4">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=5" class="img-fluid mx-auto d-block" alt="img5">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=6" class="img-fluid mx-auto d-block" alt="img6">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=7" class="img-fluid mx-auto d-block" alt="img7">
+                </div>
+                <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
+                    <img src="//placehold.it/600x400/000/fff?text=8" class="img-fluid mx-auto d-block" alt="img8">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 
+  </section>
+</div>
 
+<%= render 'shared/footer' %>
