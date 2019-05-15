@@ -13,6 +13,7 @@
         color: $green;
       }
       a {
+        color: darken($green, 10%);
         text-decoration: none;
         .v-list__tile__title {
           font-size: 14px;

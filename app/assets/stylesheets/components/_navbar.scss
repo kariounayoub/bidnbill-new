@@ -1,14 +1,25 @@
-.navbar-lewagon {
+.navbar.navbar-light {
   justify-content: space-between;
-  background: white;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+  background: linear-gradient(98.59deg, #6FE446 40.14%, #ACF094 99.89%);
+  box-shadow: 0 2px 2px transparent;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  a {
+    color: white;
+  }
+ .navbar-nav .active > .nav-link {
+    color: white;
+    &:hover {
+      color: #eee;
+    }
+  }
+  a.dropdown-item {
+    color: black;
+  }
+  .navbar-collapse {
+    flex-grow: 0;
+  }
 }
 
 .avatar {
