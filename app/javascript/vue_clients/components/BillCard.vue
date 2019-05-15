@@ -16,7 +16,9 @@
           </div>
         </div>
         <div class="bill__card__bottom hidden-xs-only">
-          MAP
+          <MglMap v-if='coordinates !== null' class="rounded" :accessToken="accessToken" :mapStyle="'mapbox://styles/mapbox/streets-v10'" :center="coordinates" :zoom='10'>
+            <MglMarker  :coordinates="coordinates" color="green" />
+          </MglMap>
         </div>
       </v-layout>
     </v-card>
@@ -25,18 +27,37 @@
 
 <script>
   import getProviderImage from '../get_provider_image.js';
-  import {mapState} from 'vuex'
+  import Mapbox from "mapbox-gl";
+  import { MglMap, MglMarker } from "vue-mapbox";
 
   export default {
     name: 'BillCard',
     props: ['bill'],
+    components: {
+      MglMap,
+      MglMarker
+    },
     computed: {
       getImage() {
          if(this.bill !== null) return getProviderImage(this.bill.attributes.current_provider)
       },
       client () {
         return this.$store.getters.Client.attributes
+      },
+      accessToken() {
+        return this.$store.getters.MapKey
+      },
+      coordinates() {
+        if (this.bill.attributes.latitude !== undefined) {
+          return [this.bill.attributes.longitude, this.bill.attributes.latitude]
+        } else {
+          return null
+        }
       }
+    },
+    created() {
+      // We need to set mapbox-gl library here in order to use it in template
+      this.mapbox = Mapbox;
     }
   }
 </script>
@@ -92,10 +113,16 @@
     .bill__card__bottom {
       height: 200px;
       background: #eee;
-      border-radius: 0 4px 30px 0;
+      border-radius: 0 0px 30px 4px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+  }
+</style>
+
+<style>
+  .bill__card__bottom .mapboxgl-map {
+    border-radius: 0 0px 30px 4px !important;
   }
 </style>

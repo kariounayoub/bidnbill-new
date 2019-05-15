@@ -14,5 +14,8 @@ export default {
   ActiveBill: state => {
       return state.activeBill
     },
+  MapKey: state => {
+    return state.mapKey
+  }
 
 }

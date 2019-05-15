@@ -7,6 +7,9 @@ class Bill < ApplicationRecord
 
   validates :current_provider, :price, :consumption, :address, presence: true
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   before_create :set_open
 
   def set_open

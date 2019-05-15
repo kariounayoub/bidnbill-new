@@ -40,7 +40,15 @@
             <div >
               <div class="form-subtitle inline-div">Votre addresse</div>
               <div class="form-content inline-div">
-                  <v-text-field v-model="address" outline :rules="[required]" />
+                  <v-combobox
+                    v-model="address"
+                    :items="items"
+                    :search-input.sync="search"
+                    hide-no-data
+                    hide-selected
+                    outline
+                    :rules="[required]"
+                  ></v-combobox>
               </div>
             </div>
 
@@ -66,6 +74,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import {required, number} from '../../shared_components/validate'
   import providers from '../../shared_components/providers'
 
@@ -77,14 +86,37 @@
       frequency: null,
       price: null,
       address: null,
+      address2: null,
       consumption: null,
       consumption_q: true,
-      listProviders: providers
+      listProviders: providers,
+      search: false,
+      entries: [],
+      city: null,
     }),
+    computed: {
+      items () {
+        return this.entries.map(e => e.properties.label)
+      }
+    },
     methods: {
       booleanToString(param) {
         if(param) return 'Oui'
         if(!param) return 'Non'
+      }
+    },
+   watch: {
+    search (val) {
+      // Lazily load input items
+      axios.get(`https://api-adresse.data.gouv.fr/search/?q=${val}`)
+        .then(res => {
+          this.entries = res.data.features
+          this.city = this.entries[0].properties.city
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(() => (this.isLoading = false))
       }
     }
   }

@@ -9,4 +9,5 @@ export default {
   myBills: [],
   myClients: {data: [{bill: {data: {id: null, attributes: { category: ''}}}, client: {data: {attributes: ''}}, info: ''}]},
   activeClient : null,
+  mapKey: root.dataset.map
 }
