@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="dashboard__title">Mes Clients</h3>
+    <h3 class="dashboard__title">Nos Clients</h3>
     <v-container>
       <v-layout row wrap class='inside-card'>
         <v-flex xs12 sm12  v-if='!activeClient'>

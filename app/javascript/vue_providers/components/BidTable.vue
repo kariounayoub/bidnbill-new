@@ -46,7 +46,7 @@
             ></v-select>
           </v-flex>
           <v-flex xs12>
-            <v-data-table :headers="headers":items="items" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter">
+            <v-data-table :headers="headers":items="items" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter"           :no-data-text="'Aucune donnée disponible'">
               <template v-slot:items="props">
                 <tr >
                   <td class="text-xs-left" >{{ props.item.category.name }}</td>

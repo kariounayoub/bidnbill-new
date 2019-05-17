@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller?
   end
+
+  def after_sign_in_path_for(resource)
+    return client_dashboard_path if resource.user_type == 'client'
+    return provider_dashboard_path if resource.user_type == 'provider'
+    root_path
+  end
 end
