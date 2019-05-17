@@ -86,7 +86,6 @@
       frequency: null,
       price: null,
       address: null,
-      address2: null,
       consumption: null,
       consumption_q: true,
       listProviders: providers,

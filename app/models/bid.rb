@@ -10,6 +10,7 @@ class Bid < ApplicationRecord
 
   def init
     self.status  ||= "en attente"
+    self.bill.update(send_update_email: true)
   end
 
   STATUS = ["refusé","en attente", "accépté"]

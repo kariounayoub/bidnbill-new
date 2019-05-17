@@ -3,7 +3,10 @@
     <h3 class="dashboard__title">Mes Clients</h3>
     <v-container>
       <v-layout row wrap class='inside-card'>
-        <v-flex xs12 sm8 >
+        <v-flex xs12 sm12  v-if='!activeClient'>
+          <ClientTable v-bind:clients='myClients' />
+        </v-flex>
+        <v-flex xs12 sm8  v-if='activeClient'>
           <ClientTable v-bind:clients='myClients' />
         </v-flex>
         <v-flex xs12 sm4>
@@ -24,6 +27,9 @@ export default {
     ClientTable,
     ClientCard
   },
+  data: () => ({
+    interval: null,
+  }),
   computed: {
     myClients() {
       return this.$store.getters.MyClients
@@ -36,7 +42,13 @@ export default {
     if (this.myClients[0].bill.data.id === null) {
       this.$store.dispatch('GET_MY_CLIENTS')
     }
+    this.interval = setInterval(() => {
+      this.$store.dispatch('GET_MY_CLIENTS')
+    }, 10000);
   },
+  beforeDestroy() {
+    clearInterval(this.interval)
+  }
 
 };
 </script>

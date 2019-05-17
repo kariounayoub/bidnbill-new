@@ -5,6 +5,10 @@ class BillPolicy < ApplicationPolicy
     end
   end
 
+  def update?
+    record.client == user
+  end
+
   def my_bills?
     record.first == nil || user == record.first.client
   end

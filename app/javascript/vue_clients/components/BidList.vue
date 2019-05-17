@@ -15,7 +15,7 @@
             <td class="text-xs-left">{{ props.item.bid.price }} €</td>
             <td class="text-xs-left">{{ calculateDifference(props.item.bid.price) }} €</td>
             <td class="text-xs-left">{{ props.item.bid.status }}</td>
-            <td class="text-xs-left"><v-btn small color='success' @click='selectBid(props.item.bid.id)' v-if='activeBill.attributes.is_open'>Accépter</v-btn></td>
+            <td class="text-xs-left"><v-btn small class='rounded' @click='selectBid(props.item.bid.id)' v-if='activeBill.attributes.is_open'>Accépter</v-btn></td>
           </template>
         </v-data-table>
     </v-card>

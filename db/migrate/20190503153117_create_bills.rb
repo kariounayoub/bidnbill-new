@@ -16,6 +16,8 @@ class CreateBills < ActiveRecord::Migration[5.2]
       t.boolean :is_deleted
       t.boolean :is_edited
       t.boolean :is_open
+      t.boolean :send_update_email
+      t.integer :days_without_mail, default: 1
 
       t.timestamps
     end

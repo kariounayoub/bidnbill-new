@@ -12,6 +12,18 @@ const config = {
 }
 
 export default {
+  UPDATE_USER: async ({state,commit}, payload) => {
+    await axios.patch(`/api/v1/users/${state.provider.data.attributes.id}`, payload, config)
+    .then((res) => {
+      if(res.data.success) {
+        commit('UPDATE_PROVDIER', res.data.user);
+        commit('SET_FLASH', { message: 'Compte modifié avec succès', variant: 'success' })
+      } else {
+        commit('SET_FLASH', {message: "Erreur le compte n'a pas été modifié", variant: 'error'})
+      }
+    })
+    .catch(err => commit('SET_FLASH', {message: err, variant: 'error'}))
+  },
   GET_BILLS: async ({state, commit}) => {
     await axios.get(`/api/v1/users/${state.provider.data.attributes.id}/bills`, config)
     .then(res => commit('SET_BILLS', res))

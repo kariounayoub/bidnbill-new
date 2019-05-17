@@ -2,11 +2,22 @@
   <div>
     <!-- Dialog -->
       <v-dialog v-model="dialog" max-width="700px" v-if='viewedBill'>
-        <BidDialog v-bind:viewedBill='viewedBill' v-bind:canBid='canBid' v-on:close='close'/>
+        <BidDialog v-bind:viewedBill='viewedBill' v-bind:canBid='!myBids' v-on:close='close'/>
       </v-dialog>
 
     <!-- Main Table -->
       <v-card class='rounded'>
+        <v-layout row wrap v-if='myBids'>
+          <v-flex xs12 sm4 offset-sm-4>
+          <v-switch
+            v-model="showMyBids"
+            color='success'
+            label='Seulement mes enchères'
+            center
+            class='justify-center'
+          ></v-switch>
+          </v-flex>
+        </v-layout>
         <v-layout row wrap class='inside-card'>
           <v-flex xs12 sm4 >
             <v-select
@@ -59,7 +70,7 @@ import providers from '../../shared_components/providers'
 
 export default {
   name: 'BidTable',
-  props: ['bills', 'canBid'],
+  props: ['myBids'],
   components: {
     BidDialog
   },
@@ -81,8 +92,14 @@ export default {
       { text: 'Actions', value: 'actions', align: 'right'},
     ],
     viewedBill: null,
+    showMyBids: false,
   }),
   computed: {
+    bills() {
+      if(this.myBids && this.showMyBids) return this.$store.getters.MyBills
+      if(this.myBids) return this.$store.getters.AccountBills
+      if(!this.myBids) return this.$store.getters.OtherBills
+    },
     items() {
       return this.bills.map(e => e.attributes)
     }
