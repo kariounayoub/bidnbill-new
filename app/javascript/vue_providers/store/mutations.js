@@ -8,6 +8,9 @@ export default {
   SET_BILLS: (state, payload) => {
     state.bills = payload;
     state.myBills =  state.bills.data.data.filter((b) => {
+      if (checkBidUser(b, state.provider.data.attributes.id) > 0) return b
+    });
+    state.accountBills =  state.bills.data.data.filter((b) => {
       if (checkBidAccount(b, state.provider.data.attributes.account.id) > 0) return b
     });
   },
@@ -16,7 +19,10 @@ export default {
   },
   SET_ACTIVE_CLIENT: (state, payload) => {
     state.activeClient = state.myClients.data.filter(c => c.bill.data.id === payload)[0]
-  }
+  },
+  UPDATE_PROVDIER: (state,payload) => {
+    state.provider = payload
+  },
 }
 
 
@@ -24,6 +30,14 @@ function checkBidAccount(bill, account) {
  if(Array.isArray(bill.attributes.bids) && bill.attributes.bids.length > 0) {
    return bill.attributes.bids.filter((bid) => {
       if(bid.account.id === account) return true
+    }).length
+  }
+}
+
+function checkBidUser(bill, user) {
+ if(Array.isArray(bill.attributes.bids) && bill.attributes.bids.length > 0) {
+   return bill.attributes.bids.filter((bid) => {
+      if(bid.account.user === user) return true
     }).length
   }
 }

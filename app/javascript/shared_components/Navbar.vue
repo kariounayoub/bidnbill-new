@@ -1,8 +1,7 @@
 <template>
   <div>
     <v-toolbar fixed class="navbar__main">
-
-      <v-toolbar-side-icon class="navbar__icon" @click="toggleSidebar()"></v-toolbar-side-icon>
+      <v-toolbar-side-icon class="navbar__icon" @click.stop="toggleSidebar()" ></v-toolbar-side-icon>
       <v-toolbar-title class="pointer navbar__header" @click='navigateLanding()'>BillSelector</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -15,6 +14,12 @@
           <img src="../../assets/images/avatar.jpg" alt="alt">
         </v-avatar>
         <v-list>
+          <router-link  :to="{name: 'edit_client'}" v-if='client'>
+            <p class='pointer navbar__menu-item'>Modifier mon compte</p>
+          </router-link>
+          <router-link  :to="{name: 'edit_provider'}" v-if='!client'>
+            <p class='pointer navbar__menu-item'>Modifier mon compte</p>
+          </router-link>
           <p class='pointer navbar__menu-item' @click='signOut()'>Déconnexion</p>
         </v-list>
       </v-menu>
@@ -41,6 +46,7 @@
     name: 'Navbar',
     props: {
       withSidebar: Boolean,
+      client: Boolean,
     },
     methods: {
       toggleSidebar() {
@@ -60,9 +66,6 @@
 </script>
 
 <style scoped lang="scss">
-  .pointer {
-    cursor: pointer;
-  }
   .navbar__main {
     background: linear-gradient(98.59deg, #6FE446 40.14%, #ACF094 99.89%);
   }
@@ -75,6 +78,7 @@
   }
   .navbar__menu-item {
     padding: 20px;
+    color: rgba(0,0,0,0.8);
     &:hover {
       background: #eee;
     };

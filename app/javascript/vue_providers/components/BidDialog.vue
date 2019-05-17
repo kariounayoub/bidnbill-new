@@ -1,7 +1,7 @@
 <template>
  <div>
   <!-- Main Dialog -->
-  <v-card class='rounded'>
+  <v-card class=' rounded'>
     <v-card-title class="headline">
       <span>Détail de l'enchère</span>
     </v-card-title>
@@ -96,31 +96,3 @@
   }
 </script>
 
-<style scoped lang='scss'>
-.headline {
-  background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  span {
-    width: 100%;
-  }
-  }
-  .card-info {
-    text-align: left;
-    padding-left: 20px;
-    font-size: 14px;
-    font-weight: 700;
-
-
-    .info-title {
-      color: #aaa;
-      width: 40%;
-      padding-bottom: 10px;
-    }
-    .content {
-      width: 60%;
-    }
-
-  }
-</style>

@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import DashboardInitial from './views/DashboardInitial.vue';
 import BillDetail from './views/BillDetail.vue';
 import BillForm from './views/BillForm.vue';
+import EditUser from './views/EditUser.vue';
 
 Vue.use(Router);
 
@@ -25,6 +26,11 @@ export default new Router({
       name: 'bill',
       component: BillDetail,
       props: true,
+    },
+    {
+      path: '/users/edit_client',
+      name: 'edit_client',
+      component: EditUser,
     },
   ],
 });

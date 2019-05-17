@@ -19,8 +19,7 @@ export default {
   },
   UPDATE_BILL: (state,payload) => {
     state.activeBill = payload
-    const index = state.bills.data.data.indexOf(b => b.id === payload.id);
-    console.log(index)
+    const index = state.bills.data.data.map(b=> b.id).indexOf(payload.id);
     state.bills.data.data[index] = payload
   }
 }

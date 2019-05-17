@@ -28,7 +28,7 @@
                   <td class="text-xs-right">{{props.item.client.data.attributes.full_name}}</td>
                   <td class="text-xs-right">{{props.item.bill.data.attributes.city}}</td>
                   <td class="text-xs-right">test</td>
-                  <td class="text-xs-right">Edit</td>
+                  <td class="text-xs-right pointer"><v-icon>visibility</v-icon></td>
                 </tr>
               </template>
             </v-data-table>

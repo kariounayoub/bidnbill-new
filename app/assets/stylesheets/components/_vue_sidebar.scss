@@ -19,6 +19,7 @@
           font-size: 14px;
         }
         &:hover {
+          background: none;
           color: white;
           text-decoration: none,
         }
@@ -38,7 +39,9 @@
       .router-link-exact-active {
         [role="listitem"]  {
           background-color: $green;
-          color: white;
+          a {
+            color: white;
+          }
           i {
             color: white;
           }

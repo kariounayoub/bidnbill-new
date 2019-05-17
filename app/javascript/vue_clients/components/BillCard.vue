@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-card class="bill__card rounded">
+    <v-card class="user_card rounded">
       <v-layout column justify-content-between>
-        <div class="bill__card__top">
-          <div class="bill__card__image" v-bind:style="{backgroundImage: 'url(' + getImage + ')'}"></div>
+        <div class="user_card__top">
+          <div class="user_card__image" v-bind:style="{backgroundImage: 'url(' + getImage + ')'}"></div>
         </div>
-        <div class='bill__card__middle'>
+        <div class='user_card__middle'>
           <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
           <div class="card-info">
             <div><div class="info-title inline-div">Nom</div><div class="content inline-div">{{client.full_name}}</div></div>
@@ -14,28 +14,44 @@
             <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{bill.attributes.price}} € / mois</div></div>
             <div><div class="info-title inline-div">Addresse</div><div class="content inline-div">{{bill.attributes.address}}</div></div>
           </div>
+          <v-btn color="primary" class='rounded primary edit-position' @click='dialog = true' v-if='bill.attributes.is_open'><v-icon>edit</v-icon>Modifier</v-btn>
         </div>
-        <div class="bill__card__bottom hidden-xs-only">
-          <MglMap v-if='coordinates !== null' class="rounded" :accessToken="accessToken" :mapStyle="'mapbox://styles/mapbox/streets-v10'" :center="coordinates" :zoom='10'>
-            <MglMarker  :coordinates="coordinates" color="green" />
-          </MglMap>
+        <div class="user_card__bottom hidden-xs-only">
+          <Map :coordinates='coordinates' :accessToken='accessToken' />
         </div>
       </v-layout>
     </v-card>
+    <!-- Dialog Edit Bill -->
+      <v-dialog v-model="dialog" max-width="500px" v-if='bill.attributes.is_open'>
+        <EditBill v-on:close='close'/>
+      </v-dialog>
+
   </div>
 </template>
 
 <script>
   import getProviderImage from '../get_provider_image.js';
-  import Mapbox from "mapbox-gl";
-  import { MglMap, MglMarker } from "vue-mapbox";
-
+  import Map from '../../shared_components/Map'
+  import EditBill from './EditBill'
   export default {
     name: 'BillCard',
     props: ['bill'],
     components: {
-      MglMap,
-      MglMarker
+      Map,
+      EditBill
+    },
+    data: () => ({
+      dialog: false,
+    }),
+    watch: {
+      dialog (val) {
+        val || this.close()
+      }
+    },
+    methods: {
+      close () {
+        this.dialog = false
+      },
     },
     computed: {
       getImage() {
@@ -55,74 +71,6 @@
         }
       }
     },
-    created() {
-      // We need to set mapbox-gl library here in order to use it in template
-      this.mapbox = Mapbox;
-    }
   }
 </script>
 
-<style scoped lang='scss'>
-  .bill__card {
-    .bill__card__top {
-      height: 100px;
-      background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
-      width: 100%;
-      display: flex;
-      align-items: center;
-      border-radius: 30px 4px 0px 0px;
-      .bill__card__image {
-        height: 70%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-      }
-    }
-    .bill__card__middle {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 20px 0;
-      .card-category {
-        padding-bottom: 20px;
-        font-size: 20px;
-        color: var(--v-success-base);
-        font-weight: 600;
-      }
-      .card-info {
-        text-align: left;
-        padding-left: 10px;
-        font-size: 14px;
-        font-weight: 700;
-
-
-        .info-title {
-          color: #aaa;
-          width: 50%;
-          padding-bottom: 10px;
-        }
-        .content {
-          width: 50%;
-        }
-
-      }
-    }
-    .bill__card__bottom {
-      height: 200px;
-      background: #eee;
-      border-radius: 0 0px 30px 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-</style>
-
-<style>
-  .bill__card__bottom .mapboxgl-map {
-    border-radius: 0 0px 30px 4px !important;
-  }
-</style>

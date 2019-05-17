@@ -44,7 +44,7 @@
       width: 50%;
       .card-category {
         padding-top: 20px;
-        font-size: 20px;
+        font-size: 18px;
         color: var(--v-success-base);
         font-weight: 600;
       }
@@ -77,5 +77,17 @@
     a:hover {
       text-decoration: none;
     }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .dashboard__card__right {
+      .card-category {
+        font-size: 16px
+      }
+      .card-info h4 {
+        font-size: 16px;
+      }
+    }
+
   }
 </style>

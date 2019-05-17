@@ -26,8 +26,11 @@
     name: 'BillDetail',
     components: {
       BillCard,
-      BidList
+      BidList,
     },
+    data: () => ({
+      interval: null,
+    }),
     props: ['id'],
     computed: {
       ...mapState(['bills']),
@@ -35,12 +38,19 @@
         return this.$store.getters.ActiveBill
       }
     },
+
     mounted() {
       if (this.bills.data.data[0].attributes.id === null) {
         this.$store.dispatch('GET_BILL', this.id)
       } else {
         this.$store.commit('SET_ACTIVE_BILL', this.id)
       }
+      this.interval = setInterval(() => {
+          this.$store.dispatch('GET_BILL', this.id)
+        }, 10000);
+    },
+    beforeDestroy() {
+      clearInterval(this.interval)
     }
   }
 </script>
@@ -55,6 +65,15 @@
       font-weight: bold;
       color: white;
       padding: 15px;
+    }
+  }
+  .edit-position {
+    position: relative;
+    left: 10%;
+  }
+  @media only screen and (max-width: 600px) {
+    .edit-position {
+      left: 30%;
     }
   }
 </style>

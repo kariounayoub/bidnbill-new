@@ -1,8 +1,12 @@
   .dashboard__title {
     font-weight: 700;
-    color: rgba(0,0,0,0.8);
-    margin: 15px auto;
+    color: white;
+    padding: 50px 0;
+    font-size: 25px;
     text-align: center;
+    background:linear-gradient(98.59deg, #6FE446 40.14%, #ACF094 99.89%);
+       -webkit-clip-path: ellipse(60% 100% at 50% 0%);
+    clip-path: ellipse(60% 100% at 50% 0%);
   }
 
   .flex-center {
@@ -30,13 +34,18 @@
   .compact-form .form-content {
     transform: scale(0.875)
   }
-
+  .pointer {
+    cursor: pointer;
+  }
 .offset {
   margin-left: 200px;
 }
 @media (max-width: 900px) {
   .offset {
     margin-left: 0px;
+  }
+  .dashboard__title {
+    font-size: 22px;
   }
 }
 

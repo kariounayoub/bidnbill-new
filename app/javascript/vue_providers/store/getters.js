@@ -13,11 +13,14 @@ export default {
   },
   OtherBills: state => {
     return state.bills.data.data.filter((b) => {
-      if (!state.myBills.includes(b)) return b
+      if (!state.accountBills.includes(b)) return b
     })
   },
   MyBills: state => {
     return state.myBills
+  },
+  AccountBills: state => {
+    return state.accountBills
   },
   MyClients: state => {
     return state.myClients.data

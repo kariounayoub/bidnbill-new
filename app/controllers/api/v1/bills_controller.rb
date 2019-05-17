@@ -1,5 +1,6 @@
 class Api::V1::BillsController < Api::V1::BaseController
   before_action :find_user, only: [:my_bills, :create, :my_clients]
+  before_action :find_bill, only: [:update]
 
   def my_bills
     bills = Bill.where(client: @user).includes(:bids)
@@ -28,6 +29,14 @@ class Api::V1::BillsController < Api::V1::BaseController
     end
   end
 
+  def update
+    if @bill.update(bill_params)
+      render json: {success: true, bill: BillsSerializer.new(@bill, {params: {show_details: true}})}
+    else
+      render json: {success: false}
+    end
+  end
+
   def my_clients
     bid_ids = Bid.joins(user: :account).where(status: 'accépté', accounts: {id: @user.account.id})
     authorize bid_ids
@@ -50,4 +59,8 @@ class Api::V1::BillsController < Api::V1::BaseController
     @user = User.find_by_id(params[:user_id])
   end
 
+  def find_bill
+    @bill = Bill.find_by_id(params[:id])
+    authorize @bill
+  end
 end

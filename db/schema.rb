@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.boolean "is_deleted"
     t.boolean "is_edited"
     t.boolean "is_open"
+    t.boolean "send_update_email"
+    t.integer "days_without_mail", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_bills_on_category_id"

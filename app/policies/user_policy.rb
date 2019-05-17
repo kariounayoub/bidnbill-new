@@ -6,4 +6,8 @@ class UserPolicy < ApplicationPolicy
   def provider_dashboard?
     record.user_type == 'provider' && user == record
   end
+
+  def update?
+    record == user
+  end
 end

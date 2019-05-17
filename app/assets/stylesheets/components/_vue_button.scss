@@ -9,3 +9,7 @@
   .v-btn.rounded.v-btn--disabled {
     background: rgba(0,0,0,0.12)
   }
+
+  .v-btn.rounded.primary {
+    background: linear-gradient(251.31deg, $blue -32.76%, #FFFFFF 217.09%);
+  }

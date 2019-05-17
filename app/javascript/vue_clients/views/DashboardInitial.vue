@@ -22,6 +22,7 @@
     components: {
       BillCardDashboard
     },
+
     computed: {
       client() {
         return this.$store.getters.Client
