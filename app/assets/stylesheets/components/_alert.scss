@@ -4,23 +4,23 @@
   z-index: 1000;
 }
 .alert-success{
-  background-color: lighten(#5cb85c, 15%);
-  border-color: lighten(#5cb85c, 10%);
+  background-color: darken($green, 35%);
+  border-color: darken($green, 10%);
   color: white;
 }
 .alert-warning{
-  background-color: lighten(#E2A41F, 15%);
-  border-color: lighten(#E2A41F, 10%);
+  background-color: lighten($orange, 15%);
+  border-color: lighten($orange, 10%);
   color: white;
 }
 .alert-error{
-  background-color: lighten(#d43f3a, 15%);
-  border-color: lighten(#d43f3a, 10%);
+  background-color: lighten($red, 15%);
+  border-color: lighten($red, 10%);
   color: white;
 }
 
 .alert {
-  width: 400px;
+  min-width: 400px;
   height: 50px;
   padding: 15px;
   margin-bottom: 20px;

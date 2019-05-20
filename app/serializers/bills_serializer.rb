@@ -10,7 +10,7 @@ class BillsSerializer
     unless  params[:show_bids] == false
       object.bids.map do |bid|
         unless bid.is_deleted
-          {bid: {id: bid.id, content: bid.content, price: bid.price, status: bid.status}, account: {company: bid.account.company, id: bid.account.id, user: bid.user_id}}
+          {bid: {id: bid.id, content: bid.content, price: bid.price, status: bid.status, needs_editing: bid.needs_editing}, account: {company: bid.account.company, id: bid.account.id, user: bid.user_id}}
         end
       end
     end

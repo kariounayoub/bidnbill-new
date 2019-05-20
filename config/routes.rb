@@ -18,7 +18,7 @@ Rails.application.routes.draw do
           get 'my_bills', to: 'bills#my_bills'
           get 'my_clients', to: 'bills#my_clients'
       end
-      resources :bids, only: [:create]
+      resources :bids, only: [:create, :update]
       patch 'bids/:id/select', to: 'bids#select'
     end
   end

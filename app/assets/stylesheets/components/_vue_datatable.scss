@@ -1,0 +1,13 @@
+#my-datatable table.v-table thead th{
+   font-size: 14px !important;
+    font-weight: 700;
+}
+#my-datatable {
+    border-radius: 0 0 30px 4px !important;
+  .v-datatable {
+    border-radius: 0 0 30px 4px !important;
+  }
+  .v-datatable__actions {
+    border-radius: 0 0 30px 4px !important;
+  }
+}

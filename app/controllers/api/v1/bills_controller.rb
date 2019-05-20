@@ -31,6 +31,7 @@ class Api::V1::BillsController < Api::V1::BaseController
 
   def update
     if @bill.update(bill_params)
+      @bill.bids.each {|b| b.update(needs_editing: true)}
       render json: {success: true, bill: BillsSerializer.new(@bill, {params: {show_details: true}})}
     else
       render json: {success: false}

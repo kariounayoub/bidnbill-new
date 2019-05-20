@@ -1,5 +1,5 @@
 class Api::V1::BidsController < Api::V1::BaseController
-  before_action :find_bid, only: [:select]
+  before_action :find_bid, only: [:select, :update]
 
   def create
     bid = Bid.new(bid_params)
@@ -11,11 +11,22 @@ class Api::V1::BidsController < Api::V1::BaseController
     end
   end
 
+  def update
+    if @bid.update(bid_params)
+      @bid.update(needs_editing: false)
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
+  end
+
 
   def select
     bill = @bid.bill
     @bid.status = 'accépté'
     if @bid.save
+      otherBids = bill.bids.reject {|b| b == @bid}
+      otherBids.each { |b| b.update(status: 'refusé')}
       bill.is_open = false
       bill.save
       render json: {success: true, bill: BillsSerializer.new(bill)}

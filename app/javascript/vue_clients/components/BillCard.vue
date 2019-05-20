@@ -22,7 +22,7 @@
       </v-layout>
     </v-card>
     <!-- Dialog Edit Bill -->
-      <v-dialog v-model="dialog" max-width="500px" v-if='bill.attributes.is_open'>
+      <v-dialog v-model="dialog" max-width="500px" v-if='bill.attributes.is_open' v-on:close='dialog = false'>
         <EditBill v-on:close='close'/>
       </v-dialog>
 

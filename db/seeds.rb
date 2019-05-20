@@ -53,6 +53,9 @@ bid6 = Bid.create!(bill: bill4, user_id: provider3.id, content: 'some descriptiv
 bid3.status = 'accépté'
 bid3.save
 
+bid4.status = 'refusé'
+bid4.save
+
 bill2.is_open = false
 bill2.save
 puts 'seed completed'

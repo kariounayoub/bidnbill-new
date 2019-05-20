@@ -94,6 +94,7 @@
                 city: this.city
               }
           }
+          this.$emit('close')
           this.$store.dispatch('UPDATE_BILL', formData)
         }
       }

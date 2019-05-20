@@ -45,5 +45,17 @@ export default {
       }
     })
     .catch(err => commit('SET_FLASH', {message: err, variant: 'error'}))
+  },
+  UPDATE_BID: async ({state,commit,dispatch}, payload) => {
+    await axios.patch(`/api/v1/bids/${payload.bid_id}`, payload, config)
+    .then((res) => {
+      if(res.data.success) {
+        dispatch('GET_BILLS');
+        commit('SET_FLASH', { message: 'Enchère modifié avec succès', variant: 'success' })
+      } else {
+        commit('SET_FLASH', {message: "Erreur l'enchère n'a pas été modifié", variant: 'error'})
+      }
+    })
+    .catch(err => commit('SET_FLASH', {message: err, variant: 'error'}))
   }
 }

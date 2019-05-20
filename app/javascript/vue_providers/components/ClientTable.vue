@@ -21,7 +21,7 @@
             ></v-select>
           </v-flex>
           <v-flex xs12>
-            <v-data-table :headers="headers":items="clients" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter">
+            <v-data-table :headers="headers":items="clients" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter" id='my-datatable'>
               <template v-slot:items="props">
                 <tr @click='setActiveClient(props.item.bill.data.id)' :class="isActive(props.item.bill.data.id) ? 'selected' : ''">
                   <td class="text-xs-left" >{{props.item.bill.data.attributes.category.name}}</td>
@@ -52,9 +52,9 @@ export default {
     },
     statuses: ['Tout','Terminé', 'En cours', 'Refusé'],
     headers: [
-      { text: 'Demande', align: 'left', value: 'category'},
-      { text: 'Nom', value: 'current_provider', align: 'right'},
-      { text: 'Ville', value: 'city', align: 'right'},
+      { text: 'Demande', align: 'left', value: 'bill.data.attributes.category.name'},
+      { text: 'Nom', value: 'client.data.attributes.full_name', align: 'right'},
+      { text: 'Ville', value: 'bill.data.attributes.city', align: 'right'},
       { text: 'Statut', value: 'status', align: 'right'},
       { text: 'Actions', value: 'actions', align: 'right'},
     ],
