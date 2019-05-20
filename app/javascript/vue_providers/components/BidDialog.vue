@@ -20,6 +20,7 @@
           <tr >
             <td class="text-xs-left" >{{ props.item.account.company }}</td>
             <td class="text-xs-right">{{ props.item.bid.price }} €/ mois</td>
+            <td class="text-xs-center"><span class='status-tag' v-bind:class='statusClass(props.item.bid.status)'>{{ props.item.bid.status }}</span></td>
           </tr>
         </template>
       </v-data-table>
@@ -75,8 +76,9 @@
       price: null,
       content: null,
       bidHeaders: [
-        { text: 'Fournisseur', align: 'left', value: 'bid_provider'},
-        { text: 'Prix', value: 'bid_price', align: 'right'},
+        { text: 'Fournisseur', align: 'left', value: 'account.company'},
+        { text: 'Prix', value: 'bid.price', align: 'right'},
+        { text: 'Statut', value: 'status', align: 'center'},
       ],
       dialog2: false,
     }),
@@ -89,7 +91,7 @@
           return this.viewedBill.bids.find(b => b.account.id === this.provider.account.id)
         }
         return null
-      }
+      },
     },
     methods: {
       myBidNeedsEditing() {
@@ -97,6 +99,11 @@
           if (this.myBid.bid.needs_editing) return true
         }
         return false
+      },
+      statusClass(status) {
+        if (status === 'refusé') return 'error'
+        if (status === 'en attente') return 'warning'
+        if (status === 'accépté') return 'success'
       },
       saveBid(type) {
         if (this.$refs.form.validate()) {

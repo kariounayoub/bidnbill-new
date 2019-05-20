@@ -29,6 +29,11 @@ export default {
     .then(res => commit('SET_BILLS', res))
     .catch(err => console.log(err))
   },
+  GET_LOST_BILLS: async ({state, commit}) => {
+    await axios.get(`/api/v1/users/${state.provider.data.attributes.id}/lost_bills`, config)
+    .then(res => commit('SET_LOST_BILLS', res))
+    .catch(err => console.log(err))
+  },
   GET_MY_CLIENTS: async ({state, commit}) => {
     await axios.get(`/api/v1/users/${state.provider.data.attributes.id}/my_clients`, config)
     .then(res => commit('SET_MY_CLIENTS', res))

@@ -14,6 +14,9 @@ export default {
       if (checkBidAccount(b, state.provider.data.attributes.account.id) > 0) return b
     });
   },
+  SET_LOST_BILLS: (state, payload) => {
+    state.lostBills = payload;
+  },
   SET_MY_CLIENTS: (state, payload) => {
     state.myClients = payload;
   },

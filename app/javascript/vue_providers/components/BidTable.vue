@@ -7,7 +7,7 @@
 
     <!-- Main Table -->
       <v-card class='rounded'>
-        <v-layout row wrap v-if='myBids'>
+        <v-layout row wrap v-if='myBids && !lostBills'>
           <v-flex xs12 sm4 offset-sm-4>
           <v-switch
             v-model="showMyBids"
@@ -70,7 +70,7 @@ import providers from '../../shared_components/providers'
 
 export default {
   name: 'BidTable',
-  props: ['myBids'],
+  props: {myBids: Boolean, lostBills: {type: Boolean, default: false}},
   components: {
     BidDialog
   },
@@ -96,6 +96,7 @@ export default {
   }),
   computed: {
     bills() {
+      if(this.lostBills) return this.$store.getters.LostBills
       if(this.myBids && this.showMyBids) return this.$store.getters.MyBills
       if(this.myBids) return this.$store.getters.AccountBills
       if(!this.myBids) return this.$store.getters.OtherBills
@@ -114,6 +115,7 @@ export default {
   },
   methods: {
     statusCalc(bill) {
+      if (this.lostBills) return 'Enchère perdu'
       if (this.myBids) {
         const myBid = bill.bids.find(b => b.account.id === this.provider.account.id)
         if (myBid.bid.needs_editing) return 'Le client à modifier son abonnement'
@@ -123,6 +125,7 @@ export default {
       return `${length} enchères en cours`;
     },
     statusClass(bill) {
+      if (this.lostBills) return 'error'
       if (this.myBids) {
         const myBid = bill.bids.find(b => b.account.id === this.provider.account.id)
         if (myBid.bid.needs_editing) return 'warning'

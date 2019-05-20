@@ -46,6 +46,11 @@ class Api::V1::BillsController < Api::V1::BaseController
     render json: my_clients
   end
 
+  def lost_bills
+    bills = policy_scope(Bill).joins(bids: :user).where(is_open: false, bids: {users: {account_id: current_user.account.id}})
+    render json: BillsSerializer.new(bills).serialized_json
+  end
+
   private
 
   def bill_params
