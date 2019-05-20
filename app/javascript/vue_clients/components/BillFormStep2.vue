@@ -40,15 +40,7 @@
             <div >
               <div class="form-subtitle inline-div">Votre addresse</div>
               <div class="form-content inline-div">
-                  <v-combobox
-                    v-model="address"
-                    :items="items"
-                    :search-input.sync="search"
-                    hide-no-data
-                    hide-selected
-                    outline
-                    :rules="[required]"
-                  ></v-combobox>
+                  <AddressAutocomplete v-model='address' v-bind:outlined='true' v-bind:Label='null' v-on:changeCity='changeCity'/>
               </div>
             </div>
 
@@ -77,9 +69,13 @@
   import axios from 'axios'
   import {required, number} from '../../shared_components/validate'
   import providers from '../../shared_components/providers'
+  import AddressAutocomplete from './AddressAutocomplete'
 
   export default {
     name: 'BillFormStep2',
+    components: {
+      AddressAutocomplete
+    },
     data: () => ({
       required: required, number: number,
       current_provider: null,
@@ -89,35 +85,17 @@
       consumption: null,
       consumption_q: true,
       listProviders: providers,
-      search: false,
-      entries: [],
       city: null,
     }),
-    computed: {
-      items () {
-        return this.entries.map(e => e.properties.label)
-      }
-    },
     methods: {
+      changeCity(v) {
+        this.city = v
+      },
       booleanToString(param) {
         if(param) return 'Oui'
         if(!param) return 'Non'
       }
     },
-   watch: {
-    search (val) {
-      // Lazily load input items
-      axios.get(`https://api-adresse.data.gouv.fr/search/?q=${val}`)
-        .then(res => {
-          this.entries = res.data.features
-          this.city = this.entries[0].properties.city
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => (this.isLoading = false))
-      }
-    }
   }
 </script>
 

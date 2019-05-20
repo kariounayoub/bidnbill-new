@@ -6,6 +6,7 @@
         <v-flex xs12 sm8 offset-sm-2 id='form-fields' class='compact-form'>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-card class='rounded'>
+              <div>
                 <div >
                   <div class="form-subtitle inline-div">Vous êtes un particulier?</div>
                   <div class="form-content inline-div">
@@ -47,10 +48,11 @@
                       <v-text-field v-model="email" outline />
                   </div>
                 </div>
-                <div class="flex-center with-padding">
-                  <v-btn color="rounded" @click="editUser()">Enregistrer</v-btn>
-                </div>
+              </div>
 
+              <div class="flex-center with-padding">
+                <v-btn color="rounded" @click="editUser()">Enregistrer</v-btn>
+              </div>
             </v-card>
           </v-form>
         </v-flex>
@@ -90,7 +92,6 @@
               email: this.email
             }
           }
-
           this.$store.dispatch('UPDATE_USER', formData)
         }
       }
@@ -103,13 +104,10 @@
       this.company = this.user.attributes.company
     }
   }
-
 </script>
 
 <style scoped lang='scss'>
   .with-padding {
     padding: 30px;
   }
-
 </style>
-

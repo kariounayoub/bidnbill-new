@@ -13,17 +13,10 @@
 
                   <v-text-field v-model="frequency"  label='Fréquence de paiement' />
 
+                  <AddressAutocomplete v-model='address' v-bind:initAddress='initialAddress' v-on:changeCity='changeCity'/>
+
                   <v-text-field v-model="price"  label='Prix' :rules="[required, number]" />
 
-                  <v-combobox
-                    v-model="address"
-                    :items="items"
-                    :search-input.sync="search"
-                    hide-no-data
-                    hide-selected
-                    label='Address'
-                    :rules="[required]"
-                  ></v-combobox>
                   <v-text-field v-model="consumption" label='Consommation Annuelle (kWh)' :rules="[required, number]" />
 
               </v-flex>
@@ -41,11 +34,15 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import {required, number} from '../../shared_components/validate'
   import providers from '../../shared_components/providers'
+  import AddressAutocomplete from './AddressAutocomplete'
+
   export default {
     name: 'EditBill',
+    components: {
+      AddressAutocomplete
+    },
     data: () => ({
       required: required, number: number,
       valid: false,
@@ -55,33 +52,20 @@
       address: null,
       consumption: null,
       listProviders: providers,
-      entries: [],
-      search: false,
       city: null,
     }),
     computed: {
-      items () {
-        return this.entries.map(e => e.properties.label)
-      },
       activeBill() {
         return this.$store.getters.ActiveBill
-      }
-    },
-   watch: {
-    search (val) {
-      // Lazily load input items
-      axios.get(`https://api-adresse.data.gouv.fr/search/?q=${val}`)
-        .then(res => {
-          this.entries = res.data.features
-          this.city = this.entries[0].properties.city
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => (this.isLoading = false))
+      },
+      initialAddress() {
+        return this.activeBill.attributes.address
       }
     },
     methods: {
+      changeCity(v) {
+        this.city = v
+      },
       editBill() {
         if (this.$refs.form.validate()) {
           const formData = {
@@ -102,7 +86,6 @@
     mounted() {
       this.current_provider = this.activeBill.attributes.current_provider
       this.price = this.activeBill.attributes.price
-      this.address = this.activeBill.attributes.address
       this.consumption = this.activeBill.attributes.consumption
     }
   }

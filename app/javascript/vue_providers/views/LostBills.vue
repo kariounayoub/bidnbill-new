@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="dashboard__title">Nos Enchères Perdu</h3>
+    <h3 class="dashboard__title">Nos Enchères Perdus</h3>
     <v-container>
       <BidTable  v-bind:myBids='true' v-bind:lostBills="true"/>
     </v-container>
