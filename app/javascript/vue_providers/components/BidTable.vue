@@ -7,7 +7,7 @@
 
     <!-- Main Table -->
       <v-card class='rounded'>
-        <v-layout row wrap v-if='myBids'>
+        <v-layout row wrap v-if='myBids && !lostBills'>
           <v-flex xs12 sm4 offset-sm-4>
           <v-switch
             v-model="showMyBids"
@@ -46,14 +46,14 @@
             ></v-select>
           </v-flex>
           <v-flex xs12>
-            <v-data-table :headers="headers":items="items" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter"           :no-data-text="'Aucune donnée disponible'">
+            <v-data-table :headers="headers":items="items" item-key="title" :rows-per-page-items="[10,25,50,100]" rows-per-page-text="Résultats par page" must-sort :search="filters" :custom-filter="customFilter"           :no-data-text="'Aucune donnée disponible'" id='my-datatable'>
               <template v-slot:items="props">
                 <tr >
                   <td class="text-xs-left" >{{ props.item.category.name }}</td>
                   <td class="text-xs-right">{{ props.item.current_provider }}</td>
                   <td class="text-xs-right">{{ props.item.price }} €</td>
                   <td class="text-xs-right">{{ props.item.city }}</td>
-                  <td class="text-xs-right">{{ bidCount(props.item) }}</td>
+                  <td class="text-xs-center"><span class='status-tag' v-bind:class='statusClass(props.item)'>{{ statusCalc(props.item) }}</span></td>
                   <td class="text-xs-right"><v-icon @click='viewBill(props.item)'>visibility</v-icon></td>
                 </tr>
               </template>
@@ -70,7 +70,7 @@ import providers from '../../shared_components/providers'
 
 export default {
   name: 'BidTable',
-  props: ['myBids'],
+  props: {myBids: Boolean, lostBills: {type: Boolean, default: false}},
   components: {
     BidDialog
   },
@@ -88,7 +88,7 @@ export default {
       { text: 'Fournisseur actuel', value: 'current_provider', align: 'right'},
       { text: 'Abonnement en cours', value: 'current_price', align: 'right'},
       { text: 'Ville', value: 'city', align: 'right'},
-      { text: 'Statut', value: 'status', align: 'right'},
+      { text: 'Statut', value: 'status', align: 'center'},
       { text: 'Actions', value: 'actions', align: 'right'},
     ],
     viewedBill: null,
@@ -96,12 +96,16 @@ export default {
   }),
   computed: {
     bills() {
+      if(this.lostBills) return this.$store.getters.LostBills
       if(this.myBids && this.showMyBids) return this.$store.getters.MyBills
       if(this.myBids) return this.$store.getters.AccountBills
       if(!this.myBids) return this.$store.getters.OtherBills
     },
     items() {
       return this.bills.map(e => e.attributes)
+    },
+    provider() {
+      return this.$store.getters.Provider.attributes
     }
   },
   watch: {
@@ -110,10 +114,22 @@ export default {
     }
   },
   methods: {
-    bidCount(bill) {
+    statusCalc(bill) {
+      if (this.lostBills) return 'Enchère perdu'
+      if (this.myBids) {
+        const myBid = bill.bids.find(b => b.account.id === this.provider.account.id)
+        if (myBid.bid.needs_editing) return 'Le client à modifier son abonnement'
+      }
       let length = 0
       if(bill.bids) {length = bill.bids.length }
       return `${length} enchères en cours`;
+    },
+    statusClass(bill) {
+      if (this.lostBills) return 'error'
+      if (this.myBids) {
+        const myBid = bill.bids.find(b => b.account.id === this.provider.account.id)
+        if (myBid.bid.needs_editing) return 'warning'
+      }
     },
     customFilter(items, filters, filter, headers) {
       const cf = new this.$MultiFilters(items, filters, filter, headers);

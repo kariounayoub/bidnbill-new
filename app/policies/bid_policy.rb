@@ -7,6 +7,10 @@ class BidPolicy < ApplicationPolicy
     record.user.account == user.account
   end
 
+  def update?
+    create?
+  end
+
   def select?
     record.bill.client == user
   end

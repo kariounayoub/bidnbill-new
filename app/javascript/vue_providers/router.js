@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import DashboardInitial from './views/DashboardInitial.vue';
 import ProviderEncheres from './views/ProviderEncheres.vue';
 import ProviderClients from './views/ProviderClients.vue';
+import LostBills from './views/LostBills.vue';
 import EditUser from './views/EditUser.vue';
 
 
@@ -21,6 +22,11 @@ export default new Router({
       path: '/provider_encheres',
       name: 'providerEncheres',
       component: ProviderEncheres,
+    },
+    {
+      path: '/provider_encheres_lost',
+      name: 'providerEncheresLost',
+      component: LostBills,
     },
     {
       path: '/provider_clients',

@@ -20,6 +20,7 @@
           <tr >
             <td class="text-xs-left" >{{ props.item.account.company }}</td>
             <td class="text-xs-right">{{ props.item.bid.price }} €/ mois</td>
+            <td class="text-xs-center"><span class='status-tag' v-bind:class='statusClass(props.item.bid.status)'>{{ props.item.bid.status }}</span></td>
           </tr>
         </template>
       </v-data-table>
@@ -29,11 +30,12 @@
       <v-spacer></v-spacer>
       <v-btn color="success darken-1" flat @click="$emit('close')">Fermer</v-btn>
       <v-btn color="success darken-1" flat @click="dialog2 = true" v-if='canBid'>Enchérir</v-btn>
+      <v-btn color="success darken-1" flat @click="dialog2 = true" v-if='myBidNeedsEditing()'>Modifier</v-btn>
     </v-card-actions>
   </v-card>
 
   <!-- Second Dialog With Form -->
-  <v-dialog v-model="dialog2" max-width="500px" v-if='canBid'>
+  <v-dialog v-model="dialog2" max-width="500px" v-if='canBid || myBidNeedsEditing()'>
       <v-card class='rounded'>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-card-title class="headline">
@@ -54,7 +56,8 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="success darken-1" flat @click="dialog2 = false">Fermer</v-btn>
-            <v-btn color="success darken-1" flat @click="createBid()">Enregistrer</v-btn>
+            <v-btn color="success darken-1" flat v-if='canBid' @click="saveBid('create')">Enregistrer</v-btn>
+            <v-btn color="success darken-1" flat v-if='myBidNeedsEditing()' @click="saveBid('edit')">Enregistrer</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -73,13 +76,36 @@
       price: null,
       content: null,
       bidHeaders: [
-        { text: 'Fournisseur', align: 'left', value: 'bid_provider'},
-        { text: 'Prix', value: 'bid_price', align: 'right'},
+        { text: 'Fournisseur', align: 'left', value: 'account.company'},
+        { text: 'Prix', value: 'bid.price', align: 'right'},
+        { text: 'Statut', value: 'status', align: 'center'},
       ],
       dialog2: false,
     }),
+    computed: {
+      provider() {
+        return this.$store.getters.Provider.attributes
+      },
+      myBid() {
+        if (!this.canBid) {
+          return this.viewedBill.bids.find(b => b.account.id === this.provider.account.id)
+        }
+        return null
+      },
+    },
     methods: {
-      createBid() {
+      myBidNeedsEditing() {
+        if (!this.canBid) {
+          if (this.myBid.bid.needs_editing) return true
+        }
+        return false
+      },
+      statusClass(status) {
+        if (status === 'refusé') return 'error'
+        if (status === 'en attente') return 'warning'
+        if (status === 'accépté') return 'success'
+      },
+      saveBid(type) {
         if (this.$refs.form.validate()) {
           const formData = {
             bid: {
@@ -89,10 +115,24 @@
               user_id: this.$store.getters.Provider.attributes.id
             }
           }
-          this.$store.dispatch('CREATE_BID', formData)
+          this.dialog2 = false
+          this.$emit('close')
+          if (type === 'create') {
+            this.$store.dispatch('CREATE_BID', formData)
+          }
+          if (type === 'edit') {
+            formData.bid_id = this.myBid.bid.id
+            this.$store.dispatch('UPDATE_BID', formData)
+          }
         }
       }
-    }
+    },
+    mounted() {
+      if (!this.canBid) {
+        this.price = this.myBid.bid.price
+        this.content = this.myBid.bid.content
+      }
+    },
   }
 </script>
 

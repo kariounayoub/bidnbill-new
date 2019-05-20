@@ -30,6 +30,9 @@ export default {
   },
   MapKey: state => {
     return state.mapKey
+  },
+  LostBills: state => {
+    return state.lostBills.data.data
   }
 }
 

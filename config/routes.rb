@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'bills/:id', to: 'pages#client_dashboard'
   get 'users/edit_client', to: 'pages#client_dashboard'
   get 'provider_encheres', to: 'pages#provider_dashboard'
+  get 'provider_encheres_lost', to: 'pages#provider_dashboard'
   get 'provider_clients', to: 'pages#provider_dashboard'
   get 'users/edit_provider', to: 'pages#provider_dashboard'
 
@@ -17,8 +18,9 @@ Rails.application.routes.draw do
           resources :bills, only: [:index, :show, :create, :update]
           get 'my_bills', to: 'bills#my_bills'
           get 'my_clients', to: 'bills#my_clients'
+          get 'lost_bills', to: 'bills#lost_bills'
       end
-      resources :bids, only: [:create]
+      resources :bids, only: [:create, :update]
       patch 'bids/:id/select', to: 'bids#select'
     end
   end

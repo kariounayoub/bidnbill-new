@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-card class='bid__card'>
-      <div class="bid__card__title">Mes offres</div>
+    <v-card class='user_card rounded'>
+      <div class="card__title">Mes offres</div>
         <v-data-table
-          id='bid-datatable'
+          id='my-datatable'
           :headers="headers"
           :items="bids"
           :rows-per-page-text="'Résultats par page'"
@@ -14,8 +14,8 @@
             <td class="text-xs-left">{{ props.item.account.company }} </td>
             <td class="text-xs-left">{{ props.item.bid.price }} €</td>
             <td class="text-xs-left">{{ calculateDifference(props.item.bid.price) }} €</td>
-            <td class="text-xs-left">{{ props.item.bid.status }}</td>
-            <td class="text-xs-left"><v-btn small class='rounded' @click='selectBid(props.item.bid.id)' v-if='activeBill.attributes.is_open'>Accépter</v-btn></td>
+            <td class="text-xs-center status-width"> <span class='status-tag' v-bind:class='statusClass(props.item.bid.status)'>{{ props.item.bid.status }}</span></td>
+            <td class="text-xs-center"><v-btn small class='rounded' @click='selectBid(props.item.bid.id)' v-if='activeBill.attributes.is_open && !props.item.bid.needs_editing'>Accépter</v-btn><span v-if='props.item.bid.needs_editing && activeBill.attributes.is_open'>En attente de validation suite à votre modification</span></td>
           </template>
         </v-data-table>
     </v-card>
@@ -28,10 +28,10 @@
     props: ['bids'],
     data: ()=> ({
         headers: [
-          { text: 'Fournisseur', value: 'provider',  class: 'bid__header'},
-          { text: 'Offre', value: 'bid',  class: 'bid__header'},
+          { text: 'Fournisseur', value: 'account.company',  class: 'bid__header'},
+          { text: 'Offre', value: 'bid.price',  class: 'bid__header'},
           { text: 'Economies', value: 'savings',  class: 'bid__header'},
-          { text: 'Statut', value: 'status', class: 'bid__header' },
+          { text: 'Statut', value: 'bid.status', class: 'bid__header', align: 'center' },
           { text: 'Actions', value: 'actions',  class: 'bid__header'}
         ],
     }),
@@ -46,6 +46,11 @@
       },
       selectBid(id) {
         this.$store.dispatch('SELECT_BID', id)
+      },
+      statusClass(status) {
+        if (status === 'refusé') return 'error'
+        if (status === 'en attente') return 'warning'
+        if (status === 'accépté') return 'success'
       }
     }
 
@@ -53,10 +58,7 @@
 </script>
 
 <style scoped lang='scss'>
-  .bid__card {
-    margin: 20px;
-    border-radius: 30px 4px 30px 4px;
-    .bid__card__title {
+    .card__title {
       background: linear-gradient(234.15deg, var(--v-success-base) -28.36%, #FFFFFF 171.84%);
       width: 100%;
       border-radius: 30px 4px 0px 0px ;
@@ -66,21 +68,5 @@
       color: white;
       text-align: center;
     }
-  }
 </style>
 
-<style lang='scss'>
-    #bid-datatable table.v-table thead th{
-       font-size: 14px !important;
-        font-weight: 700;
-    }
-    #bid-datatable {
-        border-radius: 0 0 30px 4px !important;
-      .v-datatable {
-        border-radius: 0 0 30px 4px !important;
-      }
-      .v-datatable__actions {
-        border-radius: 0 0 30px 4px !important;
-      }
-    }
-</style>

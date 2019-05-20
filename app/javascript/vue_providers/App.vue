@@ -3,7 +3,7 @@
     <Navbar class='front' v-bind:withSidebar='true'/>
     <Sidebar />
     <Flash />
-    <router-view class='top-margin min-height-full'></router-view>
+    <router-view class='top-margin min-height-full'  v-bind:class="{offset: !offset}" transition='slide-x-transition'></router-view>
   </v-app>
 </template>
 

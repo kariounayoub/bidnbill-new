@@ -6,6 +6,7 @@ class CreateBids < ActiveRecord::Migration[5.2]
       t.string :status
       t.text :content
       t.float :price
+      t.boolean :needs_editing, default: false
       t.boolean :is_deleted
 
       t.timestamps

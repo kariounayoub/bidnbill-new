@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.string "status"
     t.text "content"
     t.float "price"
+    t.boolean "needs_editing", default: false
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -57,7 +58,6 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.string "city"
     t.string "zip_code"
     t.boolean "is_deleted"
-    t.boolean "is_edited"
     t.boolean "is_open"
     t.boolean "send_update_email"
     t.integer "days_without_mail", default: 1
