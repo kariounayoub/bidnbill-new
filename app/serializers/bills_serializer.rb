@@ -1,12 +1,12 @@
 class BillsSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :current_provider, :photo, :category,  :city, :consumption, :is_open
+  attributes :id, :current_provider, :photo, :category,  :city, :consumption, :is_open, :price, :payment_frequency
   attribute :address, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :latitude, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :longitude, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :zip_code, if: Proc.new {|record, params| params && params[:show_details] == true}
 
-  attribute :price do |object|
+  attribute :standardized_price do |object|
     case object.payment_frequency
     when 'annuelle'
       (object.price / 12).round(2)

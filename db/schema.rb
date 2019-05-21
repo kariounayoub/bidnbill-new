@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.string "phone_number"
     t.string "photo"
     t.boolean "admin"
-    t.string "days_since_last_provider_email", default: "1"
+    t.integer "days_since_last_provider_email", default: 1
     t.bigint "account_id"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

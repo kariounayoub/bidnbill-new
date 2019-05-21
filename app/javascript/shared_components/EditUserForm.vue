@@ -3,7 +3,7 @@
     <h3 class="dashboard__title">Modifier Mon Compte</h3>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm8 offset-sm-2 id='form-fields' class='compact-form'>
+        <v-flex xs12 sm8 offset-sm-2  class='form-fields compact-form'>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-card class='rounded'>
               <div>

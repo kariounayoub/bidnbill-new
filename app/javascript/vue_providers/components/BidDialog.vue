@@ -9,7 +9,7 @@
     <v-card-text class='card-info'>
           <div><div class="info-title inline-div">Demande</div><div class="content inline-div">{{viewedBill.category.name}}</div></div>
           <div><div class="info-title inline-div">Fournisseur Actuel</div><div class="content inline-div">{{viewedBill.current_provider}}</div></div>
-          <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{viewedBill.price}} €/ mois</div></div>
+          <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{viewedBill.standardized_price}} €/ mois</div></div>
           <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{viewedBill.consumption}} KW/h</div></div>
           <div><div class="info-title inline-div">Ville</div><div class="content inline-div">{{viewedBill.city}}</div></div>
       <v-spacer></v-spacer>
@@ -45,7 +45,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-text-field label="Prix" v-model='price' :rules='[required, number]'></v-text-field>
+                  <v-text-field label="Prix (mensuelle)" v-model='price' :rules='[required, number]'></v-text-field>
                 </v-flex>
                 <v-flex xs12>
                   <v-textarea label="Commentaire" v-model='content' ></v-textarea>

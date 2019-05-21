@@ -4,6 +4,7 @@ import '../stylus/main.styl';
 import '@mdi/font/css/materialdesignicons.css';
 
 Vue.use(Vuetify, {
+  iconfont: 'md',
   options: {
     customProperties: true
   },

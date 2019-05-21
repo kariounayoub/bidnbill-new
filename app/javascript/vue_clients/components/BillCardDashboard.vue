@@ -6,7 +6,7 @@
           <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
           <div class="card-info">
             <h4>{{bill.attributes.current_provider}}</h4>
-            <p>{{bill.attributes.price}} € / mois</p>
+            <p>{{bill.attributes.standardized_price}} € / mois</p>
           </div>
           <router-link  :to="'/bills/' + bill.attributes.id">
             <v-btn class='rounded'>Mes offres</v-btn>

@@ -40,11 +40,7 @@
     },
 
     mounted() {
-      if (this.bills.data.data[0].attributes.id === null) {
-        this.$store.dispatch('GET_BILL', this.id)
-      } else {
-        this.$store.commit('SET_ACTIVE_BILL', this.id)
-      }
+      this.$store.dispatch('GET_BILL', this.id)
       this.interval = setInterval(() => {
           this.$store.dispatch('GET_BILL', this.id)
         }, 10000);

@@ -7,7 +7,7 @@ class AddInfoToUsers < ActiveRecord::Migration[5.2]
     add_column :users, :phone_number, :string
     add_column :users, :photo, :string
     add_column :users, :admin, :boolean
-    add_column :users, :days_since_last_provider_email, :string, default: 1
+    add_column :users, :days_since_last_provider_email, :integer, default: 1
     add_reference :users, :account
   end
 end

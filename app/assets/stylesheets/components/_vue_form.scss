@@ -3,7 +3,7 @@
     width: 49%;
     text-align: left;
     padding-bottom: 10px;
-    padding-left: 10%;
+    padding-left: 5%;
     font-weight: 700;
     font-size: 14px;
   }
@@ -26,15 +26,42 @@
     #form-fields .v-input input {
     max-height: none;
   }
-  #form-fields .v-text-field--outline input {
+  .form-fields .v-text-field--outline input {
     margin-top: 0;
   }
 
-  #form-fields .v-select.v-text-field--enclosed:not(.v-text-field--single-line) .v-select__selections {
+  .form-fields .v-select.v-text-field--enclosed:not(.v-text-field--single-line) .v-select__selections {
     padding-top: 0 ;
   }
 
+  .form-fields .v-autocomplete.v-text-field--enclosed:not(.v-text-field--solo):not(.v-text-field--single-line) .v-select__slot > input {
+    margin-top: 0;
+  }
 
-  #form-fields .v-select:not(.v-text-field--single-line) .v-select__slot > input {
+  .form-fields .v-select:not(.v-text-field--single-line) .v-select__slot > input {
     align-self: center;
+  }
+  .form-fields .v-text-field > .v-input__control > .v-input__slot > .v-text-field__slot {
+    align-items: center;
+  }
+  .form-fields .v-text-field--outline > .v-input__control > .v-input__slot {
+    border: 1px solid !important;
+    margin: 0;
+    border-radius: 5px;
+    min-height: 50px;
+    font-size: 15px;
+  }
+
+  .form-section {
+    padding-bottom: 10px;
+  }
+
+  h3.form-header {
+    border-bottom: 2px solid #777;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    color: #777
   }

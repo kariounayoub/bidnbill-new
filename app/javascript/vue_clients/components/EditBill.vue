@@ -11,7 +11,7 @@
               <v-flex xs12>
                   <v-select v-model="current_provider" :items="listProviders"  label='Fournisseur Actuel' :rules="[required]" ></v-select>
 
-                  <v-text-field v-model="frequency"  label='Fréquence de paiement' />
+                  <v-select v-model="payment_frequency" label='Fréquence de paiement' :rules='[required]' :items='listFrequency'></v-select>
 
                   <AddressAutocomplete v-model='address' v-bind:initAddress='initialAddress' v-on:changeCity='changeCity'/>
 
@@ -69,11 +69,12 @@
       required: required, number: number,
       valid: false,
       current_provider: null,
-      frequency: null,
+      payment_frequency: null,
       price: null,
       address: null,
       consumption: null,
       listProviders: providers,
+      listFrequency: ['mensuelle', 'semestrielle', 'annuelle'],
       city: null,
       dialog2: false,
     }),
@@ -96,6 +97,7 @@
               bill: {
                 price: this.price,
                 current_provider: this.current_provider,
+                payment_frequency: this.payment_frequency,
                 consumption: this.consumption,
                 address: this.address,
                 city: this.city
@@ -112,6 +114,7 @@
       this.consumption = this.activeBill.attributes.consumption
       this.address = this.activeBill.attributes.address
       this.city = this.activeBill.attributes.city
+      this.payment_frequency = this.activeBill.attributes.payment_frequency
     }
   }
 </script>

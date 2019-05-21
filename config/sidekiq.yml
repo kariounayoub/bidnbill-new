@@ -5,6 +5,9 @@
   - default
   - mailers
 :schedule:
-  send_mail_job:
+  bids_mail_job:
     cron: '0 00 12 * * *'   # Runs once per day at noon
-    class: SendMailJob
+    class: BidsMailJob
+  selected_bids_mail_job:
+    cron: '0 00 10 * * *'   # Runs once per day at 10am
+    class: SelectedBidsMailJob
