@@ -20,6 +20,8 @@ gem 'webpacker'
 gem 'fast_jsonapi'
 gem 'geocoder'
 
+gem 'rails_admin', '~> 1.3'
+
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'sidekiq-scheduler'

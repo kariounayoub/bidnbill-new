@@ -45,7 +45,7 @@
                 <div >
                   <div class="form-subtitle inline-div">Email</div>
                   <div class="form-content inline-div">
-                      <v-text-field v-model="email" outline />
+                      <v-text-field v-model="email" outline disabled/>
                   </div>
                 </div>
               </div>

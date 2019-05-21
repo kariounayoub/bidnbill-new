@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.string "company"
     t.string "phone_number"
     t.string "photo"
+    t.boolean "admin"
     t.bigint "account_id"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

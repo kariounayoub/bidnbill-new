@@ -5,7 +5,7 @@
       <p>Téléchargez votre facture ou remplissez le formulaire de consommation</p>
       <v-container fluid>
         <v-layout row wrap>
-          <v-flex xs12 sm4>
+<!--           <v-flex xs12 sm4>
             <div class='upload-invoice-wrapper'>
               <div class="flex-center flex-column"   >
                 <div class="download-icon" >
@@ -14,8 +14,8 @@
                 <p>Téléchargez Facture</p>
               </div>
             </div>
-          </v-flex>
-          <v-flex xs12 sm8 id='form-fields' class='compact-form'>
+          </v-flex> -->
+          <v-flex xs12 sm8 offset-sm-2 id='form-fields' class='compact-form'>
             <div >
               <div class="form-subtitle inline-div">Vôtre fournisseur actuel</div>
               <div class="form-content inline-div">

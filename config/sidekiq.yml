@@ -6,5 +6,5 @@
   - mailers
 :schedule:
   send_mail_job:
-    cron: '0 57 11 * * *'   # Runs once per minute
+    cron: '0 00 12 * * *'   # Runs once per day at noon
     class: SendMailJob

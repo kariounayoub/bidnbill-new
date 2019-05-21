@@ -14,6 +14,9 @@ Category.destroy_all
 puts 'delete complted'
 puts ''
 
+puts 'creating admin'
+
+User.create(email: 'admin@admin.com', password: '123456', admin: true)
 
 puts 'creating data'
 account1 = Account.create!(company: 'EDF')
