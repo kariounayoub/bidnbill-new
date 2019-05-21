@@ -53,7 +53,7 @@
                   <td class="text-xs-right">{{ props.item.current_provider }}</td>
                   <td class="text-xs-right">{{ props.item.price }} €</td>
                   <td class="text-xs-right">{{ props.item.city }}</td>
-                  <td class="text-xs-center"><span class='status-tag' v-bind:class='statusClass(props.item)'>{{ statusCalc(props.item) }}</span></td>
+                  <td class="text-xs-center  status-width large"><span class='status-tag' v-bind:class='statusClass(props.item)'>{{ statusCalc(props.item) }}</span></td>
                   <td class="text-xs-right"><v-icon @click='viewBill(props.item)'>visibility</v-icon></td>
                 </tr>
               </template>

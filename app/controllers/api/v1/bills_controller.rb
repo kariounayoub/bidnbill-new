@@ -55,7 +55,7 @@ class Api::V1::BillsController < Api::V1::BaseController
   private
 
   def bill_params
-    params.require(:bill).permit(:user_id, :category_id, :price, :current_provider, :consumption, :address, :city)
+    params.require(:bill).permit(:user_id, :category_id, :price, :current_provider, :consumption, :address, :city, :payment_frequency)
   end
 
   def user_params

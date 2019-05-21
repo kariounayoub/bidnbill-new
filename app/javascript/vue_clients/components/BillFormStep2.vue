@@ -26,7 +26,7 @@
             <div >
               <div class="form-subtitle inline-div">Fréquence de paiement</div>
               <div class="form-content inline-div">
-                  <v-text-field v-model="frequency" outline />
+                  <v-select v-model="payment_frequency" outline :rules='[required]' :items='listFrequency'></v-select>
               </div>
             </div>
 
@@ -79,12 +79,13 @@
     data: () => ({
       required: required, number: number,
       current_provider: null,
-      frequency: null,
+      payment_frequency: null,
       price: null,
       address: null,
       consumption: null,
       consumption_q: true,
       listProviders: providers,
+      listFrequency: ['mensuelle', 'semestrielle', 'annuelle'],
       city: null,
     }),
     methods: {

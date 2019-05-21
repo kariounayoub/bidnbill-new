@@ -11,3 +11,32 @@
     border-radius: 0 0 30px 4px !important;
   }
 }
+
+
+.status-tag {
+  padding: 5px 10px;
+  text-align: center;
+  background: $gray;
+  color: white;
+  border-radius: 20px;
+}
+
+.status-width {
+    min-width: 150px;
+}
+
+.status-width.large {
+    min-width: 300px;
+}
+
+.status-tag.success {
+  background: darken($green, 20%)
+}
+
+.status-tag.warning {
+  background: darken($orange, 20%)
+}
+
+.status-tag.error {
+  background: $red;
+}

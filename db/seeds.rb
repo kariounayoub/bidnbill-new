@@ -40,10 +40,10 @@ AccountCategory.create!(account: account1, category: category2)
 AccountCategory.create!(account: account1, category: category3)
 
 
-bill1 = Bill.create!(user_id: client.id, current_provider: 'EDF', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '200', price: '50')
-bill2 = Bill.create!(user_id: client.id, current_provider: 'Total Direct Energie', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '250', price: '60')
-bill3 = Bill.create!(user_id: client2.id, current_provider: 'Total Direct Energie', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '50')
-bill4 = Bill.create!(user_id: client2.id, current_provider: 'Edf', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '70')
+bill1 = Bill.create!(user_id: client.id, current_provider: 'EDF', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle')
+bill2 = Bill.create!(user_id: client.id, current_provider: 'Total Direct Energie', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '250', price: '60', payment_frequency: 'mensuelle')
+bill3 = Bill.create!(user_id: client2.id, current_provider: 'Total Direct Energie', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle')
+bill4 = Bill.create!(user_id: client2.id, current_provider: 'Edf', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '70', payment_frequency: 'mensuelle')
 
 
 bid1 = Bid.create!(bill: bill1, user_id: provider1.id, content: 'some descriptive text', price: 45)

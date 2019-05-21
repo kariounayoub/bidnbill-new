@@ -84,6 +84,7 @@
               bill: {
                 user_id: this.clientId,
                 category_id: this.$refs.step1.billType,
+                payment_frequency: this.$refs.step2.payment_frequency,
                 price: this.$refs.step2.price,
                 current_provider: this.$refs.step2.current_provider,
                 consumption: this.$refs.step2.consumption,

@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-card class='rounded'>
-      <v-form ref="form" v-model="valid" lazy-validation>
         <v-card-title class="headline">
           <span >Modifier</span>
         </v-card-title>
+        <v-form ref="form" v-model="valid" lazy-validation>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
