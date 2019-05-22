@@ -10,8 +10,13 @@
           <div><div class="info-title inline-div">Demande</div><div class="content inline-div">{{viewedBill.category.name}}</div></div>
           <div><div class="info-title inline-div">Fournisseur Actuel</div><div class="content inline-div">{{viewedBill.current_provider}}</div></div>
           <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{viewedBill.standardized_price}} €/ mois</div></div>
-          <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{viewedBill.consumption}} kWh</div></div>
+          <div><div class="info-title inline-div">Consommation <span v-if='viewedBill.calculated_consumption'>(estimé)</span></div><div class="content inline-div">{{viewedBill.consumption}} kWh</div></div>
           <div><div class="info-title inline-div">Ville</div><div class="content inline-div">{{viewedBill.city}}</div></div>
+<!--           <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Type Logement</div><div class="content inline-div">{{viewedBill.type_home}}</div></div>
+          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Nombre d'habitants</div><div class="content inline-div">{{viewedBill.nb_people}} personnes</div></div>
+          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Surface</div><div class="content inline-div">{{viewedBill.surface}} m2</div></div>
+          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Chauffage</div><div class="content inline-div">{{viewedBill.heating}}</div></div>
+          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Eau chaude</div><div class="content inline-div">{{viewedBill.hot_water}}</div></div> -->
       <v-spacer></v-spacer>
       <v-divider></v-divider>
       <h5 class='text-center bold'> Enchères en cours</h5>

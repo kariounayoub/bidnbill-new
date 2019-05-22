@@ -57,7 +57,7 @@
             <div >
               <div class="form-subtitle inline-div">Consommation annuelle (kWh)</div>
               <div class="form-content inline-div">
-                  <v-text-field v-model="consumption" outline :rules="[required, number]" />
+                  <v-text-field v-model="consumption" outline :rules="[required, number]" :disabled='!consumption_q'/>
               </div>
             </div>
 

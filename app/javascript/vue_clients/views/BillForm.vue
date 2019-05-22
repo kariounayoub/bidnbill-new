@@ -90,7 +90,7 @@
                 consumption: this.$refs.step2.consumption,
                 address: this.$refs.step2.address,
                 city: this.$refs.step2.city,
-                calculated_consumption: this.$refs.step2.consumption_q,
+                calculated_consumption: !this.$refs.step2.consumption_q,
                 ...this.$refs.step2.consumptionData
               },
               user: {
