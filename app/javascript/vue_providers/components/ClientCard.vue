@@ -12,7 +12,7 @@
             <div><div class="info-title inline-div">E-mail</div><div class="content inline-div">{{client.client.data.attributes.email}}</div></div>
             <div><div class="info-title inline-div">Téléphone</div><div class="content inline-div">{{client.client.data.attributes.phone_number}}</div></div>
             <div><div class="info-title inline-div">Prix Offre</div><div class="content inline-div">{{client.bid.data.attributes.price}} € / mois</div></div>
-            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{client.bill.data.attributes.consumption}} KW/h</div></div>
+            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{client.bill.data.attributes.consumption}} kWh</div></div>
             <div><div class="info-title inline-div">Addresse</div><div class="content inline-div">{{client.bill.data.attributes.address}}</div></div>
             <div><div class="info-title inline-div">Ville</div><div class="content inline-div">{{client.bill.data.attributes.city}}</div></div>
           </div>

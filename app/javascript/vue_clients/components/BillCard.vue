@@ -10,7 +10,7 @@
           <div class="card-info">
             <div><div class="info-title inline-div">Nom</div><div class="content inline-div">{{client.full_name}}</div></div>
             <div><div class="info-title inline-div">Fournisseur</div><div class="content inline-div">{{bill.attributes.current_provider}}</div></div>
-            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{bill.attributes.consumption}} KW/h</div></div>
+            <div><div class="info-title inline-div">Consommation</div><div class="content inline-div">{{bill.attributes.consumption}} kWh</div></div>
             <div><div class="info-title inline-div">Prix</div><div class="content inline-div">{{bill.attributes.standardized_price}} € / mois</div></div>
             <div><div class="info-title inline-div">Addresse</div><div class="content inline-div">{{bill.attributes.address}}</div></div>
           </div>

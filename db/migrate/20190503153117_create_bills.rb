@@ -14,6 +14,19 @@ class CreateBills < ActiveRecord::Migration[5.2]
       t.string :city
       t.string :zip_code
 
+      t.boolean :calculated_consumption, default: false
+      t.string :type_home
+      t.integer :nb_people
+      t.integer :surface
+      t.string :hot_water
+      t.string :heating
+      t.boolean :fridge
+      t.boolean :freezer
+      t.boolean :oven
+      t.boolean :dishwasher
+      t.boolean :washer
+      t.boolean :dryer
+
       t.boolean :is_deleted
       t.boolean :is_open
       t.boolean :send_update_email

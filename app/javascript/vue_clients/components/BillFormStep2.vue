@@ -55,7 +55,7 @@
             </div>
 
             <div >
-              <div class="form-subtitle inline-div">Consommation annuelle (KW/h)</div>
+              <div class="form-subtitle inline-div">Consommation annuelle (kWh)</div>
               <div class="form-content inline-div">
                   <v-text-field v-model="consumption" outline :rules="[required, number]" />
               </div>
@@ -68,7 +68,7 @@
     </div>
 
     <v-dialog v-model="dialog" max-width="700px" v-if='!consumption_q' v-on:close='dialog = false'>
-      <ConsumptionFormDialog v-on:close='close'/>
+      <ConsumptionFormDialog v-on:close='close' v-on:calculation='consumptionCalc' v-on:consumptionData='updateConsumptionData'/>
     </v-dialog>
   </div>
 </template>
@@ -98,6 +98,7 @@
       listFrequency: ['mensuelle', 'semestrielle', 'annuelle'],
       city: null,
       dialog: false,
+      consumptionData: null,
     }),
     methods: {
       changeCity(v) {
@@ -110,6 +111,12 @@
       close () {
         this.dialog = false
       },
+      updateConsumptionData(v) {
+        this.consumptionData = v
+      },
+      consumptionCalc(v) {
+        this.consumption = v
+      }
     },
     watch: {
       dialog (val) {
@@ -117,6 +124,10 @@
       },
       consumption_q() {
         this.consumption_q ? this.dialog = false : this.dialog = true
+        if (this.consumption_q) {
+          this.consumption = 0
+          this.consumptionData = null
+        }
       }
     }
   }

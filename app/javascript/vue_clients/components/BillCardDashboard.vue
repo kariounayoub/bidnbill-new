@@ -68,7 +68,9 @@
       border-radius: 0 4px 30px 0;
       .dashboard_card_image {
         height: 50%;
-        width: 100%;
+        width: 60%;
+        position: relative;
+        left: 20%;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;

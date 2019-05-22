@@ -8,8 +8,7 @@
       :label='Label'
       :outline='outlined'
       :rules="[required]"
-       @input="$emit('input', address)"
-       @change="$emit('changeCity', city)"
+       @change="[$emit('input', address)]"
     ></v-combobox>
 </template>
 
@@ -29,7 +28,6 @@
       address: null,
       entries: [],
       search: false,
-      city: null,
     }),
 
     computed: {
@@ -47,13 +45,12 @@
       axios.get(`https://api-adresse.data.gouv.fr/search/?q=${val}`)
         .then(res => {
           this.entries = res.data.features
-          this.city = this.entries[0].properties.city
         })
         .catch(err => {
           console.log(err)
         })
-        .finally(() => (this.isLoading = false))
-      }
+        .finally(() => (this.$emit('changeCity', this.entries[0].properties.city)))
+      },
     },
   }
 </script>

@@ -21,7 +21,9 @@
       border-radius: 30px 4px 0px 0px;
       .user_card__image {
         height: 70%;
-        width: 100%;
+        width: 50%;
+        position: relative;
+        left: 25%;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
