@@ -5,7 +5,7 @@
       <p>Renseignez vos informations personnelles et créer une enchère</p>
       <v-container fluid>
         <v-layout row wrap>
-          <v-flex xs12 sm8 offset-sm-2 id='form-fields' class='compact-form'>
+          <v-flex xs12 sm8 offset-sm-2  class=' form-fields compact-form'>
             <div >
               <div class="form-subtitle inline-div">Vous êtes un particulier?</div>
               <div class="form-content inline-div">

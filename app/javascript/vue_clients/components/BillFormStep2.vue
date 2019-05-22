@@ -5,7 +5,7 @@
       <p>Téléchargez votre facture ou remplissez le formulaire de consommation</p>
       <v-container fluid>
         <v-layout row wrap>
-          <v-flex xs12 sm4>
+<!--           <v-flex xs12 sm4>
             <div class='upload-invoice-wrapper'>
               <div class="flex-center flex-column"   >
                 <div class="download-icon" >
@@ -14,8 +14,8 @@
                 <p>Téléchargez Facture</p>
               </div>
             </div>
-          </v-flex>
-          <v-flex xs12 sm8 id='form-fields' class='compact-form'>
+          </v-flex> -->
+          <v-flex xs12 sm8 offset-sm-2 class='form-fields compact-form'>
             <div >
               <div class="form-subtitle inline-div">Vôtre fournisseur actuel</div>
               <div class="form-content inline-div">
@@ -26,7 +26,7 @@
             <div >
               <div class="form-subtitle inline-div">Fréquence de paiement</div>
               <div class="form-content inline-div">
-                  <v-text-field v-model="frequency" outline />
+                  <v-select v-model="payment_frequency" outline :rules='[required]' :items='listFrequency'></v-select>
               </div>
             </div>
 
@@ -40,36 +40,36 @@
             <div >
               <div class="form-subtitle inline-div">Votre addresse</div>
               <div class="form-content inline-div">
-                  <v-combobox
-                    v-model="address"
-                    :items="items"
-                    :search-input.sync="search"
-                    hide-no-data
-                    hide-selected
-                    outline
-                    :rules="[required]"
-                  ></v-combobox>
+                  <AddressAutocomplete v-model='address' v-bind:outlined='true' v-bind:Label='null' v-on:changeCity='changeCity'/>
               </div>
             </div>
 
             <div >
               <div class="form-subtitle inline-div">Connaissez vous votre consommation?</div>
               <div class="form-content inline-div">
+                <div class='flex-center'>
                   <v-switch :label="booleanToString(consumption_q)" v-model="consumption_q" color='success'></v-switch>
+                  <v-btn color='success darken-1' flat @click='dialog = true' v-if='!consumption_q'>Afficher Formulaire</v-btn>
+                </div>
               </div>
             </div>
 
-            <div v-if='consumption_q'>
-              <div class="form-subtitle inline-div">Consommation annuelle (KW/h)</div>
+            <div >
+              <div class="form-subtitle inline-div">Consommation annuelle (kWh)</div>
               <div class="form-content inline-div">
-                  <v-text-field v-model="consumption" outline :rules="[required, number]" />
+                  <v-text-field v-model="consumption" outline :rules="[required, number]" :disabled='!consumption_q'/>
               </div>
             </div>
+
 
           </v-flex>
         </v-layout>
       </v-container>
     </div>
+
+    <v-dialog v-model="dialog" max-width="700px" v-if='!consumption_q' v-on:close='dialog = false'>
+      <ConsumptionFormDialog v-on:close='close' v-on:calculation='consumptionCalc' v-on:consumptionData='updateConsumptionData'/>
+    </v-dialog>
   </div>
 </template>
 
@@ -77,45 +77,57 @@
   import axios from 'axios'
   import {required, number} from '../../shared_components/validate'
   import providers from '../../shared_components/providers'
+  import AddressAutocomplete from './AddressAutocomplete'
+  import ConsumptionFormDialog from './ConsumptionFormDialog'
 
   export default {
     name: 'BillFormStep2',
+    components: {
+      AddressAutocomplete,
+      ConsumptionFormDialog
+    },
     data: () => ({
       required: required, number: number,
       current_provider: null,
-      frequency: null,
+      payment_frequency: null,
       price: null,
       address: null,
       consumption: null,
       consumption_q: true,
       listProviders: providers,
-      search: false,
-      entries: [],
+      listFrequency: ['mensuelle', 'semestrielle', 'annuelle'],
       city: null,
+      dialog: false,
+      consumptionData: null,
     }),
-    computed: {
-      items () {
-        return this.entries.map(e => e.properties.label)
-      }
-    },
     methods: {
+      changeCity(v) {
+        this.city = v
+      },
       booleanToString(param) {
         if(param) return 'Oui'
         if(!param) return 'Non'
+      },
+      close () {
+        this.dialog = false
+      },
+      updateConsumptionData(v) {
+        this.consumptionData = v
+      },
+      consumptionCalc(v) {
+        this.consumption = v
       }
     },
-   watch: {
-    search (val) {
-      // Lazily load input items
-      axios.get(`https://api-adresse.data.gouv.fr/search/?q=${val}`)
-        .then(res => {
-          this.entries = res.data.features
-          this.city = this.entries[0].properties.city
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => (this.isLoading = false))
+    watch: {
+      dialog (val) {
+        val || this.close()
+      },
+      consumption_q() {
+        this.consumption_q ? this.dialog = false : this.dialog = true
+        if (this.consumption_q) {
+          this.consumption = 0
+          this.consumptionData = null
+        }
       }
     }
   }

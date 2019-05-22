@@ -84,11 +84,14 @@
               bill: {
                 user_id: this.clientId,
                 category_id: this.$refs.step1.billType,
+                payment_frequency: this.$refs.step2.payment_frequency,
                 price: this.$refs.step2.price,
                 current_provider: this.$refs.step2.current_provider,
                 consumption: this.$refs.step2.consumption,
                 address: this.$refs.step2.address,
-                city: this.$refs.step2.city
+                city: this.$refs.step2.city,
+                calculated_consumption: !this.$refs.step2.consumption_q,
+                ...this.$refs.step2.consumptionData
               },
               user: {
                 first_name: this.$refs.step3.first_name,

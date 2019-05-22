@@ -7,8 +7,19 @@ class UserMailer < ApplicationMailer
   #
   def newBids(user)
     @user = user
-    @greeting = "Bonjour #{user.full_name}"
-
+    @greeting = greeting(user)
     mail(to: @user.email, subject: 'Vous avez des nouvelles offres sur votre abonnement BillSelector')
+  end
+
+  def selectedBids(user)
+    @user = user
+    @greeting = greeting(user)
+    mail(to: @user.email, subject: "Une ou plusieurs de vos offres ont été sélectionées!")
+  end
+
+  private
+
+  def greeting(user)
+    "Bonjour #{user.full_name}"
   end
 end

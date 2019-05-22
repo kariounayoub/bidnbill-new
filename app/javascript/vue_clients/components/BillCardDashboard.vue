@@ -6,7 +6,7 @@
           <div class="card-category"><i class="fas fa-lightbulb"></i>  {{bill.attributes.category.name}}</div>
           <div class="card-info">
             <h4>{{bill.attributes.current_provider}}</h4>
-            <p>{{bill.attributes.price}} € / mois</p>
+            <p>{{bill.attributes.standardized_price}} € / mois</p>
           </div>
           <router-link  :to="'/bills/' + bill.attributes.id">
             <v-btn class='rounded'>Mes offres</v-btn>
@@ -68,7 +68,9 @@
       border-radius: 0 4px 30px 0;
       .dashboard_card_image {
         height: 50%;
-        width: 100%;
+        width: 60%;
+        position: relative;
+        left: 20%;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;

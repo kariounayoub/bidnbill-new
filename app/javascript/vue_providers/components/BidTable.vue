@@ -51,9 +51,9 @@
                 <tr >
                   <td class="text-xs-left" >{{ props.item.category.name }}</td>
                   <td class="text-xs-right">{{ props.item.current_provider }}</td>
-                  <td class="text-xs-right">{{ props.item.price }} €</td>
+                  <td class="text-xs-right">{{ props.item.standardized_price }} €</td>
                   <td class="text-xs-right">{{ props.item.city }}</td>
-                  <td class="text-xs-center"><span class='status-tag' v-bind:class='statusClass(props.item)'>{{ statusCalc(props.item) }}</span></td>
+                  <td class="text-xs-center  status-width large"><span class='status-tag' v-bind:class='statusClass(props.item)'>{{ statusCalc(props.item) }}</span></td>
                   <td class="text-xs-right"><v-icon @click='viewBill(props.item)'>visibility</v-icon></td>
                 </tr>
               </template>
@@ -86,7 +86,7 @@ export default {
     headers: [
       { text: 'Demande', align: 'left', value: 'category'},
       { text: 'Fournisseur actuel', value: 'current_provider', align: 'right'},
-      { text: 'Abonnement en cours', value: 'current_price', align: 'right'},
+      { text: 'Abonnement en cours', value: 'standardized_price', align: 'right'},
       { text: 'Ville', value: 'city', align: 'right'},
       { text: 'Statut', value: 'status', align: 'center'},
       { text: 'Actions', value: 'actions', align: 'right'},

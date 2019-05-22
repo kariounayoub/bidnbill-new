@@ -4,6 +4,7 @@ class CreateBills < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :current_provider
       t.string :address
+      t.string :payment_frequency
       t.float :price
       t.string :photo
       t.references :category, foreign_key: true
@@ -12,6 +13,19 @@ class CreateBills < ActiveRecord::Migration[5.2]
       t.integer :consumption
       t.string :city
       t.string :zip_code
+
+      t.boolean :calculated_consumption, default: false
+      t.string :type_home
+      t.integer :nb_people
+      t.integer :surface
+      t.string :hot_water
+      t.string :heating
+      t.boolean :fridge
+      t.boolean :freezer
+      t.boolean :oven
+      t.boolean :dishwasher
+      t.boolean :washer
+      t.boolean :dryer
 
       t.boolean :is_deleted
       t.boolean :is_open

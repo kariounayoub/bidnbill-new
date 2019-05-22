@@ -47,14 +47,16 @@ class Api::V1::BillsController < Api::V1::BaseController
   end
 
   def lost_bills
-    bills = policy_scope(Bill).joins(bids: :user).where(is_open: false, bids: {users: {account_id: current_user.account.id}})
-    render json: BillsSerializer.new(bills).serialized_json
+    bid_ids = Bid.joins(user: :account).where(status: 'refusé', accounts: {id: current_user.account.id})
+    bills = policy_scope(Bill).where(id: bid_ids.map {|bid| bid.bill.id})
+    render json: BillsSerializer.new(bills)
   end
 
   private
 
   def bill_params
-    params.require(:bill).permit(:user_id, :category_id, :price, :current_provider, :consumption, :address, :city)
+    params.require(:bill).permit(:user_id, :category_id, :price, :current_provider, :consumption, :address, :city, :payment_frequency, :calculated_consumption,
+                                 :type_home, :nb_people, :surface, :hot_water, :heating, :fridge, :freezer, :oven, :dishwasher, :washer, :dryer)
   end
 
   def user_params

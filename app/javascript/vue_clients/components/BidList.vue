@@ -42,7 +42,7 @@
     },
     methods: {
       calculateDifference(bidPrice) {
-        return this.activeBill.attributes.price - bidPrice
+        return this.activeBill.attributes.standardized_price - bidPrice
       },
       selectBid(id) {
         this.$store.dispatch('SELECT_BID', id)
