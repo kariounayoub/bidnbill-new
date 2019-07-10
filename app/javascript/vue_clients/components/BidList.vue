@@ -32,7 +32,7 @@
           { text: 'Offre', value: 'bid.price',  class: 'bid__header'},
           { text: 'Economies', value: 'savings',  class: 'bid__header'},
           { text: 'Statut', value: 'bid.status', class: 'bid__header', align: 'center' },
-          { text: 'Actions', value: 'actions',  class: 'bid__header'}
+          { text: 'Voir Réponses', value: 'actions',  class: 'bid__header'}
         ],
     }),
     computed: {
