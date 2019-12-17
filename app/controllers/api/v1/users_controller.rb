@@ -3,6 +3,8 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def update
     if @user.update(user_params)
+      @user.is_valid = true
+      @user.save
       render json: {success: true, user: UsersSerializer.new(@user)}
     else
       render json: {success: false}

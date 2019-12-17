@@ -1,17 +1,17 @@
   #footer {
-    height: 100px;
-     background: linear-gradient(98.59deg, #6FE446 40.14%, #ACF094 99.89%);
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     font-size: 14px;
-     font-weight: 700;
-     color: white;
-     z-index: 1000;
-     p {
-      margin: 0;
-     }
-     span {
-      margin: 0 10px;
-     }
+      height: 100px;
+      background: linear-gradient(98.59deg, $mainColor 40.14%, $mainColorLight 99.89%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      z-index: 1000;
+      p {
+          margin: 0;
+      }
+      span {
+          margin: 0 10px;
+      }
   }
