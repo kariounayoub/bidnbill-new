@@ -4,6 +4,9 @@ import ActionCableVue from "actioncable-vue";
 Vue.use(ActionCableVue, {
   debug: true,
   debugLevel: "error",
-  connectionUrl: "ws://localhost:3000/cable",
+  connectionUrl:
+    process.env.NODE_ENV === "development"
+      ? "ws://localhost:3000/cable"
+      : "wss://bidnbill-new.herokuapp.com/cable",
   connectImmediately: true
 });
