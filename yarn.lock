@@ -1064,7 +1064,7 @@ actioncable-vue@^1.5.1:
   dependencies:
     actioncable "^5.2.3"
 
-actioncable@^5.2.3, actioncable@^5.2.4:
+actioncable@^5.2.3:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.4.tgz#744f555f16d87413044f81074a9cc4d2cf416502"
   integrity sha512-2mCP0eKTjxtDWNPqP6xPar9a5i8F/pndrTHJGU6QDS1a77B+DlPEWzPRiyNAaNEGMY/9yTBOP3CXhR+8/zaVQw==

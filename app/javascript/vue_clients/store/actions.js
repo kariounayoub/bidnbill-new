@@ -1,6 +1,5 @@
 import axios from "axios"; // axios is an http library to make http requrests (can use default fetch api instead)
 import router from "../router";
-const ROOT_URL = `${window.location.origin}`;
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes
   .content.value;
 const config = {
