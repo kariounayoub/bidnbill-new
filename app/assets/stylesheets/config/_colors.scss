@@ -11,4 +11,6 @@ $light-gray: #F4F4F4;
 $mainColor: #1c3358;
 $mainColorLight: #4878c5;
 $secondaryColor: #9a8b3f;
+$gradientColor: linear-gradient(98.59deg, $mainColor 40.14%, $mainColorLight 99.89%);
+$gradientColorSecondary: linear-gradient(98.59deg, lighten($secondaryColor, 10%) 40.14%, lighten($secondaryColor, 40%) 99.89%);
 $boxShadow: 0px 0px 7px rgba(0, 0, 0, 0.3);

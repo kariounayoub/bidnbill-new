@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_153522) do
+ActiveRecord::Schema.define(version: 2019_12_18_143251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,18 @@ ActiveRecord::Schema.define(version: 2019_12_17_153522) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "bid_id"
+    t.boolean "seen"
+    t.string "category"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bid_id"], name: "index_notifications_on_bid_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -130,4 +142,6 @@ ActiveRecord::Schema.define(version: 2019_12_17_153522) do
   add_foreign_key "bids", "users"
   add_foreign_key "bills", "categories"
   add_foreign_key "bills", "users"
+  add_foreign_key "notifications", "bids"
+  add_foreign_key "notifications", "users"
 end

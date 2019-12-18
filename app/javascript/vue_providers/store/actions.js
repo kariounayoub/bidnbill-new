@@ -97,5 +97,8 @@ export default {
         }
       })
       .catch(err => commit("SET_FLASH", { message: err, variant: "error" }));
+  },
+  SEEN_NOTIFICATIONS: async ({}, payload) => {
+    await axios.patch(`/api/v1/notifications/${payload}/seen`, config);
   }
 };

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :bids, only: [:create, :update]
       patch 'bids/:id/select', to: 'bids#select'
+      patch 'notifications/:id/seen', to: 'notifications#seen'
     end
   end
 

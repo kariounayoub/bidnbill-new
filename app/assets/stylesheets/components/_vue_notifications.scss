@@ -1,0 +1,44 @@
+.notifications {
+    position: relative;
+    margin: 0 20px 0 0;
+    .notification-icon.v-icon {
+        color: white;
+    }
+    .notifications-count {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        color: white;
+        background: $red;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: -3px;
+        right: -5px;
+    }
+}
+
+.v-list {
+    padding: 0;
+}
+
+.notification-content {
+    margin: 0 10px;
+    padding: 15px;
+    border-bottom: 2px dotted $mainColor;
+    &:last-child {
+        border-bottom: none;
+    }
+    .notification-content__content {
+        padding: 15px;
+    }
+    .notification-content__icon {
+        .v-icon {
+            cursor: pointer;
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+}

@@ -4,7 +4,7 @@
       padding: 50px 0;
       font-size: 25px;
       text-align: center;
-      background: linear-gradient(98.59deg, $mainColor 40.14%, $mainColorLight 99.89%);
+      background: $gradientColor;
       -webkit-clip-path: ellipse(60% 100% at 50% 0%);
       clip-path: ellipse(60% 100% at 50% 0%);
   }

@@ -1,1 +1,1 @@
-import '../vue_clients'
+import "../vue_clients";

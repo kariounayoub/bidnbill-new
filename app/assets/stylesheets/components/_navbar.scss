@@ -1,6 +1,6 @@
 .navbar.navbar-light {
     justify-content: space-between;
-    background: linear-gradient(98.59deg, $mainColor 40.14%, $mainColorLight 99.89%);
+    background: $gradientColor;
     box-shadow: $boxShadow;
     position: sticky;
     top: 0;

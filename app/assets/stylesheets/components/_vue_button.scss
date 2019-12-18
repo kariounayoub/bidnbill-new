@@ -1,5 +1,5 @@
   .v-btn.rounded {
-      background: linear-gradient(251.31deg, $mainColorLight -32.76%, #FFFFFF 217.09%);
+      background: $gradientColor;
       color: white !important;
       text-transform: none !important;
       border-radius: 15px 2px 15px 2px !important;
@@ -11,7 +11,7 @@
   }
   
   .v-btn.rounded.primary {
-      background: linear-gradient(251.31deg, $secondaryColor -32.76%, #FFFFFF 217.09%);
+      background: $gradientColorSecondary
   }
   
   .v-btn.large {

@@ -7,5 +7,8 @@ class UsersSerializer
   attribute :account do |object|
     {company: object.account.company, id: object.account.id} unless object.account.nil?
   end
+  attribute :notifications do |object|
+    object.notifications.where(seen: false)
+  end
 
 end

@@ -1,7 +1,7 @@
 // Specific CSS for your home-page
 #home-wrapper {
     #home-top {
-        background: linear-gradient(98.59deg, $mainColor 40.14%, $mainColorLight 99.89%);
+        background: $gradientColor;
         min-height: 40vh;
         clip-path: ellipse(100% 100% at 50% 0%);
         .text-container {
