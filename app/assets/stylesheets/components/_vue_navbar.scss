@@ -1,0 +1,30 @@
+.navbar__main {
+    background: $gradientColor;
+}
+
+.navbar__icon {
+    color: white !important;
+}
+
+.navbar__header {
+    color: white;
+    font-weight: 700;
+}
+
+.navbar__menu-item {
+    padding: 20px;
+    color: rgba(0, 0, 0, 0.8);
+    &:hover {
+        background: #eee;
+    }
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.navbar__link {
+    color: white;
+    padding: 20px;
+    font-weight: 600;
+}

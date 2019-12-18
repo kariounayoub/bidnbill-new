@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_153346) do
+ActiveRecord::Schema.define(version: 2019_12_18_143251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "methode_contact"
     t.index ["bill_id"], name: "index_bids_on_bill_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
   end
@@ -77,6 +78,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.integer "days_without_mail", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pdl"
+    t.boolean "energie_verte"
     t.index ["category_id"], name: "index_bills_on_category_id"
     t.index ["user_id"], name: "index_bills_on_user_id"
   end
@@ -86,6 +89,18 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.boolean "is_deleted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "bid_id"
+    t.boolean "seen"
+    t.string "category"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bid_id"], name: "index_notifications_on_bid_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
     t.boolean "admin"
     t.integer "days_since_last_provider_email", default: 1
     t.bigint "account_id"
+    t.boolean "is_valid", default: false
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -126,4 +142,6 @@ ActiveRecord::Schema.define(version: 2019_05_03_153346) do
   add_foreign_key "bids", "users"
   add_foreign_key "bills", "categories"
   add_foreign_key "bills", "users"
+  add_foreign_key "notifications", "bids"
+  add_foreign_key "notifications", "users"
 end

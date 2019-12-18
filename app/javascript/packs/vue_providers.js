@@ -1,1 +1,1 @@
-import '../vue_providers'
+import "../vue_providers";

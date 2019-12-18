@@ -6,6 +6,8 @@ class Bid < ApplicationRecord
   has_one :account, through: :user
   has_one :client, through: :bill
 
+  has_many :notifications,dependent: :destroy
+
   validates :status, inclusion: {in: STATUS}
   validates :status, :price, presence: true
 

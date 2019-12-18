@@ -1,21 +1,26 @@
 <div class="navbar navbar-expand-sm navbar-light">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <h4>BillSelector</h4>
-    <% end %>
-
+    <%image_tag 'logo-light.png', class: 'logo'%>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
           <% if current_user.user_type == 'client' %>
-            <%= link_to "Dashboard", client_dashboard_path, class: "nav-link" %>
+            <% if current_user.is_valid %>
+              <%= link_to "Dashboard", client_dashboard_path, class: "nav-link" %>
+            <% else %>
+              <%= link_to "Valider mon compte", users_edit_client_path, class: "nav-link" %>
+            <% end %>
           <% elsif current_user.user_type == 'provider' %>
-            <%= link_to "Dashboard", provider_dashboard_path, class: "nav-link" %>
+            <% if current_user.is_valid %>
+              <%= link_to "Dashboard", provider_dashboard_path, class: "nav-link" %>
+            <% else %>
+              <%= link_to "Valider mon compte", users_edit_provider_path, class: "nav-link" %>
+            <% end %>
           <% end %>
         </li>
         <li class="nav-item">
@@ -28,9 +33,6 @@
           </div>
         </li>
       <% else %>
-        <li class="nav-item">
-          <%= link_to "S'inscrire", new_user_registration_path, class: "nav-link" %>
-        </li>
         <li class="nav-item">
           <%= link_to "Connexion", new_user_session_path, class: "nav-link" %>
         </li>

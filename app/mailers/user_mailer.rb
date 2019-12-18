@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def newBids(user)
     @user = user
     @greeting = greeting(user)
-    mail(to: @user.email, subject: 'Vous avez des nouvelles offres sur votre abonnement BillSelector')
+    mail(to: @user.email, subject: 'Vous avez des nouvelles offres sur votre enchères BidnBill')
   end
 
   def selectedBids(user)

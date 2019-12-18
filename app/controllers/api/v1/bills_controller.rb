@@ -22,8 +22,7 @@ class Api::V1::BillsController < Api::V1::BaseController
   def create
     bill = Bill.new(bill_params)
     if bill.save
-      @user.update(user_params)
-      render json: {success: true, bill: BillsSerializer.new(bill, {params: {show_details: true}}), user: UsersSerializer.new(@user)}
+      render json: {success: true, bill: BillsSerializer.new(bill, {params: {show_details: true}})}
     else
       render json: {success: false}
     end
@@ -56,11 +55,7 @@ class Api::V1::BillsController < Api::V1::BaseController
 
   def bill_params
     params.require(:bill).permit(:user_id, :category_id, :price, :current_provider, :consumption, :address, :city, :payment_frequency, :calculated_consumption,
-                                 :type_home, :nb_people, :surface, :hot_water, :heating, :fridge, :freezer, :oven, :dishwasher, :washer, :dryer)
-  end
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :company, :phone_number)
+                                 :type_home, :nb_people, :surface, :hot_water, :heating, :fridge, :freezer, :oven, :dishwasher, :washer, :dryer, :pdl, :energie_verte)
   end
 
   def find_user

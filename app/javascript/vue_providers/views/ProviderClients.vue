@@ -1,16 +1,16 @@
 <template>
   <div>
     <h3 class="dashboard__title">Nos Clients</h3>
-    <v-container>
-      <v-layout row wrap class='inside-card'>
-        <v-flex xs12 sm12  v-if='!activeClient'>
-          <ClientTable v-bind:clients='myClients' />
+    <v-container fluid>
+      <v-layout row wrap class="inside-card">
+        <v-flex xs12 sm12 v-if="!activeClient">
+          <ClientTable v-bind:clients="myClients" />
         </v-flex>
-        <v-flex xs12 sm8  v-if='activeClient'>
-          <ClientTable v-bind:clients='myClients' />
+        <v-flex xs12 sm8 v-if="activeClient">
+          <ClientTable v-bind:clients="myClients" />
         </v-flex>
         <v-flex xs12 sm4>
-          <ClientCard v-if='activeClient' v-bind:client='activeClient'/>
+          <ClientCard v-if="activeClient" v-bind:client="activeClient" />
         </v-flex>
       </v-layout>
     </v-container>
@@ -18,37 +18,36 @@
 </template>
 
 <script>
-  import ClientTable from '../components/ClientTable'
-  import ClientCard from '../components/ClientCard'
+import ClientTable from "../components/ClientTable";
+import ClientCard from "../components/ClientCard";
 
 export default {
-  name: 'ProviderClients',
+  name: "ProviderClients",
   components: {
     ClientTable,
     ClientCard
   },
   data: () => ({
-    interval: null,
+    interval: null
   }),
   computed: {
     myClients() {
-      return this.$store.getters.MyClients
+      return this.$store.getters.MyClients;
     },
     activeClient() {
-      return this.$store.getters.ActiveClient
+      return this.$store.getters.ActiveClient;
     }
   },
   mounted() {
     if (this.myClients[0].bill.data.id === null) {
-      this.$store.dispatch('GET_MY_CLIENTS')
+      this.$store.dispatch("GET_MY_CLIENTS");
     }
     this.interval = setInterval(() => {
-      this.$store.dispatch('GET_MY_CLIENTS')
+      this.$store.dispatch("GET_MY_CLIENTS");
     }, 10000);
   },
   beforeDestroy() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   }
-
 };
 </script>

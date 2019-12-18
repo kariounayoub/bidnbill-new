@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :account, optional: true
   has_many :bills
+  has_many :notifications
 
   def full_name
     "#{first_name} #{last_name}" unless first_name.nil? || last_name.nil?
