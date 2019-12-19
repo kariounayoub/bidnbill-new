@@ -14,6 +14,7 @@ class Bid < ApplicationRecord
   before_validation(on: :create) do
     self.status  ||= "en attente"
     self.bill.update(send_update_email: true)
+    # UserMailer.newBids(self.bill.client).deliver_later
   end
 
 end

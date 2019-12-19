@@ -5,16 +5,24 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.newBids.subject
   #
+
+  def welcome(user)
+    @user = user
+    @greeting = greeting(user)
+    mail(to: @user.email, subject: 'Bienvenue sur BidnBill')
+  end
+
   def newBids(user)
     @user = user
     @greeting = greeting(user)
     mail(to: @user.email, subject: 'Vous avez des nouvelles offres sur votre enchères BidnBill')
   end
 
-  def selectedBids(user)
+  def selectedBids(user, client)
     @user = user
+    @client = client
     @greeting = greeting(user)
-    mail(to: @user.email, subject: "Une ou plusieurs de vos offres ont été sélectionées!")
+    mail(to: @user.email, subject: "#{@client.full_name} à accépter votre offre")
   end
 
   private
