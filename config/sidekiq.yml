@@ -1,13 +1,13 @@
 :concurrency: 3
 :timeout: 60
 :verbose: true
-:queues:  # Queue priority: https://github.com/mperham/sidekiq/wiki/Advanced-Options
+:queues: # Queue priority: https://github.com/mperham/sidekiq/wiki/Advanced-Options
   - default
   - mailers
-:schedule:
-  bids_mail_job:
-    cron: '0 00 12 * * *'   # Runs once per day at noon
-    class: BidsMailJob
-  selected_bids_mail_job:
-    cron: '0 00 10 * * *'   # Runs once per day at 10am
-    class: SelectedBidsMailJob
+# :schedule:
+#   bids_mail_job:
+#     cron: '0 00 12 * * *'   # Runs once per day at noon
+#     class: BidsMailJob
+#   selected_bids_mail_job:
+#     cron: '0 00 10 * * *'   # Runs once per day at 10am
+#     class: SelectedBidsMailJob
