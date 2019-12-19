@@ -47,6 +47,7 @@ class Api::V1::BillsController < Api::V1::BaseController
 
   def lost_bills
     bid_ids = Bid.joins(user: :account).where(status: 'refusé', accounts: {id: current_user.account.id})
+    authorize bid_ids
     bills = policy_scope(Bill).where(id: bid_ids.map {|bid| bid.bill.id})
     render json: BillsSerializer.new(bills)
   end

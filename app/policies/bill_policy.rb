@@ -6,14 +6,14 @@ class BillPolicy < ApplicationPolicy
   end
 
   def update?
-    record.client == user && user.is_valid
+    record.client == user
   end
 
   def my_bills?
-    record.first == nil || user == record.first.client && user.is_valid
+    record.first == nil || user == record.first.client
   end
 
   def show?
-    user == record.client && user.is_valid
+    user == record.client
   end
 end

@@ -1,7 +1,7 @@
 .show-alert {
     position: relative;
     bottom: -67px;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .alert-success {
@@ -38,7 +38,7 @@
     position: fixed;
     top: 70px;
     right: 10px;
-    z-index: 1000;
+    z-index: 1;
     @extend .shadow-1;
     &:hover {
         @extend .shadow-2;

@@ -6,13 +6,14 @@
       v-bind:isValid="isValid"
       v-bind:notifications="notifications"
       v-on:submitNotification="handleNotification"
+      v-bind:isAdmin="isAdmin"
     />
-    <Sidebar v-if="!isMobile && isValid" />
+    <Sidebar v-if="!isMobile" />
     <SidebarMobile v-if="isMobile" />
     <Flash />
     <router-view
       class="top-margin min-height-full"
-      v-bind:class="{ offset: !offset && isValid }"
+      v-bind:class="{ offset: !offset }"
       transition="slide-x-transition"
     ></router-view>
   </v-app>
@@ -41,6 +42,9 @@ export default {
     },
     isValid() {
       return this.$store.getters.Provider.attributes.is_valid;
+    },
+    isAdmin() {
+      return this.$store.getters.Provider.attributes.account_admin;
     },
     offset() {
       return this.$store.getters.Offset;

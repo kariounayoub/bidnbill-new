@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "./store/index";
+
 import DashboardInitial from "./views/DashboardInitial.vue";
 import ProviderEncheres from "./views/ProviderEncheres.vue";
 import ProviderClients from "./views/ProviderClients.vue";
 import LostBills from "./views/LostBills.vue";
-import EditUser from "./views/EditUser.vue";
+import EditAccount from "./views/EditAccount.vue";
 
 Vue.use(Router);
 
@@ -33,9 +35,16 @@ export default new Router({
       component: ProviderClients
     },
     {
-      path: "/users/edit_provider",
-      name: "edit_provider",
-      component: EditUser
+      path: "/edit_account",
+      name: "edit_account",
+      component: EditAccount,
+      beforeEnter: (to, from, next) => {
+        if (store.state.provider.data.attributes.account_admin === false) {
+          next(false);
+        } else {
+          next();
+        }
+      }
     }
   ],
   scrollBehavior() {

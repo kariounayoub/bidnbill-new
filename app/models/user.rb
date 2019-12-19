@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :bills
   has_many :notifications
 
+  validates :phone_number, format: { with: /((\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/}, allow_blank: true
+
+
   def full_name
     "#{first_name} #{last_name}" unless first_name.nil? || last_name.nil?
   end

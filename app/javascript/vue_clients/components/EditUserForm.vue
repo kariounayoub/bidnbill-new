@@ -42,7 +42,7 @@
                 <div>
                   <div class="form-subtitle inline-div">Numéro de Téléphone</div>
                   <div class="form-content inline-div">
-                    <v-text-field v-model="phone" outline :rules="[required]" />
+                    <v-text-field v-model="phone" outline :rules="[required, isPhone]" />
                   </div>
                 </div>
 
@@ -66,12 +66,13 @@
 </template>
 
 <script>
-import { required } from "./validate";
+import { required, isPhone } from "../../shared_components/validate";
 export default {
   name: "EditUserForm",
   props: ["user"],
   data: () => ({
     required: required,
+    isPhone: isPhone,
     last_name: null,
     first_name: null,
     phone: null,

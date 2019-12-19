@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   def provider_dashboard
     authorize current_user
     @provider = UsersSerializer.new(current_user).serialized_json
-    redirect_to users_edit_provider_path if !current_user.is_valid  && users_edit_provider_path != request.env['REQUEST_URI']
+    @account = AccountsSerializer.new(current_user.account).serialized_json
   end
 
   private

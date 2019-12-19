@@ -1,8 +1,7 @@
-<div id="app" data-provider="<%= @provider %>" data-map="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div id="app" data-provider="<%= @provider %>" data-account="<%=@account%>" data-map="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 <% content_for :header do %>
-    <%= stylesheet_pack_tag 'vue_providers' %>
+  <%= stylesheet_pack_tag 'vue_providers' %>
 <% end %>
-
 <% content_for :after_js do %>
-    <%= javascript_pack_tag 'vue_providers' %>
+  <%= javascript_pack_tag 'vue_providers' %>
 <% end %>

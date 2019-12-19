@@ -1,39 +1,40 @@
 export default {
   Flash: state => {
-      return state.flash
-    },
+    return state.flash;
+  },
   Provider: state => {
-      return state.provider.data
-    },
+    return state.provider.data;
+  },
+  Account: state => {
+    return state.account.data;
+  },
   Offset: state => {
-      return state.offset
-    },
+    return state.offset;
+  },
   Bills: state => {
-    return state.bills.data.data
+    return state.bills.data.data;
   },
   OtherBills: state => {
-    return state.bills.data.data.filter((b) => {
-      if (!state.accountBills.includes(b)) return b
-    })
+    return state.bills.data.data.filter(b => {
+      if (!state.accountBills.includes(b)) return b;
+    });
   },
   MyBills: state => {
-    return state.myBills
+    return state.myBills;
   },
   AccountBills: state => {
-    return state.accountBills
+    return state.accountBills;
   },
   MyClients: state => {
-    return state.myClients.data
+    return state.myClients.data;
   },
   ActiveClient: state => {
-    return state.activeClient
+    return state.activeClient;
   },
   MapKey: state => {
-    return state.mapKey
+    return state.mapKey;
   },
   LostBills: state => {
-    return state.lostBills.data.data
+    return state.lostBills.data.data;
   }
-}
-
-
+};

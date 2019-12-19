@@ -26,6 +26,7 @@ export default {
             message: "Compte modifié avec succès",
             variant: "primary"
           });
+          router.push("/client_dashboard");
         } else {
           commit("SET_FLASH", {
             message: "Erreur le compte n'a pas été modifié",

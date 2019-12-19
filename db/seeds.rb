@@ -24,7 +24,7 @@ account2 = Account.create!(company: 'Total Direct Energie')
 
 client = User.create!(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client')
 client2 = User.create!(email: 'ab@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Karioun', user_type: 'client')
-provider1 = User.create!(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider', account: account1)
+provider1 = User.create!(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider', account: account1, account_admin: true)
 provider2 = User.create!(email: 'mj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account2)
 provider3 = User.create!(email: 'maj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account1)
 

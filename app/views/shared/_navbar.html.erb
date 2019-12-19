@@ -16,11 +16,7 @@
               <%= link_to "Valider mon compte", users_edit_client_path, class: "nav-link" %>
             <% end %>
           <% elsif current_user.user_type == 'provider' %>
-            <% if current_user.is_valid %>
-              <%= link_to "Dashboard", provider_dashboard_path, class: "nav-link" %>
-            <% else %>
-              <%= link_to "Valider mon compte", users_edit_provider_path, class: "nav-link" %>
-            <% end %>
+            <%= link_to "Dashboard", provider_dashboard_path, class: "nav-link" %>
           <% end %>
         </li>
         <li class="nav-item">
