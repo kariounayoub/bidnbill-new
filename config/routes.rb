@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'provider_encheres_lost', to: 'pages#provider_dashboard'
   get 'provider_clients', to: 'pages#provider_dashboard'
   get 'edit_account', to: 'pages#provider_dashboard'
+  get 'edit_provider', to: 'pages#provider_dashboard'
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -23,9 +24,11 @@ Rails.application.routes.draw do
           get 'lost_bills', to: 'bills#lost_bills'
       end
       resources :bids, only: [:create, :update]
+      resources :accounts, only: [:update] do
+        post 'new_user', to: 'accounts#new_user'
+      end
       patch 'bids/:id/select', to: 'bids#select'
       patch 'notifications/:id/seen', to: 'notifications#seen'
-      post 'accounts/:id/new_user', to: 'accounts#new_user'
     end
   end
 

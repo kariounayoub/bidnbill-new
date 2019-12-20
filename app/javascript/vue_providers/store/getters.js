@@ -36,5 +36,8 @@ export default {
   },
   LostBills: state => {
     return state.lostBills.data.data;
+  },
+  IsLoading: state => {
+    return state.isLoading;
   }
 };

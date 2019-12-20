@@ -20,6 +20,8 @@ export default {
         config
       )
       .then(res => {
+        commit("TOGGLE_IS_LOADING");
+
         if (res.data.success) {
           commit("UPDATE_CLIENT", res.data.user);
           commit("SET_FLASH", {
@@ -27,6 +29,7 @@ export default {
             variant: "primary"
           });
           router.push("/client_dashboard");
+          window.location.reload();
         } else {
           commit("SET_FLASH", {
             message: "Erreur le compte n'a pas été modifié",

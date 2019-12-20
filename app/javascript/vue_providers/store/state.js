@@ -27,5 +27,6 @@ export default {
     ]
   },
   activeClient: null,
-  mapKey: root.dataset.map
+  mapKey: root.dataset.map,
+  isLoading: false
 };

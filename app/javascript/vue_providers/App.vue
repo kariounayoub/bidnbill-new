@@ -1,12 +1,18 @@
 <template>
   <v-app id="app">
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
     <Navbar
       class="front"
       v-bind:withSidebar="true"
-      v-bind:isValid="isValid"
+      v-bind:isValid="provider.is_valid"
       v-bind:notifications="notifications"
       v-on:submitNotification="handleNotification"
-      v-bind:isAdmin="isAdmin"
+      v-bind:isAdmin="provider.account_admin"
+      v-bind:avatarImg="provider.picture"
     />
     <Sidebar v-if="!isMobile" />
     <SidebarMobile v-if="isMobile" />
@@ -24,6 +30,10 @@ import Navbar from "../shared_components/Navbar";
 import Flash from "../shared_components/Flash";
 import Sidebar from "./components/Sidebar";
 import SidebarMobile from "./components/SidebarMobile";
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   name: "App",
@@ -31,20 +41,21 @@ export default {
     Navbar,
     Flash,
     Sidebar,
-    SidebarMobile
+    SidebarMobile,
+    Loading
   },
   data: () => ({
     notifications: []
   }),
   computed: {
+    isLoading() {
+      return this.$store.getters.IsLoading;
+    },
     isMobile() {
       return screen.width <= 600 ? true : false;
     },
-    isValid() {
-      return this.$store.getters.Provider.attributes.is_valid;
-    },
-    isAdmin() {
-      return this.$store.getters.Provider.attributes.account_admin;
+    provider() {
+      return this.$store.getters.Provider.attributes;
     },
     offset() {
       return this.$store.getters.Offset;

@@ -1,11 +1,17 @@
 <template>
   <v-app id="app">
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
     <Navbar
       v-bind:withSidebar="false"
       v-bind:client="true"
-      v-bind:isValid="isValid"
+      v-bind:isValid="client.is_valid"
       v-bind:notifications="notifications"
       v-on:submitNotification="handleNotification"
+      v-bind:avatarImg="client.picture"
     />
     <Flash />
     <router-view class="top-margin min-height-full"></router-view>
@@ -15,19 +21,27 @@
 <script>
 import Navbar from "../shared_components/Navbar";
 import Flash from "../shared_components/Flash";
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    Flash
+    Flash,
+    Loading
   },
   data: () => ({
     notifications: []
   }),
   computed: {
-    isValid() {
-      return this.$store.getters.Client.attributes.is_valid;
+    isLoading() {
+      return this.$store.getters.IsLoading;
+    },
+    client() {
+      return this.$store.getters.Client.attributes;
     }
   },
   methods: {

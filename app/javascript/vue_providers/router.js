@@ -7,6 +7,7 @@ import ProviderEncheres from "./views/ProviderEncheres.vue";
 import ProviderClients from "./views/ProviderClients.vue";
 import LostBills from "./views/LostBills.vue";
 import EditAccount from "./views/EditAccount.vue";
+import EditProvider from "./views/EditProvider.vue";
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
       path: "/provider_clients",
       name: "providerClients",
       component: ProviderClients
+    },
+    {
+      path: "/edit_provider",
+      name: "edit_provider",
+      component: EditProvider
     },
     {
       path: "/edit_account",

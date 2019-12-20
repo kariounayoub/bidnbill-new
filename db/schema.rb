@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 2019_12_19_152318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number_users_allowed", default: 1
+    t.string "picture"
+    t.string "phone_number"
+    t.text "description"
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "post_code"
   end
 
   create_table "bids", force: :cascade do |t|
@@ -132,6 +139,8 @@ ActiveRecord::Schema.define(version: 2019_12_19_152318) do
     t.bigint "account_id"
     t.boolean "is_valid", default: false
     t.boolean "account_admin", default: false
+    t.boolean "is_active", default: true
+    t.string "picture"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,5 +1,9 @@
 class AccountPolicy < ApplicationPolicy
-  def new_user?
+  def update?
     user.account_admin
+  end
+
+  def new_user?
+    update?
   end
 end

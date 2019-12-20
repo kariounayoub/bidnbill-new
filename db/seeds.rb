@@ -19,8 +19,9 @@ puts 'creating admin'
 User.create(email: 'admin@admin.com', password: '123456', admin: true)
 
 puts 'creating data'
-account1 = Account.create!(company: 'EDF')
-account2 = Account.create!(company: 'Total Direct Energie')
+account1 = Account.create!(company: 'EDF', number_users_allowed: 3, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget aliquet quam. Nam vel dolor at est sagittis sodales. Integer eleifend libero non eros facilisis rhoncus. Suspendisse ac sagittis neque. Maecenas nec lacus vestibulum, interdum erat ullamcorper, eleifend risus. Proin vel nisl accumsan, posuere justo et, sodales tellus. Sed porta porttitor euismod. Sed dictum tellus nunc, quis vehicula metus faucibus ac. Suspendisse potenti. Nam fringilla ligula in posuere feugiat. Pellentesque a erat et ante elementum euismod. Phasellus a mi sed ex mollis pretium eget ut est. Mauris vitae blandit diam, a eleifend justo. Aenean tincidunt diam at lorem sollicitudin, sed vehicula ante facilisis.
+  ", address: "18 rue miolis, Paris", city: 'Paris', country: "France", post_code: '75015')
+account2 = Account.create!(company: 'Total Direct Energie', number_users_allowed: 3)
 
 client = User.create!(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client')
 client2 = User.create!(email: 'ab@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Karioun', user_type: 'client')

@@ -33,11 +33,16 @@ export default {
     state.provider = payload;
   },
   SET_NEW_USER: (state, payload) => {
-    console.log(state, payload);
     state.account.data.attributes.account_users = [
       ...state.account.data.attributes.account_users,
       payload.data.user
     ];
+  },
+  UPDATE_ACCOUNT: (state, payload) => {
+    state.account = payload;
+  },
+  TOGGLE_IS_LOADING: state => {
+    state.isLoading = !state.isLoading;
   }
 };
 
