@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           get 'my_bills', to: 'bills#my_bills'
           get 'my_clients', to: 'bills#my_clients'
           get 'lost_bills', to: 'bills#lost_bills'
+          patch 'disable_user', to: 'disable_user'
       end
       resources :bids, only: [:create, :update]
       resources :accounts, only: [:update] do

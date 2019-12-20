@@ -38,6 +38,11 @@ export default {
       payload.data.user
     ];
   },
+  REMOVE_USER: (state, payload) => {
+    state.account.data.attributes.account_users = state.account.data.attributes.account_users.filter(
+      u => u.data.id !== payload.data.id
+    );
+  },
   UPDATE_ACCOUNT: (state, payload) => {
     state.account = payload;
   },

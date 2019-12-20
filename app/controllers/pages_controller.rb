@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   def provider_dashboard
     authorize current_user
     @provider = UsersSerializer.new(current_user).serialized_json
-    @account = AccountsSerializer.new(current_user.account).serialized_json
+    @account = AccountsSerializer.new(current_user.account, {params: {current_user: current_user}}).serialized_json
   end
 
   private

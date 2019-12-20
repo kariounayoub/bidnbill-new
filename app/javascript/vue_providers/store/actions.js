@@ -149,5 +149,24 @@ export default {
         }
       })
       .catch(err => commit("SET_FLASH", { message: err, variant: "error" }));
+  },
+  DISABLE_USER: async ({ state, commit }, payload) => {
+    await axios
+      .patch(`/api/v1/users/${payload}/disable_user`, config)
+      .then(res => {
+        if (res.data.success) {
+          commit("REMOVE_USER", res.data.user);
+          commit("SET_FLASH", {
+            message: "Utilisateur désactivé avec succès",
+            variant: "primary"
+          });
+        } else {
+          commit("SET_FLASH", {
+            message: "Erreur l'utilisateur n'a pas été désactivé",
+            variant: "error"
+          });
+        }
+      })
+      .catch(err => commit("SET_FLASH", { message: err, variant: "error" }));
   }
 };

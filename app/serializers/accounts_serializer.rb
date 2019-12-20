@@ -6,7 +6,7 @@ class AccountsSerializer
     object.picture.url
   end
 
-  attribute :account_users do |object|
-    object.users.map{|u| UsersSerializer.new(u)}
+  attribute :account_users do |object, params|
+    object.users.where.not(is_active: false, id: params[:current_user].id).map{|u| UsersSerializer.new(u)}
   end
 end

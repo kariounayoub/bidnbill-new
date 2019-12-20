@@ -18,7 +18,7 @@ class Api::V1::AccountsController < Api::V1::BaseController
 
   def update
     if @account.update(account_params)
-      render json: {success: true, account: AccountsSerializer.new(@account)}
+      render json: {success: true, account: AccountsSerializer.new(@account, {params: {current_user: current_user}})}
     else
       render json: {success: false}
     end
