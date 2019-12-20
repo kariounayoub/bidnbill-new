@@ -16,4 +16,8 @@ class BillPolicy < ApplicationPolicy
   def show?
     user == record.client
   end
+
+  def create?
+    user == record.client
+  end
 end

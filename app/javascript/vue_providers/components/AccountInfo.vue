@@ -28,9 +28,9 @@
           ><span class="info-content">{{ info.number_users_allowed }}</span>
         </div>
       </div>
-      <button color="primary" flat @click="dialog = true">
+      <v-btn color="primary" flat @click="dialog = true">
         Modifier <v-icon class="ml-2" color="primary">edit</v-icon>
-      </button>
+      </v-btn>
     </div>
     <!-- Dialog -->
     <v-dialog v-model="dialog" max-width="700px">

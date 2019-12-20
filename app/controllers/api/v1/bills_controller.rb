@@ -21,6 +21,7 @@ class Api::V1::BillsController < Api::V1::BaseController
 
   def create
     bill = Bill.new(bill_params)
+    authorize bill
     if bill.save
       render json: {success: true, bill: BillsSerializer.new(bill, {params: {show_details: true}})}
     else

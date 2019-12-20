@@ -12,6 +12,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def disable_user?
-    record.account == user.account && user.account_admin
+    record.account == user.account && user.account_admin && record != user
   end
 end
