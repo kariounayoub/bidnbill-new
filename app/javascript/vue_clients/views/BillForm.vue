@@ -17,7 +17,6 @@
               <BillFormStep1 ref="step1" />
               <v-btn
                 id="suivant1"
-                color="success"
                 class="right rounded"
                 :disabled="!valid"
                 @click="validate(1,2)"
@@ -29,15 +28,9 @@
           <v-stepper-content step="2">
             <v-form ref="form2" v-model="valid" lazy-validation>
               <BillFormStep2 ref="step2" />
-              <v-btn
-                color="success"
-                class="left rounded"
-                :disabled="!valid"
-                @click="back()"
-              >Précédent</v-btn>
+              <v-btn class="left rounded" :disabled="!valid" @click="back()">Précédent</v-btn>
               <v-btn
                 id="suivant2"
-                color="success"
                 class="right rounded"
                 :disabled="!valid"
                 @click="validate(2,2)"

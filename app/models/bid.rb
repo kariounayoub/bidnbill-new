@@ -1,5 +1,6 @@
 class Bid < ApplicationRecord
   STATUS = ["refusé", "en attente", "accépté"]
+  CLIENT_STATUS = ["Nouveau", "A Contacter", "Contact en cours", "Contact Refusé", "Contact Accépté"]
   belongs_to :bill
   belongs_to :user
 
@@ -9,6 +10,7 @@ class Bid < ApplicationRecord
   has_many :notifications,dependent: :destroy
 
   validates :status, inclusion: {in: STATUS}
+  validates :client_status, inclusion: {in: CLIENT_STATUS}, allow_blank: true
   validates :status, :price, presence: true
 
   before_validation(on: :create) do

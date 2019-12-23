@@ -1,0 +1,22 @@
+.image-input {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-img {
+    position: relative;
+    img {
+        min-height: 50px;
+        min-width: 50px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid var(--v-primary-base);
+    }
+    button {
+        position: absolute;
+        bottom: 0;
+        right: -15px;
+    }
+}

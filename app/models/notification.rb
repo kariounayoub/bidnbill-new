@@ -8,7 +8,7 @@ class Notification < ApplicationRecord
   after_create do |notification|
     ActionCable.server.broadcast(
       "notifications_#{notification.user.id}",
-      notification: notification
+      notification: NotificationsSerializer.new(notification)
     )
   end
 end

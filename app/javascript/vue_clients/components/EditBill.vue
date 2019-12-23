@@ -29,7 +29,11 @@
                   v-on:changeCity="changeCity"
                 />
 
-                <v-text-field v-model="price" label="Prix" :rules="[required, number]" />
+                <v-text-field
+                  v-model="price"
+                  label="Prix"
+                  :rules="[required, number]"
+                />
 
                 <v-text-field
                   v-model="consumption"
@@ -44,7 +48,11 @@
                   label="Connaissez vous votre numéro de PDL?"
                 ></v-switch>
 
-                <v-text-field v-model="pdl" label="Numéro de PDL" v-if="pdl_q" />
+                <v-text-field
+                  v-model="pdl"
+                  label="Numéro de PDL"
+                  v-if="pdl_q"
+                />
 
                 <v-switch
                   :label="booleanToString(energie_verte)"
@@ -58,32 +66,25 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary darken-1" flat @click="$emit('close')">Fermer</v-btn>
-          <v-btn color="primary darken-1" flat @click="dialog2 = true">Enregistrer</v-btn>
+          <v-btn color="primary" flat @click="$emit('close')"
+            >Fermer</v-btn
+          >
+          <v-btn color="primary" flat @click="dialog2 = true"
+            >Enregistrer</v-btn
+          >
         </v-card-actions>
       </v-form>
     </v-card>
 
     <!-- Second Dialog With Form -->
     <v-dialog v-model="dialog2" max-width="500px">
-      <v-card class="rounded padded-card">
-        <v-card-text class="text-center">
-          <i class="fa fa-exclamation-circle icon-danger"></i>
-          <br />
-          <br />
-          <h3
-            class="heading-danger"
-          >Si vous faites des modifications les offres en cours doivent être validé par les fournisseurs</h3>
-          <br />
-          <h4 class="heading-danger">Etes-vous sur de vouloir continuer?</h4>
-          <br />
-        </v-card-text>
-        <v-spacer></v-spacer>
-        <v-card-actions class="flex-center">
-          <v-btn class="rounded primary large" flat @click="dialog2 = false">Annuler</v-btn>
-          <v-btn class="rounded large" flat @click="editBill()">Valider</v-btn>
-        </v-card-actions>
-      </v-card>
+      <AlertDialog
+        v-on:validate="editBill"
+        v-on:close="dialog2 = false"
+        v-bind:text="
+          'Si vous faites des modifications les offres en cours doivent être validé par les fournisseurs'
+        "
+      />
     </v-dialog>
   </div>
 </template>
@@ -91,12 +92,14 @@
 <script>
 import { required, number } from "../../shared_components/validate";
 import providers from "../../shared_components/providers";
+import AlertDialog from "../../shared_components/AlertDialog";
 import AddressAutocomplete from "./AddressAutocomplete";
 
 export default {
   name: "EditBill",
   components: {
-    AddressAutocomplete
+    AddressAutocomplete,
+    AlertDialog
   },
   data: () => ({
     required: required,
@@ -165,7 +168,7 @@ export default {
 };
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .icon-danger {
   font-size: 70px;
   color: var(--v-error-base);

@@ -1,18 +1,25 @@
 <template>
   <v-app id="app">
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="true"
+    ></loading>
     <Navbar
       class="front"
       v-bind:withSidebar="true"
-      v-bind:isValid="isValid"
+      v-bind:isValid="provider.is_valid"
       v-bind:notifications="notifications"
       v-on:submitNotification="handleNotification"
+      v-bind:isAdmin="provider.account_admin"
+      v-bind:avatarImg="provider.picture"
     />
-    <Sidebar v-if="!isMobile && isValid" />
+    <Sidebar v-if="!isMobile" />
     <SidebarMobile v-if="isMobile" />
     <Flash />
     <router-view
       class="top-margin min-height-full"
-      v-bind:class="{ offset: !offset && isValid }"
+      v-bind:class="{ offset: !offset }"
       transition="slide-x-transition"
     ></router-view>
   </v-app>
@@ -23,6 +30,10 @@ import Navbar from "../shared_components/Navbar";
 import Flash from "../shared_components/Flash";
 import Sidebar from "./components/Sidebar";
 import SidebarMobile from "./components/SidebarMobile";
+// Import component
+import Loading from "vue-loading-overlay";
+// Import stylesheet
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   name: "App",
@@ -30,17 +41,21 @@ export default {
     Navbar,
     Flash,
     Sidebar,
-    SidebarMobile
+    SidebarMobile,
+    Loading
   },
   data: () => ({
     notifications: []
   }),
   computed: {
+    isLoading() {
+      return this.$store.getters.IsLoading;
+    },
     isMobile() {
       return screen.width <= 600 ? true : false;
     },
-    isValid() {
-      return this.$store.getters.Provider.attributes.is_valid;
+    provider() {
+      return this.$store.getters.Provider.attributes;
     },
     offset() {
       return this.$store.getters.Offset;
@@ -48,7 +63,7 @@ export default {
   },
   methods: {
     handleNotification(id) {
-      this.notifications = this.notifications.filter(n => n.id !== id);
+      this.notifications = this.notifications.filter(n => n.data.id !== id);
       this.$store.dispatch("SEEN_NOTIFICATIONS", id);
     }
   },

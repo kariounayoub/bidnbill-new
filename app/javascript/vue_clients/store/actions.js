@@ -20,12 +20,16 @@ export default {
         config
       )
       .then(res => {
+        commit("TOGGLE_IS_LOADING");
+
         if (res.data.success) {
           commit("UPDATE_CLIENT", res.data.user);
           commit("SET_FLASH", {
             message: "Compte modifié avec succès",
             variant: "primary"
           });
+          router.push("/client_dashboard");
+          window.location.reload();
         } else {
           commit("SET_FLASH", {
             message: "Erreur le compte n'a pas été modifié",
@@ -99,7 +103,7 @@ export default {
   },
   SELECT_BID: async ({ state, commit }, payload) => {
     await axios
-      .patch(`/api/v1/bids/${payload}/select`, config)
+      .patch(`/api/v1/bids/${payload.id}/select`, payload, config)
       .then(res => {
         if (res.data.success) {
           commit("UPDATE_BILL", res.data.bill.data);

@@ -1,10 +1,14 @@
 class BidPolicy < ApplicationPolicy
   def my_clients?
-    record.first == nil || user == record.first.user && user.is_valid
+    record.first == nil || user.account == record.first.user.account
+  end
+
+  def lost_bills?
+    my_clients?
   end
 
   def create?
-    record.user.account == user.account && user.is_valid
+    record.user.account == user.account
   end
 
   def update?
@@ -12,6 +16,6 @@ class BidPolicy < ApplicationPolicy
   end
 
   def select?
-    record.bill.client == user && user.is_valid
+    record.bill.client == user
   end
 end

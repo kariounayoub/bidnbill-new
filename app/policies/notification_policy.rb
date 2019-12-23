@@ -1,5 +1,5 @@
 class NotificationPolicy < ApplicationPolicy
   def seen?
-    record.user == user && user.is_valid
+    record.user == user
   end
 end

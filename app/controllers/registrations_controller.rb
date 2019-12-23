@@ -5,4 +5,5 @@ class RegistrationsController < Devise::RegistrationsController
     resource.save
     UserMailer.welcome(resource).deliver_later
   end
+
 end

@@ -12,9 +12,9 @@
       >
         <template v-slot:items="props">
           <td class="text-xs-left">{{ props.item.account.company }}</td>
-          <td class="text-xs-left">{{ props.item.bid.price }} €</td>
+          <td class="text-xs-left">{{ props.item.bid.price }} € / mois</td>
           <td class="text-xs-left">
-            {{ calculateDifference(props.item.bid.price) }} €
+            {{ calculateDifference(props.item.bid.price) }} € / mois
           </td>
           <td class="text-xs-center status-width">
             <span
@@ -45,7 +45,7 @@
     <v-dialog v-model="dialog" max-width="700px">
       <ActionsDialog
         v-on:close="dialog = false"
-        v-on:validate="selectBid(viewedBid.id)"
+        v-on:validate="selectBid"
         v-bind:price="viewedBid.price"
         v-bind:text="viewedBid.content"
       />
@@ -86,8 +86,14 @@ export default {
     calculateDifference(bidPrice) {
       return this.activeBill.attributes.standardized_price - bidPrice;
     },
-    selectBid(id) {
-      this.$store.dispatch("SELECT_BID", id);
+    selectBid(response) {
+      const formData = {
+        id: this.viewedBid.id,
+        bid: {
+          methode_contact: response
+        }
+      };
+      this.$store.dispatch("SELECT_BID", formData);
     },
     statusClass(status) {
       if (status === "refusé") return "error";

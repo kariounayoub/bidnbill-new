@@ -23,46 +23,58 @@
 
     <!-- Second Dialog for Validation -->
     <v-dialog v-model="dialog2" max-width="500px">
-      <v-card class="rounded padded-card">
-        <v-card-text class="text-center">
-          <i class="fa fa-exclamation-circle icon-danger"></i>
-          <h5 class="heading-danger">
-            Attention, vous êtes sur le point de valider cette offre, seul ce
-            fournisseur pourra désormais vous contacter pour envisager de
-            conclure un nouveau contrat
-          </h5>
-          <h6 class="heading-danger">Etes-vous sur de vouloir continuer?</h6>
-        </v-card-text>
-        <v-spacer></v-spacer>
-        <v-card-actions class="flex-center">
-          <v-btn color="primary" flat @click="dialog2 = false">Annuler</v-btn>
-          <v-btn class="rounded success large" flat @click="handleValidate"
-            >Accépter</v-btn
-          >
-        </v-card-actions>
-      </v-card>
+      <AlertDialog
+        v-on:validate="handleValidate"
+        v-on:close="dialog2 = false"
+        v-bind:text="
+          'Attention, vous êtes sur le point de valider cette offre, seul ce fournisseur pourra désormais vous contacter pour envisager de conclure un nouveau contrat'
+        "
+      >
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-select
+            class="m-5"
+            v-model="contact"
+            :items="contactList"
+            :rules="[required]"
+            label="Comment souhaitez vous être contacté"
+          ></v-select>
+        </v-form>
+      </AlertDialog>
     </v-dialog>
   </div>
 </template>
 
 <script>
+import AlertDialog from "../../shared_components/AlertDialog";
+import { required } from "../../shared_components/validate";
+
 export default {
   name: "ActionsDialog",
+  components: {
+    AlertDialog
+  },
   props: {
     price: Number,
     text: String
   },
   data: () => ({
+    required: required,
     dialog: false,
-    dialog2: false
+    dialog2: false,
+    contact: "email",
+    contactList: ["téléphone", "email"],
+    valid: false
   }),
   methods: {
     handleValidate() {
       console.log("validate");
-      this.$emit("validate");
-      this.dialog = false;
-      this.dialog2 = false;
-      this.$emit("close");
+      console.log(this.contact);
+      if (this.$refs.form.validate()) {
+        this.$emit("validate", this.contact);
+        this.dialog = false;
+        this.dialog2 = false;
+        this.$emit("close");
+      }
     }
   }
 };

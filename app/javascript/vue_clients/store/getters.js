@@ -1,21 +1,23 @@
 export default {
   Flash: state => {
-      return state.flash
-    },
+    return state.flash;
+  },
   Client: state => {
-      return state.client.data
-    },
+    return state.client.data;
+  },
   Categories: state => {
-      return state.categories
-    },
+    return state.categories;
+  },
   Bills: state => {
-      return state.bills.data.data
-    },
+    return state.bills.data.data;
+  },
   ActiveBill: state => {
-      return state.activeBill
-    },
+    return state.activeBill;
+  },
   MapKey: state => {
-    return state.mapKey
+    return state.mapKey;
+  },
+  IsLoading: state => {
+    return state.isLoading;
   }
-
-}
+};

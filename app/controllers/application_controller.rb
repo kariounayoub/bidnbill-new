@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_up_path_for(resource)
     return users_edit_client_path if resource.user_type == 'client'
-    return users_edit_provider_path if resource.user_type == 'provider'
+    return provider_dashboard_path if resource.user_type == 'provider'
     root_path
   end
 end

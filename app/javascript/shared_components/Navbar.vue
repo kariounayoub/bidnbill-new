@@ -4,6 +4,7 @@
       <v-toolbar-side-icon
         class="navbar__icon"
         @click.stop="toggleSidebar()"
+        v-if="withSidebar"
       ></v-toolbar-side-icon>
       <v-toolbar-title
         class="pointer navbar__header"
@@ -13,13 +14,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <router-link :to="{ name: 'dashboard' }" v-if="isValid">
+        <router-link :to="{ name: 'dashboard' }" v-if="isValid || !client">
           <p class="pointer navbar__link">Dashboard</p>
         </router-link>
         <router-link :to="{ name: 'edit_client' }" v-if="client && !isValid">
-          <p class="pointer navbar__link">Valider mon compte</p>
-        </router-link>
-        <router-link :to="{ name: 'edit_provider' }" v-if="!client && !isValid">
           <p class="pointer navbar__link">Valider mon compte</p>
         </router-link>
       </v-toolbar-items>
@@ -30,10 +28,8 @@
         v-if="notifications && notifications.length > 0"
       >
         <div class="notifications" slot="activator">
-          <v-icon class="notification-icon">notifications </v-icon>
-          <div class="notifications-count">
-            {{ notifications.length }}
-          </div>
+          <v-icon class="notification-icon">notifications</v-icon>
+          <div class="notifications-count">{{ notifications.length }}</div>
         </div>
 
         <v-list>
@@ -41,15 +37,26 @@
             class="notification-content"
             v-for="notification in notifications"
           >
-            <span class="notification-content__content">
-              {{ notification.content }}
-            </span>
+            <router-link
+              :to="
+                notification.data.attributes.category === 'new bid'
+                  ? '/bills/' + notification.data.attributes.bill
+                  : '/provider_clients'
+              "
+            >
+              <span
+                class="notification-content__content"
+                v-on:click="$emit('submitNotification', notification.data.id)"
+                >{{ notification.data.attributes.content }}</span
+              >
+            </router-link>
 
             <span
               class="notification-content__icon"
-              v-on:click="$emit('submitNotification', notification.id)"
-              ><v-icon>check</v-icon></span
+              v-on:click="$emit('submitNotification', notification.data.id)"
             >
+              <v-icon>check</v-icon>
+            </span>
           </div>
         </v-list>
       </v-menu>
@@ -60,7 +67,10 @@
           class="pointer"
           slot="activator"
         >
-          <img src="../../assets/images/avatar.jpg" alt="alt" />
+          <img
+            :src="avatarImg ? avatarImg : '../../assets/images/avatar.jpg'"
+            alt="alt"
+          />
         </v-avatar>
         <v-list>
           <router-link :to="{ name: 'edit_client' }" v-if="client">
@@ -68,6 +78,9 @@
           </router-link>
           <router-link :to="{ name: 'edit_provider' }" v-if="!client">
             <p class="pointer navbar__menu-item">Modifier mon compte</p>
+          </router-link>
+          <router-link :to="{ name: 'edit_account' }" v-if="!client && isAdmin">
+            <p class="pointer navbar__menu-item">Gérer mon compte entreprise</p>
           </router-link>
           <p class="pointer navbar__menu-item" @click="signOut()">
             Déconnexion
@@ -100,7 +113,9 @@ export default {
     withSidebar: Boolean,
     client: Boolean,
     isValid: Boolean,
-    notifications: Array
+    notifications: Array,
+    isAdmin: Boolean,
+    avatarImg: String
   },
   data: () => ({
     image: image

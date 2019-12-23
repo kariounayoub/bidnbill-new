@@ -9,32 +9,44 @@
       <v-card-text class="card-info">
         <div>
           <div class="info-title inline-div">Type de Contrat</div>
-          <div class="content inline-div">{{viewedBill.category.name}}</div>
+          <div class="content inline-div">{{ viewedBill.category.name }}</div>
         </div>
         <div>
           <div class="info-title inline-div">Fournisseur Actuel</div>
-          <div class="content inline-div">{{viewedBill.current_provider}}</div>
+          <div class="content inline-div">
+            {{ viewedBill.current_provider }}
+          </div>
         </div>
         <div>
           <div class="info-title inline-div">Prix</div>
-          <div class="content inline-div">{{viewedBill.standardized_price}} €/ mois</div>
+          <div class="content inline-div">
+            {{ viewedBill.standardized_price }} €/ mois
+          </div>
         </div>
         <div>
           <div class="info-title inline-div">
             Consommation
             <span v-if="viewedBill.calculated_consumption">(estimée)</span>
           </div>
-          <div class="content inline-div">{{viewedBill.consumption}} kWh</div>
+          <div class="content inline-div">{{ viewedBill.consumption }} kWh</div>
         </div>
         <div>
           <div class="info-title inline-div">Ville</div>
-          <div class="content inline-div">{{viewedBill.city}}</div>
+          <div class="content inline-div">{{ viewedBill.city }}</div>
         </div>
-        <!--           <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Type Logement</div><div class="content inline-div">{{viewedBill.type_home}}</div></div>
-          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Nombre d'habitants</div><div class="content inline-div">{{viewedBill.nb_people}} personnes</div></div>
-          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Surface</div><div class="content inline-div">{{viewedBill.surface}} m2</div></div>
-          <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Chauffage</div><div class="content inline-div">{{viewedBill.heating}}</div></div>
-        <div v-if='viewedBill.calculated_consumption'><div class="info-title inline-div">Eau chaude</div><div class="content inline-div">{{viewedBill.hot_water}}</div></div>-->
+        <div>
+          <div
+            class="info-title inline-div green-text"
+            v-if="viewedBill.energie_verte"
+          >
+            Energie verte seulement
+          </div>
+          <div class="content inline-div">
+            <v-btn color="primary" @click="dialog3 = true">
+              Informations Supplémentaires
+            </v-btn>
+          </div>
+        </div>
         <v-spacer></v-spacer>
         <v-divider></v-divider>
         <h5 class="text-center bold">Enchères en cours</h5>
@@ -42,7 +54,7 @@
           :headers="bidHeaders"
           :items="viewedBill.bids"
           item-key="title"
-          :rows-per-page-items="[5,10]"
+          :rows-per-page-items="[5, 10]"
           rows-per-page-text="Résultats par page"
           no-data-text="Données indisponibles"
         >
@@ -54,7 +66,8 @@
                 <span
                   class="status-tag"
                   v-bind:class="statusClass(props.item.bid.status)"
-                >{{ props.item.bid.status }}</span>
+                  >{{ props.item.bid.status }}</span
+                >
               </td>
             </tr>
           </template>
@@ -63,79 +76,67 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat @click="$emit('close')">Fermer</v-btn>
-        <v-btn color="primary darken-1" flat @click="dialog2 = true" v-if="canBid">Enchérir</v-btn>
+        <v-btn color="primary" flat @click="$emit('close')"
+          >Fermer</v-btn
+        >
         <v-btn
-          color="primary darken-1"
+          color="primary"
+          flat
+          @click="dialog2 = true"
+          v-if="canBid"
+          >Enchérir</v-btn
+        >
+        <v-btn
+          color="primary"
           flat
           @click="dialog2 = true"
           v-if="myBidNeedsEditing()"
-        >Modifier</v-btn>
+          >Modifier</v-btn
+        >
       </v-card-actions>
     </v-card>
 
     <!-- Second Dialog With Form -->
-    <v-dialog v-model="dialog2" max-width="500px" v-if="canBid || myBidNeedsEditing()">
-      <v-card class="rounded">
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-card-title class="headline">
-            <span>Enchérir</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12>
-                  <v-text-field
-                    label="Prix (mensuelle)"
-                    v-model="price"
-                    :rules="[required, number]"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs12>
-                  <v-textarea label="Présentation de l'offre" v-model="content"></v-textarea>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary darken-1" flat @click="dialog2 = false">Fermer</v-btn>
-            <v-btn
-              color="primary darken-1"
-              flat
-              v-if="canBid"
-              @click="saveBid('create')"
-            >Enregistrer</v-btn>
-            <v-btn
-              color="primary darken-1"
-              flat
-              v-if="myBidNeedsEditing()"
-              @click="saveBid('edit')"
-            >Enregistrer</v-btn>
-          </v-card-actions>
-        </v-form>
-      </v-card>
+    <v-dialog
+      v-model="dialog2"
+      max-width="600px"
+      v-if="canBid || myBidNeedsEditing()"
+    >
+      <BiddingForm
+        v-bind:canBid="canBid"
+        v-bind:myBidNeedsEditing="myBidNeedsEditing"
+        v-bind:myBid="myBid"
+        v-bind:viewedBill="viewedBill"
+        v-on:close="handleClose()"
+        v-on:closeAll="$emit('close')"
+      />
+    </v-dialog>
+
+    <!-- Third Dialog With Bill Info -->
+    <v-dialog v-model="dialog3" max-width="600px">
+      <BillInfo v-bind:viewedBill="viewedBill" v-on:close="handleClose()" />
     </v-dialog>
   </div>
 </template>
 
 <script>
-import { required, number } from "../../shared_components/validate";
+import BiddingForm from "./BiddingForm";
+import BillInfo from "./BillInfo";
 export default {
   name: "BidDialog",
   props: ["viewedBill", "canBid"],
+  components: {
+    BiddingForm,
+    BillInfo
+  },
   data: () => ({
-    required: required,
-    number: number,
-    valid: false,
-    price: null,
-    content: null,
     bidHeaders: [
       { text: "Fournisseur", align: "left", value: "account.company" },
       { text: "Prix", value: "bid.price", align: "right" },
       { text: "Statut", value: "status", align: "center" }
     ],
-    dialog2: false
+    dialog2: false,
+    dialog3: false
   }),
   computed: {
     provider() {
@@ -162,34 +163,10 @@ export default {
       if (status === "en attente") return "warning";
       if (status === "accépté") return "primary";
     },
-    saveBid(type) {
-      if (this.$refs.form.validate()) {
-        const formData = {
-          bid: {
-            bill_id: this.viewedBill.id,
-            price: this.price,
-            content: this.content,
-            user_id: this.$store.getters.Provider.attributes.id
-          }
-        };
-        this.dialog2 = false;
-        this.$emit("close");
-        if (type === "create") {
-          this.$store.dispatch("CREATE_BID", formData);
-        }
-        if (type === "edit") {
-          formData.bid_id = this.myBid.bid.id;
-          this.$store.dispatch("UPDATE_BID", formData);
-        }
-      }
-    }
-  },
-  mounted() {
-    if (!this.canBid) {
-      this.price = this.myBid.bid.price;
-      this.content = this.myBid.bid.content;
+    handleClose() {
+      this.dialog2 = false;
+      this.dialog3 = false;
     }
   }
 };
 </script>
-
