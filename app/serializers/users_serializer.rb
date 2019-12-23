@@ -11,7 +11,7 @@ class UsersSerializer
     {company: object.account.company, id: object.account.id} unless object.account.nil?
   end
   attribute :notifications do |object|
-    object.notifications.where(seen: false)
+    object.notifications.where(seen: false).map{|n| NotificationsSerializer.new(n)}
   end
 
 end

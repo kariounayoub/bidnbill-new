@@ -22,7 +22,7 @@ export default {
       {
         bill: { data: { id: null, attributes: { category: "" } } },
         client: { data: { attributes: "" } },
-        info: ""
+        bid: { data: { id: null, attributes: {} } }
       }
     ]
   },

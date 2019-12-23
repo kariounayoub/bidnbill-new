@@ -13,34 +13,66 @@
                 <div>
                   <div class="form-subtitle inline-div">Votre bien est ?</div>
                   <div class="form-content inline-div">
-                    <v-select v-model="type_home" :items="listHome" outline :rules="[required]"></v-select>
+                    <v-select
+                      v-model="type_home"
+                      :items="listHome"
+                      outline
+                      :rules="[required]"
+                    ></v-select>
                   </div>
                 </div>
                 <div>
-                  <div class="form-subtitle inline-div">Quelle est la surface (en m2) ?</div>
+                  <div class="form-subtitle inline-div">
+                    Quelle est la surface (en m2) ?
+                  </div>
                   <div class="form-content inline-div">
-                    <v-text-field v-model="surface" outline :rules="[required, number]" />
+                    <v-text-field
+                      v-model="surface"
+                      outline
+                      :rules="[required, number]"
+                    />
                   </div>
                 </div>
                 <div>
-                  <div class="form-subtitle inline-div">Combien de personnes l'occupent ?</div>
+                  <div class="form-subtitle inline-div">
+                    Combien de personnes l'occupent ?
+                  </div>
                   <div class="form-content inline-div">
-                    <v-select v-model="nb_people" :items="listPeople" outline :rules="[required]"></v-select>
+                    <v-select
+                      v-model="nb_people"
+                      :items="listPeople"
+                      outline
+                      :rules="[required]"
+                    ></v-select>
                   </div>
                 </div>
               </div>
               <div class="form-section">
                 <h3 class="form-header">Chauffage</h3>
                 <div>
-                  <div class="form-subtitle inline-div">Comment est chauffé votre eau ?</div>
+                  <div class="form-subtitle inline-div">
+                    Comment est chauffé votre eau ?
+                  </div>
                   <div class="form-content inline-div">
-                    <v-select v-model="hot_water" :items="listHotWater" outline :rules="[required]"></v-select>
+                    <v-select
+                      v-model="hot_water"
+                      :items="listHotWater"
+                      outline
+                      :rules="[required]"
+                    ></v-select>
                   </div>
                 </div>
                 <div>
-                  <div class="form-subtitle inline-div">Comment est chauffé votre logement ?</div>
+                  <div class="form-subtitle inline-div">
+                    Comment est chauffé votre logement ?
+                  </div>
                   <div class="form-content inline-div">
-                    <v-select v-model="heating" :items="listChauffage" outline :rules="[required]"></v-select>
+                    <v-select
+                      v-model="heating"
+                      :items="listChauffage"
+                      outline
+                      :rules="[required]"
+                    ></v-select>
                   </div>
                 </div>
               </div>
@@ -48,7 +80,12 @@
                 <h3 class="form-header">Appareils Electroménager</h3>
                 <div class="flex-center">
                   <div class="form-content inline-div padded-left">
-                    <v-switch color="primary" v-model="fridge" label="Réfrigirateur" outline></v-switch>
+                    <v-switch
+                      color="primary"
+                      v-model="fridge"
+                      label="Réfrigirateur"
+                      outline
+                    ></v-switch>
                   </div>
                   <div class="form-content inline-div">
                     <v-switch
@@ -62,19 +99,39 @@
 
                 <div class="flex-center">
                   <div class="form-content inline-div padded-left">
-                    <v-switch color="primary" v-model="oven" label="Four" outline></v-switch>
+                    <v-switch
+                      color="primary"
+                      v-model="oven"
+                      label="Four"
+                      outline
+                    ></v-switch>
                   </div>
                   <div class="form-content inline-div">
-                    <v-switch color="primary" v-model="dishwasher" label="Lave-vaisselle" outline></v-switch>
+                    <v-switch
+                      color="primary"
+                      v-model="dishwasher"
+                      label="Lave-vaisselle"
+                      outline
+                    ></v-switch>
                   </div>
                 </div>
 
                 <div class="flex-center">
                   <div class="form-content inline-div padded-left">
-                    <v-switch color="primary" v-model="washer" label="Lave-linge" outline></v-switch>
+                    <v-switch
+                      color="primary"
+                      v-model="washer"
+                      label="Lave-linge"
+                      outline
+                    ></v-switch>
                   </div>
                   <div class="form-content inline-div">
-                    <v-switch color="primary" v-model="dryer" label="Seche-linge" outline></v-switch>
+                    <v-switch
+                      color="primary"
+                      v-model="dryer"
+                      label="Seche-linge"
+                      outline
+                    ></v-switch>
                   </div>
                 </div>
               </div>
@@ -84,8 +141,12 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat @click="$emit('close')">Fermer</v-btn>
-        <v-btn color="primary darken-1" flat @click="calculateConsumption()">Valider</v-btn>
+        <v-btn color="primary" flat @click="$emit('close')"
+          >Fermer</v-btn
+        >
+        <v-btn color="primary" flat @click="calculateConsumption()"
+          >Valider</v-btn
+        >
       </v-card-actions>
     </v-card>
   </div>
@@ -99,7 +160,7 @@ export default {
   data: () => ({
     required: required,
     number: number,
-    type_home: "Maison",
+    type_home: "à usage d'habitation",
     nb_people: 2,
     surface: 100,
     hot_water: "Ballon d'eau chaude",

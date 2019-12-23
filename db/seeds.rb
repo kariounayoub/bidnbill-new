@@ -55,6 +55,7 @@ bid5 = Bid.create!(bill: bill3, user_id: provider2.id, content: 'some descriptiv
 bid6 = Bid.create!(bill: bill4, user_id: provider3.id, content: 'some descriptive text5', price: 49)
 
 bid3.status = 'accépté'
+bid3.client_status = 'Nouveau'
 bid3.save
 
 bid4.status = 'refusé'

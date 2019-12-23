@@ -7,6 +7,7 @@
           {{ text }}
         </h5>
         <h6 class="heading-danger">Etes-vous sur de vouloir continuer?</h6>
+        <slot></slot>
       </v-card-text>
       <v-spacer></v-spacer>
       <v-card-actions class="flex-center">

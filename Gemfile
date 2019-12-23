@@ -21,7 +21,7 @@ gem 'geocoder'
 
 gem 'rails_admin', '~> 1.3'
 
-gem 'sidekiq'
+gem 'sidekiq', '5.2.7'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'sidekiq-scheduler'
 

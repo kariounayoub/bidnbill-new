@@ -1,10 +1,11 @@
 class BillsSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :current_provider, :photo, :category,  :city, :consumption, :is_open, :price, :payment_frequency, :calculated_consumption, :energie_verte, :pdl, :type_home, :surface, :nb_people, :hot_water, :heating, :fridge, :freezer, :oven, :dishwasher, :washer, :dryer
+  attributes :id, :current_provider, :photo, :category,  :city, :consumption, :is_open, :price, :payment_frequency, :calculated_consumption, :energie_verte, :type_home, :surface, :nb_people, :hot_water, :heating, :fridge, :freezer, :oven, :dishwasher, :washer, :dryer
   attribute :address, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :latitude, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :longitude, if: Proc.new {|record, params| params && params[:show_details] == true}
   attribute :zip_code, if: Proc.new {|record, params| params && params[:show_details] == true}
+  attribute :pdl, if: Proc.new {|record, params| params && params[:show_details] == true}
 
   attribute :standardized_price do |object|
     case object.payment_frequency

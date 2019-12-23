@@ -66,10 +66,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary darken-1" flat @click="$emit('close')"
+          <v-btn color="primary" flat @click="$emit('close')"
             >Fermer</v-btn
           >
-          <v-btn color="primary darken-1" flat @click="dialog2 = true"
+          <v-btn color="primary" flat @click="dialog2 = true"
             >Enregistrer</v-btn
           >
         </v-card-actions>

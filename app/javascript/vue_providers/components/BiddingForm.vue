@@ -25,18 +25,18 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat @click="$emit('close')"
+        <v-btn color="primary" flat @click="$emit('close')"
           >Fermer</v-btn
         >
         <v-btn
-          color="primary darken-1"
+          color="primary"
           flat
           v-if="canBid"
           @click="saveBid('create')"
           >Enregistrer</v-btn
         >
         <v-btn
-          color="primary darken-1"
+          color="primary"
           flat
           v-if="myBidNeedsEditing()"
           @click="saveBid('edit')"

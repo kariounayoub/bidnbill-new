@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     handleNotification(id) {
-      this.notifications = this.notifications.filter(n => n.id !== id);
+      this.notifications = this.notifications.filter(n => n.data.id !== id);
       this.$store.dispatch("SEEN_NOTIFICATIONS", id);
     }
   },

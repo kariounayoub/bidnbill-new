@@ -103,7 +103,7 @@ export default {
   },
   SELECT_BID: async ({ state, commit }, payload) => {
     await axios
-      .patch(`/api/v1/bids/${payload}/select`, config)
+      .patch(`/api/v1/bids/${payload.id}/select`, payload, config)
       .then(res => {
         if (res.data.success) {
           commit("UPDATE_BILL", res.data.bill.data);

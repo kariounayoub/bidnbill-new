@@ -29,13 +29,25 @@
         v-bind:text="
           'Attention, vous êtes sur le point de valider cette offre, seul ce fournisseur pourra désormais vous contacter pour envisager de conclure un nouveau contrat'
         "
-      />
+      >
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-select
+            class="m-5"
+            v-model="contact"
+            :items="contactList"
+            :rules="[required]"
+            label="Comment souhaitez vous être contacté"
+          ></v-select>
+        </v-form>
+      </AlertDialog>
     </v-dialog>
   </div>
 </template>
 
 <script>
 import AlertDialog from "../../shared_components/AlertDialog";
+import { required } from "../../shared_components/validate";
+
 export default {
   name: "ActionsDialog",
   components: {
@@ -46,16 +58,23 @@ export default {
     text: String
   },
   data: () => ({
+    required: required,
     dialog: false,
-    dialog2: false
+    dialog2: false,
+    contact: "email",
+    contactList: ["téléphone", "email"],
+    valid: false
   }),
   methods: {
     handleValidate() {
       console.log("validate");
-      this.$emit("validate");
-      this.dialog = false;
-      this.dialog2 = false;
-      this.$emit("close");
+      console.log(this.contact);
+      if (this.$refs.form.validate()) {
+        this.$emit("validate", this.contact);
+        this.dialog = false;
+        this.dialog2 = false;
+        this.$emit("close");
+      }
     }
   }
 };

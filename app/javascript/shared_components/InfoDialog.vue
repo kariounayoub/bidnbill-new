@@ -7,7 +7,7 @@
       <v-card-text>{{ text }}</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat @click="$emit('close')">Ok</v-btn>
+        <v-btn color="primary" flat @click="$emit('close')">Ok</v-btn>
       </v-card-actions>
     </v-card>
   </div>

@@ -13,14 +13,19 @@
           ></v-text-field>
         </v-flex>
         <v-flex xs12 sm6>
-          <v-select class="with-margin" :items="statuses" label="Status" @change="filterStatus"></v-select>
+          <v-select
+            class="with-margin"
+            :items="statuses"
+            label="Status"
+            @change="filterStatus"
+          ></v-select>
         </v-flex>
         <v-flex xs12>
           <v-data-table
             :headers="headers"
             :items="clients"
             item-key="title"
-            :rows-per-page-items="[10,25,50,100]"
+            :rows-per-page-items="[10, 25, 50, 100]"
             rows-per-page-text="Résultats par page"
             must-sort
             :search="filters"
@@ -32,11 +37,25 @@
                 @click="setActiveClient(props.item.bill.data.id)"
                 :class="isActive(props.item.bill.data.id) ? 'selected' : ''"
               >
-                <td class="text-xs-left">{{props.item.bill.data.attributes.category.name}}</td>
-                <td class="text-xs-right">{{props.item.client.data.attributes.full_name}}</td>
-                <td class="text-xs-right">{{props.item.bill.data.attributes.city}}</td>
-                <td class="text-xs-right">test</td>
-                <td class="text-xs-right pointer">
+                <td class="text-xs-left">
+                  {{ props.item.bill.data.attributes.category.name }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.client.data.attributes.full_name }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.bill.data.attributes.city }}
+                </td>
+                <td class="text-xs-center">
+                  <span
+                    class="status-tag"
+                    v-bind:class="
+                      statusClass(props.item.bid.data.attributes.client_status)
+                    "
+                    >{{ props.item.bid.data.attributes.client_status }}</span
+                  >
+                </td>
+                <td class="text-xs-right pointer" @click="dialog = true">
                   <v-icon>visibility</v-icon>
                 </td>
               </tr>
@@ -45,21 +64,39 @@
         </v-flex>
       </v-layout>
     </v-card>
+    <!-- Dialog -->
+    <v-dialog v-model="dialog" max-width="700px" v-if="activeClient !== null">
+      <EditClientStatusDialog
+        v-bind:client="activeClient"
+        v-on:close="dialog = false"
+      />
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import providers from "../../shared_components/providers";
-
+import EditClientStatusDialog from "./EditClientStatusDialog";
 export default {
-  name: "BidTable",
+  name: "ClientTable",
   props: ["clients"],
+  components: {
+    EditClientStatusDialog
+  },
   data: () => ({
+    dialog: false,
     filters: {
       ville: "",
       status: ""
     },
-    statuses: ["Tout", "Terminé", "En cours", "Refusé"],
+    statuses: [
+      "Tout",
+      "Nouveau",
+      "A Contacter",
+      "Contact en cours",
+      "Contact Refusé",
+      "Contact Accépté"
+    ],
     headers: [
       {
         text: "Demande",
@@ -72,7 +109,11 @@ export default {
         align: "right"
       },
       { text: "Ville", value: "bill.data.attributes.city", align: "right" },
-      { text: "Statut", value: "status", align: "right" },
+      {
+        text: "Statut",
+        value: "bid.data.attributes.client_status",
+        align: "center"
+      },
       { text: "Actions", value: "actions", align: "right" }
     ]
   }),
@@ -82,6 +123,15 @@ export default {
     }
   },
   methods: {
+    statusClass(status) {
+      if (status === "Nouveau") return "success";
+      if (status === "A Contacter") return "warning";
+      if (status === "Contact en cours") return "warning";
+      if (status === "Contact Refusé") return "error";
+      if (status === "Contact Accépté") return "success";
+      return "";
+    },
+
     customFilter(items, filters, filter, headers) {
       const cf = new this.$MultiFilters(items, filters, filter, headers);
 
@@ -102,7 +152,7 @@ export default {
 
         return items.filter(item => {
           return (
-            item.bid.data.attributes.status.toLowerCase() ===
+            item.bid.data.attributes.client_status.toLowerCase() ===
             status.toLowerCase()
           );
         }, status);

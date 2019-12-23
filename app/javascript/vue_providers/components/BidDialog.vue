@@ -76,18 +76,18 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat @click="$emit('close')"
+        <v-btn color="primary" flat @click="$emit('close')"
           >Fermer</v-btn
         >
         <v-btn
-          color="primary darken-1"
+          color="primary"
           flat
           @click="dialog2 = true"
           v-if="canBid"
           >Enchérir</v-btn
         >
         <v-btn
-          color="primary darken-1"
+          color="primary"
           flat
           @click="dialog2 = true"
           v-if="myBidNeedsEditing()"

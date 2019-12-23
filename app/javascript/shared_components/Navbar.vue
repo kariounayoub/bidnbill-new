@@ -37,13 +37,23 @@
             class="notification-content"
             v-for="notification in notifications"
           >
-            <span class="notification-content__content">{{
-              notification.content
-            }}</span>
+            <router-link
+              :to="
+                notification.data.attributes.category === 'new bid'
+                  ? '/bills/' + notification.data.attributes.bill
+                  : '/provider_clients'
+              "
+            >
+              <span
+                class="notification-content__content"
+                v-on:click="$emit('submitNotification', notification.data.id)"
+                >{{ notification.data.attributes.content }}</span
+              >
+            </router-link>
 
             <span
               class="notification-content__icon"
-              v-on:click="$emit('submitNotification', notification.id)"
+              v-on:click="$emit('submitNotification', notification.data.id)"
             >
               <v-icon>check</v-icon>
             </span>
