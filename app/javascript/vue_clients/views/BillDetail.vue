@@ -38,15 +38,22 @@ export default {
       return this.$store.getters.ActiveBill;
     }
   },
-
+  channels: {
+    update_bill_channel: {
+      received() {
+        this.$store.dispatch("GET_BILL", this.id);
+      }
+    }
+  },
   mounted() {
     this.$store.dispatch("GET_BILL", this.id);
-    this.interval = setInterval(() => {
-      this.$store.dispatch("GET_BILL", this.id);
-    }, 10000);
-  },
-  beforeDestroy() {
-    clearInterval(this.interval);
+    this.$cable.subscribe(
+      {
+        channel: "UpdateBillChannel",
+        account_id: this.$store.getters.Client.attributes.id
+      },
+      "update_bill_channel"
+    );
   }
 };
 </script>

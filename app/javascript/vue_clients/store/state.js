@@ -1,4 +1,5 @@
 const root = document.getElementById("app");
+import sharedState from "../../shared_store/state";
 
 export default {
   client: JSON.parse(root.dataset.client),
@@ -13,7 +14,5 @@ export default {
   activeBill: {
     attributes: { id: null, category: " ", current_provider: " " }
   }, // This is formatted in a similar way to how it comes in from the api
-  flash: null,
-  mapKey: root.dataset.map,
-  isLoading: false
+  ...sharedState
 };

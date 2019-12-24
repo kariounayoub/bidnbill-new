@@ -1,6 +1,7 @@
 class Api::V1::BillsController < Api::V1::BaseController
   before_action :find_user, only: [:my_bills, :create, :my_clients]
   before_action :find_bill, only: [:update]
+  after_action :send_update_message, only: [:create, :update]
 
   def my_bills
     bills = Bill.where(client: @user).includes(:bids)
@@ -67,5 +68,9 @@ class Api::V1::BillsController < Api::V1::BaseController
   def find_bill
     @bill = Bill.find_by_id(params[:id])
     authorize @bill
+  end
+
+  def send_update_message
+    ActionCable.server.broadcast("update_bills", {})
   end
 end

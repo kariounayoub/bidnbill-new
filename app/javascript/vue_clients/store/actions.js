@@ -1,5 +1,6 @@
 import axios from "axios"; // axios is an http library to make http requrests (can use default fetch api instead)
 import router from "../router";
+import sharedActions from "../../shared_store/actions";
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes
   .content.value;
 const config = {
@@ -120,7 +121,5 @@ export default {
       })
       .catch(err => commit("SET_FLASH", { message: err, variant: "error" }));
   },
-  SEEN_NOTIFICATIONS: async ({}, payload) => {
-    await axios.patch(`/api/v1/notifications/${payload}/seen`, config);
-  }
+  ...sharedActions
 };

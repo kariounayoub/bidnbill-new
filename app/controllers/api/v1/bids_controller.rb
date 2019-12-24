@@ -7,6 +7,7 @@ class Api::V1::BidsController < Api::V1::BaseController
     if bid.save
       notification = Notification.create(bid: bid, user: bid.bill.client, category: 'new bid', seen: false, content: "#{bid.user.account.company} vous a fait une offre")
       render json: {success: true}
+      ActionCable.server.broadcast("update_bill_#{bid.bill.client.id}", {})
     else
       render json: {success: false}
     end
@@ -16,6 +17,8 @@ class Api::V1::BidsController < Api::V1::BaseController
     if @bid.update(bid_params)
       @bid.update(needs_editing: false)
       render json: {success: true}
+      ActionCable.server.broadcast("update_bill_#{@bid.user.account.id}", {}) unless bid_params[:client_status].nil?
+      ActionCable.server.broadcast("update_bill_#{@bid.bill.client.id}", {})  if bid_params[:client_status].nil?
     else
       render json: {success: false}
     end
@@ -31,10 +34,15 @@ class Api::V1::BidsController < Api::V1::BaseController
       notification = Notification.create(bid: @bid, user: @bid.user, category: 'accepted bid', seen: false, content: "#{@bid.bill.client.full_name} a accépté votre offre")
       # UserMailer.selectedBids(@bid.user, @bid.bill.client).deliver_later
       otherBids = bill.bids.reject {|b| b == @bid}
-      otherBids.each { |b| b.update(status: 'refusé')}
+      otherBids.each do |b|
+         b.update(status: 'refusé')
+         ActionCable.server.broadcast("update_bill_#{b.user.account.id}", {})
+      end
       bill.is_open = false
       bill.save
       render json: {success: true, bill: BillsSerializer.new(bill)}
+      ActionCable.server.broadcast("update_bill_#{@bid.user.account.id}", {})
+      ActionCable.server.broadcast("update_bill_#{bill.client.id}", {})
     else
       render json: {success: false}
     end

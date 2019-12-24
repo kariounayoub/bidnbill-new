@@ -1,12 +1,11 @@
+import sharedMutations from "../../shared_store/mutations";
+
 export default {
   TOOGLE_SIDEBAR_STATE: (state, payload) => {
     state.offset = !state.offset;
   },
   HIDE_SIDEBAR: state => {
     state.offset = true;
-  },
-  SET_FLASH: (state, payload) => {
-    state.flash = payload;
   },
   SET_BILLS: (state, payload) => {
     state.bills = payload;
@@ -46,9 +45,7 @@ export default {
   UPDATE_ACCOUNT: (state, payload) => {
     state.account = payload;
   },
-  TOGGLE_IS_LOADING: state => {
-    state.isLoading = !state.isLoading;
-  }
+  ...sharedMutations
 };
 
 function checkBidAccount(bill, account) {

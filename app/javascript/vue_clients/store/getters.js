@@ -1,7 +1,6 @@
+import sharedGetters from "../../shared_store/getters";
+
 export default {
-  Flash: state => {
-    return state.flash;
-  },
   Client: state => {
     return state.client.data;
   },
@@ -14,10 +13,5 @@ export default {
   ActiveBill: state => {
     return state.activeBill;
   },
-  MapKey: state => {
-    return state.mapKey;
-  },
-  IsLoading: state => {
-    return state.isLoading;
-  }
+  ...sharedGetters
 };
