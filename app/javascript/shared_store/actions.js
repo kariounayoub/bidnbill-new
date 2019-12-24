@@ -13,5 +13,10 @@ const config = {
 export default {
   SEEN_NOTIFICATIONS: async ({}, payload) => {
     await axios.patch(`/api/v1/notifications/${payload}/seen`, config);
+  },
+  SIGN_OUT: async ({}, payload) => {
+    axios
+      .delete(`${window.location.origin}/users/sign_out`, config)
+      .then(res => window.location.assign(window.location.origin));
   }
 };

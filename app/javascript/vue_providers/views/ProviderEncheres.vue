@@ -11,7 +11,7 @@
 import BidTable from "../components/BidTable";
 
 export default {
-  name: "DashboardInitial",
+  name: "ProviderEncheres",
   components: {
     BidTable
   },
@@ -23,16 +23,19 @@ export default {
       return this.$store.getters.Bills;
     }
   },
-  mounted() {
-    if (this.allBills[0].attributes.id === null) {
-      this.$store.dispatch("GET_BILLS");
+  channels: {
+    update_bills_channel: {
+      received() {
+        this.$store.dispatch("GET_BILLS");
+      }
     }
-    this.interval = setInterval(() => {
-      this.$store.dispatch("GET_BILLS");
-    }, 10000);
   },
-  beforeDestroy() {
-    clearInterval(this.interval);
+  mounted() {
+    this.$store.dispatch("GET_BILLS");
+    this.$cable.subscribe(
+      { channel: "UpdateBillsChannel" },
+      "update_bills_channel"
+    );
   }
 };
 </script>

@@ -66,19 +66,6 @@
 </template>
 
 <script>
-import axios from "axios";
-const ROOT_URL = window.location.origin;
-const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes
-  .content.value;
-const config = {
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    "X-CSRF-Token": csrfToken
-  },
-  credentials: "same-origin"
-};
-
 import image from "../../assets/images/logo-light.png";
 
 export default {
@@ -110,9 +97,7 @@ export default {
       window.location.assign(ROOT_URL);
     },
     signOut() {
-      axios
-        .delete(`${ROOT_URL}/users/sign_out`, config)
-        .then(res => window.location.assign(ROOT_URL));
+      this.$store.dispatch("SIGN_OUT");
     },
     handleNotification(id) {
       this.notifications = this.notifications.filter(n => n.data.id !== id);
@@ -121,11 +106,7 @@ export default {
   },
   channels: {
     notifications_channel: {
-      connected() {
-        console.log("WS Connected");
-      },
       received({ notification }) {
-        console.log("recieved");
         this.notifications.push(notification);
       }
     }
