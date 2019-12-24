@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :notifications
 
   validates :phone_number, format: { with: /((\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/}, allow_blank: true
-  validates :user_type, inclusion: {in: USERTYPE}
+  validates :user_type, inclusion: {in: USERTYPE}, allow_blank: true
 
   validate :validate_number_users, on: :create
   mount_base64_uploader :picture, PhotoUploader
