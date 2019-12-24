@@ -94,7 +94,7 @@ export default {
       }
     },
     navigateLanding() {
-      window.location.assign(ROOT_URL);
+      window.location.assign(window.location.origin);
     },
     signOut() {
       this.$store.dispatch("SIGN_OUT");
