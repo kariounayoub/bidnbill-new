@@ -1,10 +1,7 @@
-import sharedActions from "../../shared_store/actions";
-import userActions from "./actions/user_actions";
-import biddingActions from "./actions/bidding_actions";
-
+import axios from "axios"; // axios is an http library to make http requrests (can use default fetch api instead)
 const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes
   .content.value;
-export const config = {
+const config = {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -14,7 +11,7 @@ export const config = {
 };
 
 export default {
-  ...biddingActions,
-  ...userActions,
-  ...sharedActions
+  SEEN_NOTIFICATIONS: async ({}, payload) => {
+    await axios.patch(`/api/v1/notifications/${payload}/seen`, config);
+  }
 };

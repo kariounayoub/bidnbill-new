@@ -1,3 +1,5 @@
+import sharedMutations from "../../shared_store/mutations";
+
 export default {
   SET_BILLS: (state, payload) => {
     state.bills = payload;
@@ -7,9 +9,6 @@ export default {
   },
   SET_BILL: (state, payload) => {
     state.activeBill = payload.data.data;
-  },
-  SET_FLASH: (state, payload) => {
-    state.flash = payload;
   },
   ADD_BILL: (state, payload) => {
     state.bills.data.data.push(payload);
@@ -22,7 +21,5 @@ export default {
     const index = state.bills.data.data.map(b => b.id).indexOf(payload.id);
     state.bills.data.data[index] = payload;
   },
-  TOGGLE_IS_LOADING: state => {
-    state.isLoading = !state.isLoading;
-  }
+  ...sharedMutations
 };

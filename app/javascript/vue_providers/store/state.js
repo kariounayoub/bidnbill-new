@@ -1,7 +1,7 @@
 const root = document.getElementById("app");
+import sharedState from "../../shared_store/state";
 
 export default {
-  flash: null,
   offset: false,
   provider: JSON.parse(root.dataset.provider),
   account: JSON.parse(root.dataset.account),
@@ -27,6 +27,5 @@ export default {
     ]
   },
   activeClient: null,
-  mapKey: root.dataset.map,
-  isLoading: false
+  ...sharedState
 };
