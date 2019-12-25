@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
   root to: 'pages#home'
 
+  # Static pages
+  get 'donnees_personnels', to: 'pages#donnes_personnels', as: :donnes_personnels
+  get 'mentions_legals', to: 'pages#mentions_legals', as: :mentions_legals
+  get 'a_propos', to: 'pages#a_propos', as: :a_propos
+  get 'contact', to: 'pages#contact', as: :contact
+
+  # Fake routes for vue-router
   get 'client_dashboard', to: 'pages#client_dashboard', as: :client_dashboard
   get 'provider_dashboard', to: 'pages#provider_dashboard', as: :provider_dashboard
-
   get 'bills/:id', to: 'pages#client_dashboard'
   get 'users/edit_client', to: 'pages#client_dashboard'
   get 'provider_encheres', to: 'pages#provider_dashboard'
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
   get 'edit_account', to: 'pages#provider_dashboard'
   get 'edit_provider', to: 'pages#provider_dashboard'
 
+  # Api Routes
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: [:update] do

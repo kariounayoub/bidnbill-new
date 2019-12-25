@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
-  skip_after_action :verify_authorized, only: [:home]
+  skip_before_action :authenticate_user!, only: [:home, :a_propos, :contact, :donnes_personnels, :mentions_legals]
+  skip_after_action :verify_authorized, only: [:home, :a_propos, :contact, :donnes_personnels, :mentions_legals]
 
   def home
   end
@@ -18,5 +18,15 @@ class PagesController < ApplicationController
     @account = AccountsSerializer.new(current_user.account, {params: {current_user: current_user}}).serialized_json
   end
 
-  private
+  def a_propos
+  end
+
+  def contact
+  end
+
+  def donnes_personnels
+  end
+
+  def mentions_legals
+  end
 end

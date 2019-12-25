@@ -15,9 +15,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary " flat @click="$emit('close')">Fermer</v-btn>
-        <v-btn color="success darken-2" flat @click="dialog2 = true"
-          >Accépter</v-btn
-        >
+        <v-btn color="success darken-2" flat @click="dialog2 = true">Accépter</v-btn>
       </v-card-actions>
     </v-card>
 
@@ -37,6 +35,13 @@
             :items="contactList"
             :rules="[required]"
             label="Comment souhaitez vous être contacté"
+          ></v-select>
+          <v-select
+            class="m-5"
+            v-model="contact_preferences"
+            :items="contactPreferencesList"
+            :rules="[required]"
+            label="Quels sont les plages horraires qui vous conviennent le mieux"
           ></v-select>
         </v-form>
       </AlertDialog>
@@ -63,14 +68,20 @@ export default {
     dialog2: false,
     contact: "email",
     contactList: ["téléphone", "email"],
+    contact_preferences: "8h - 12h",
+    contactPreferencesList: ["8h - 12h", "12h - 16h", "16h - 20h"],
     valid: false
   }),
   methods: {
     handleValidate() {
-      console.log("validate");
-      console.log(this.contact);
       if (this.$refs.form.validate()) {
-        this.$emit("validate", this.contact);
+        const formData = {
+          bid: {
+            methode_contact: this.contact,
+            contact_preferences: this.contact_preferences
+          }
+        };
+        this.$emit("validate", formData);
         this.dialog = false;
         this.dialog2 = false;
         this.$emit("close");

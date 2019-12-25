@@ -9,7 +9,7 @@
               <div>
                 <div class="image-input">
                   <div class="profile-img" v-if="!editImg">
-                    <img :src="picture" alt="profile" />
+                    <img :src="picture ? picture : avatar" alt="profile" />
                     <button
                       color="primary"
                       @click="editImg = true"
@@ -31,9 +31,7 @@
                 </div>
 
                 <div v-if="user.user_type == 'client'">
-                  <div class="form-subtitle inline-div">
-                    Vous êtes un particulier?
-                  </div>
+                  <div class="form-subtitle inline-div">Vous êtes un particulier?</div>
                   <div class="form-content inline-div">
                     <v-switch
                       :label="booleanToString(particulier_q)"
@@ -46,58 +44,35 @@
                 <div v-if="particulier_q">
                   <div class="form-subtitle inline-div">Nom</div>
                   <div class="form-content inline-div">
-                    <v-text-field
-                      v-model="last_name"
-                      outline
-                      :rules="[required]"
-                    />
+                    <v-text-field v-model="last_name" outline :rules="[required]" />
                   </div>
                 </div>
 
                 <div v-if="particulier_q">
                   <div class="form-subtitle inline-div">Prénom</div>
                   <div class="form-content inline-div">
-                    <v-text-field
-                      v-model="first_name"
-                      outline
-                      :rules="[required]"
-                    />
+                    <v-text-field v-model="first_name" outline :rules="[required]" />
                   </div>
                 </div>
 
                 <div v-if="!particulier_q">
                   <div class="form-subtitle inline-div">Raison sociale</div>
                   <div class="form-content inline-div">
-                    <v-text-field
-                      v-model="company"
-                      outline
-                      :rules="[required]"
-                    />
+                    <v-text-field v-model="company" outline :rules="[required]" />
                   </div>
                 </div>
 
                 <div>
-                  <div class="form-subtitle inline-div">
-                    Numéro de Téléphone
-                  </div>
+                  <div class="form-subtitle inline-div">Numéro de Téléphone</div>
                   <div class="form-content inline-div">
-                    <v-text-field
-                      v-model="phone"
-                      outline
-                      :rules="[required, isPhone]"
-                    />
+                    <v-text-field v-model="phone" outline :rules="[required, isPhone]" />
                   </div>
                 </div>
 
                 <div>
                   <div class="form-subtitle inline-div">Email</div>
                   <div class="form-content inline-div">
-                    <v-text-field
-                      v-model="email"
-                      outline
-                      disabled
-                      :rules="[required]"
-                    />
+                    <v-text-field v-model="email" outline disabled :rules="[required]" />
                   </div>
                 </div>
               </div>
@@ -116,6 +91,7 @@
 <script>
 import { required, isPhone } from "./validate";
 import SingleFileUploader from "./SingleFileUploader";
+import avatar from "../../../app/assets/images/avatar.jpg";
 
 export default {
   name: "EditUserForm",
@@ -134,7 +110,8 @@ export default {
     picture: null,
     particulier_q: true,
     valid: false,
-    editImg: false
+    editImg: false,
+    avatar: avatar
   }),
   methods: {
     booleanToString(param) {

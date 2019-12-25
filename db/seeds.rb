@@ -16,18 +16,18 @@ puts ''
 
 puts 'creating admin'
 
-User.create(email: 'admin@admin.com', password: '123456', admin: true)
+User.create(email: 'admin@admin.com', password: '123456', admin: true, is_valid: true)
 
 puts 'creating data'
 account1 = Account.create!(company: 'EDF', number_users_allowed: 3, description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget aliquet quam. Nam vel dolor at est sagittis sodales. Integer eleifend libero non eros facilisis rhoncus. Suspendisse ac sagittis neque. Maecenas nec lacus vestibulum, interdum erat ullamcorper, eleifend risus. Proin vel nisl accumsan, posuere justo et, sodales tellus. Sed porta porttitor euismod. Sed dictum tellus nunc, quis vehicula metus faucibus ac. Suspendisse potenti. Nam fringilla ligula in posuere feugiat. Pellentesque a erat et ante elementum euismod. Phasellus a mi sed ex mollis pretium eget ut est. Mauris vitae blandit diam, a eleifend justo. Aenean tincidunt diam at lorem sollicitudin, sed vehicula ante facilisis.
   ", address: "18 rue miolis, Paris", city: 'Paris', country: "France", post_code: '75015')
 account2 = Account.create!(company: 'Total Direct Energie', number_users_allowed: 3)
 
-client = User.create!(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client')
-client2 = User.create!(email: 'ab@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Karioun', user_type: 'client')
-provider1 = User.create!(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider', account: account1, account_admin: true)
-provider2 = User.create!(email: 'mj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account2)
-provider3 = User.create!(email: 'maj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account1)
+client = User.create!(email: 'majid@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'client', phone_number: '0663344334', is_valid: true)
+client2 = User.create!(email: 'ab@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Karioun', user_type: 'client', phone_number: '0663344334', is_valid: true)
+provider1 = User.create!(email: 'ayoub@gmail.com', password: '123456', first_name: 'Ayoub', last_name: 'Kairoun', user_type: 'provider', account: account1, account_admin: true, phone_number: '0663344334', is_valid: true)
+provider2 = User.create!(email: 'mj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account2, phone_number: '0663344334', is_valid: true)
+provider3 = User.create!(email: 'maj@gmail.com', password: '123456', first_name: 'Majid', last_name: 'Jaidi', user_type: 'provider', account: account1, phone_number: '0663344334', is_valid: true)
 
 category1 = Category.create!(name: 'Electricité')
 category2 = Category.create!(name: 'Gaz')
@@ -41,10 +41,10 @@ AccountCategory.create!(account: account1, category: category2)
 AccountCategory.create!(account: account1, category: category3)
 
 
-bill1 = Bill.create!(user_id: client.id, current_provider: 'EDF', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle', energie_verte: true, pdl: '0413433')
-bill2 = Bill.create!(user_id: client.id, current_provider: 'Total Direct Energie', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '250', price: '60', payment_frequency: 'mensuelle', pdl: '0413433')
-bill3 = Bill.create!(user_id: client2.id, current_provider: 'Total Direct Energie', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle', pdl: '0413433')
-bill4 = Bill.create!(user_id: client2.id, current_provider: 'Edf', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '70', payment_frequency: 'mensuelle', energie_verte: true, pdl: '0413433')
+bill1 = Bill.create!(user_id: client.id, current_provider: 'EDF', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle', energie_verte: true, pdl: '0413433', latitude: 48.8534, longitude: 2.3488)
+bill2 = Bill.create!(user_id: client.id, current_provider: 'Total Direct Energie', address: '18 rue miolis, Paris', category: category1, city: 'Paris', zip_code: '75001', consumption: '250', price: '60', payment_frequency: 'mensuelle', pdl: '0413433', latitude: 48.8534, longitude: 2.3488)
+bill3 = Bill.create!(user_id: client2.id, current_provider: 'Total Direct Energie', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '50', payment_frequency: 'mensuelle', pdl: '0413433', latitude: 48.8534, longitude: 2.3488)
+bill4 = Bill.create!(user_id: client2.id, current_provider: 'Edf', address: 'Casablanca', category: category1, city: 'Casablanca', zip_code: '75001', consumption: '200', price: '70', payment_frequency: 'mensuelle', energie_verte: true, pdl: '0413433', latitude: 48.8534, longitude: 2.3488)
 
 
 bid1 = Bid.create!(bill: bill1, user_id: provider1.id, content: 'some descriptive text', price: 45)

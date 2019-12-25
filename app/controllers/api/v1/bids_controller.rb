@@ -30,6 +30,7 @@ class Api::V1::BidsController < Api::V1::BaseController
     @bid.status = 'accépté'
     @bid.client_status = "Nouveau"
     @bid.methode_contact = bid_params[:methode_contact]
+    @bid.contact_preferences = bid_params[:contact_preferences]
     if @bid.save
       notification = Notification.create(bid: @bid, user: @bid.user, category: 'accepted bid', seen: false, content: "#{@bid.bill.client.full_name} a accépté votre offre")
       # UserMailer.selectedBids(@bid.user, @bid.bill.client).deliver_later
@@ -51,7 +52,7 @@ class Api::V1::BidsController < Api::V1::BaseController
   private
 
   def bid_params
-    params.require(:bid).permit(:user_id, :bill_id, :price, :content, :methode_contact, :client_status)
+    params.require(:bid).permit(:user_id, :bill_id, :price, :content, :methode_contact, :client_status, :contact_preferences)
   end
 
   def find_bid

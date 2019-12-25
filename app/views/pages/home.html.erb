@@ -4,7 +4,15 @@
     <div class="text-container">
       <h1>BidnBill</h1>
       <h4>Contracter différemment</h4>
-      <%= link_to "Inscrivez Vous", new_user_registration_path, class: 'home-btn'%>
+      <% if user_signed_in? %>
+        <% if current_user.user_type == 'client' %>
+          <%= link_to "Dashboard", client_dashboard_path, class: 'home-btn'%>
+        <% elsif current_user.user_type == 'provider' %>
+          <%= link_to "Dashboard", provider_dashboard_path, class: 'home-btn'%>
+        <% end %>
+      <% else %>
+        <%= link_to "Inscrivez Vous", new_user_registration_path, class: 'home-btn'%>
+      <% end %>
     </div>
   </div>
   <section id='first-section'>

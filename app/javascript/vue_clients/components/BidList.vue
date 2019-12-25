@@ -13,15 +13,12 @@
         <template v-slot:items="props">
           <td class="text-xs-left">{{ props.item.account.company }}</td>
           <td class="text-xs-left">{{ props.item.bid.price }} € / mois</td>
-          <td class="text-xs-left">
-            {{ calculateDifference(props.item.bid.price) }} € / mois
-          </td>
+          <td class="text-xs-left">{{ calculateDifference(props.item.bid.price) }} € / mois</td>
           <td class="text-xs-center status-width">
             <span
               class="status-tag"
               v-bind:class="statusClass(props.item.bid.status)"
-              >{{ props.item.bid.status }}</span
-            >
+            >{{ props.item.bid.status }}</span>
           </td>
           <td class="text-xs-center">
             <v-icon
@@ -29,14 +26,12 @@
               v-if="
                 activeBill.attributes.is_open && !props.item.bid.needs_editing
               "
-              >visibility</v-icon
-            >
+            >visibility</v-icon>
             <span
               v-if="
                 props.item.bid.needs_editing && activeBill.attributes.is_open
               "
-              >En attente de validation suite à votre modification</span
-            >
+            >En attente de validation suite à votre modification</span>
           </td>
         </template>
       </v-data-table>
@@ -89,9 +84,7 @@ export default {
     selectBid(response) {
       const formData = {
         id: this.viewedBid.id,
-        bid: {
-          methode_contact: response
-        }
+        ...response
       };
       this.$store.dispatch("SELECT_BID", formData);
     },

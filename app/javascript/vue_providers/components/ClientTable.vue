@@ -13,12 +13,7 @@
           ></v-text-field>
         </v-flex>
         <v-flex xs12 sm6>
-          <v-select
-            class="with-margin"
-            :items="statuses"
-            label="Status"
-            @change="filterStatus"
-          ></v-select>
+          <v-select class="with-margin" :items="statuses" label="Status" @change="filterStatus"></v-select>
         </v-flex>
         <v-flex xs12>
           <v-data-table
@@ -37,23 +32,16 @@
                 @click="setActiveClient(props.item.bill.data.id)"
                 :class="isActive(props.item.bill.data.id) ? 'selected' : ''"
               >
-                <td class="text-xs-left">
-                  {{ props.item.bill.data.attributes.category.name }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.client.data.attributes.full_name }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.bill.data.attributes.city }}
-                </td>
-                <td class="text-xs-center">
+                <td class="text-xs-left">{{ props.item.bill.data.attributes.category.name }}</td>
+                <td class="text-xs-right">{{ props.item.client.data.attributes.full_name }}</td>
+                <td class="text-xs-right">{{ props.item.bill.data.attributes.city }}</td>
+                <td class="text-xs-center status-width">
                   <span
                     class="status-tag"
                     v-bind:class="
                       statusClass(props.item.bid.data.attributes.client_status)
                     "
-                    >{{ props.item.bid.data.attributes.client_status }}</span
-                  >
+                  >{{ props.item.bid.data.attributes.client_status }}</span>
                 </td>
                 <td class="text-xs-right pointer" @click="dialog = true">
                   <v-icon>visibility</v-icon>
@@ -66,10 +54,7 @@
     </v-card>
     <!-- Dialog -->
     <v-dialog v-model="dialog" max-width="700px" v-if="activeClient !== null">
-      <EditClientStatusDialog
-        v-bind:client="activeClient"
-        v-on:close="dialog = false"
-      />
+      <EditClientStatusDialog v-bind:client="activeClient" v-on:close="dialog = false" />
     </v-dialog>
   </div>
 </template>
@@ -193,5 +178,8 @@ export default {
 }
 .selected {
   background-color: rgba(126, 172, 247, 0.4);
+}
+.status-width {
+  min-width: 200px;
 }
 </style>
