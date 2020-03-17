@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'contacts/new'
+  get 'contacts/create'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, :controllers => {:registrations => "registrations"}
@@ -8,7 +10,9 @@ Rails.application.routes.draw do
   get 'donnees_personnels', to: 'pages#donnes_personnels', as: :donnes_personnels
   get 'mentions_legals', to: 'pages#mentions_legals', as: :mentions_legals
   get 'a_propos', to: 'pages#a_propos', as: :a_propos
-  get 'contact', to: 'pages#contact', as: :contact
+  get 'cookies', to: 'pages#cookies_page', as: :cookies_page
+
+  resources :contacts, only: [:new, :create]
 
   # Fake routes for vue-router
   get 'client_dashboard', to: 'pages#client_dashboard', as: :client_dashboard

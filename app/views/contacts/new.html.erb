@@ -1,0 +1,27 @@
+<%= render 'shared/navbar' %>
+<h3 class="dashboard__title">Nous Contacter</h3>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-12">
+      <div class="contact-form">
+        <h4 class='pb-3'>Envoyez nous un message</h4>
+        <%= simple_form_for @contact do |f| %>
+          <%= f.input :email, placeholder: 'Email', label: false %>
+          <%= f.input :name, placeholder: 'Nom Complet', label: false %>
+          <%= f.input :company, placeholder: 'Société', label: false %>
+          <%= f.input :phone, placeholder: 'Numéro de Téléphone', label: false %>
+          <%= f.input :message, placeholder: 'Message', label: false, input_html: {rows: 5} %>
+          <%= f.submit 'Envoyer', class: 'btn btn-lg v-btn rounded large' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="contact-info">
+        <h4 class='pb-3'>Nos coordonnées</h4>
+        <p><i class='fas fa-phone'></i> +33 634 434 434</p>
+        <p><i class='fas fa-envelope'></i> contact@bidnbill.com</p>
+        <p><i class='fas fa-map-marker-alt'></i> 139 rue Legendre PARIS - France</p>
+      </div>
+    </div>
+  </div>
+</div>
