@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :a_propos, :contact, :donnes_personnels, :mentions_legals]
-  skip_after_action :verify_authorized, only: [:home, :a_propos, :contact, :donnes_personnels, :mentions_legals]
+  skip_before_action :authenticate_user!, only: [:home, :a_propos, :donnes_personnels, :mentions_legals, :cookies_page]
+  skip_after_action :verify_authorized, only: [:home, :a_propos, :donnes_personnels, :mentions_legals, :cookies_page]
 
   def home
   end
@@ -21,12 +21,12 @@ class PagesController < ApplicationController
   def a_propos
   end
 
-  def contact
-  end
-
   def donnes_personnels
   end
 
   def mentions_legals
+  end
+
+  def cookies_page
   end
 end

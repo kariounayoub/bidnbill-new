@@ -29,6 +29,9 @@ gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 gem 'carrierwave-base64'
 
+gem 'cookies_eu'
+
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'letter_opener'

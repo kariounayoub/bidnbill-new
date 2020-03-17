@@ -75,6 +75,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
+    cookies_eu (1.7.6)
+      js_cookie_rails (~> 2.2.0)
     crass (1.0.5)
     devise (4.7.1)
       bcrypt (~> 3.0)
@@ -119,6 +121,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    js_cookie_rails (2.2.0)
+      railties (>= 3.1)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -318,6 +322,7 @@ DEPENDENCIES
   carrierwave (~> 1.2)
   carrierwave-base64
   cloudinary (~> 1.9.1)
+  cookies_eu
   devise
   dotenv-rails
   fast_jsonapi

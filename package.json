@@ -13,6 +13,7 @@
         "mapbox-gl": "^0.54.0",
         "particles.js": "^2.0.0",
         "popper.js": "^1.15.0",
+        "rails-erb-loader": "^5.5.2",
         "style-loader": "^0.23.1",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.2",

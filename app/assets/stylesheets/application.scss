@@ -1,10 +1,9 @@
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
-
 // External libraries
 @import "bootstrap/scss/bootstrap";
-
+@import 'cookies_eu';
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
